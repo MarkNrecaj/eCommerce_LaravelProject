@@ -16,7 +16,7 @@ class AddNewColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->after('id');
             $table->string('last_name')->after('name');
-            $table->string('company')->after('last_name');
+            $table->string('company')->nullable()->after('last_name');
             $table->string('tel')->after('password');
             $table->string('state')->after('tel');
             $table->string('city')->after('state');
