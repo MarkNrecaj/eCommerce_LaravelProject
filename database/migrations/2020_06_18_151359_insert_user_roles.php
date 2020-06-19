@@ -7,19 +7,19 @@ use Illuminate\Support\Facades\Schema;
 class InsertUserRoles extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      *
      * @return void
      */
     public function up()
     {
-        try{
+        try {
             \Illuminate\Support\Facades\DB::beginTransaction();
-            \App\Role::create(['name'=>'administrator', 'description'=>'Has access everywhere. Can register,delete or update user data']);
-            \App\Role::create(['name'=>'postal_worker', 'description'=>'Can process orders.']);
-            \App\Role::create(['name'=>'seller', 'description'=>'Can add orders in website.']);
+            \App\Role::create(['name' => 'administrator', 'description' => 'Has access everywhere. Can register,delete or update user data']);
+            \App\Role::create(['name' => 'postal_worker', 'description' => 'Can process orders.']);
+            \App\Role::create(['name' => 'seller', 'description' => 'Can add orders in website.']);
             \Illuminate\Support\Facades\DB::commit();
-        }catch (Exception $e){
+        } catch (Exception $e) {
             \Illuminate\Support\Facades\DB::rollBack();
         }
     }
