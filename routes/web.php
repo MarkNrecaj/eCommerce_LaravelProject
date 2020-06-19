@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
+Route::get('/seller', 'SellerController@index')->name('seller')->middleware('seller');
+Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');
