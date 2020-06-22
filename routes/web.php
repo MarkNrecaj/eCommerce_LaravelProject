@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -23,4 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 Route::get('/seller', 'SellerController@index')->name('seller')->middleware('seller');
+Route::get('/order', 'OrderController@index')->name('order')->middleware('seller');
+Route::post('/order', 'OrderController@store')->middleware('seller');
 Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');

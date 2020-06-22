@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('receiver_tel2')->nullable();
             $table->string('state');
             $table->string('city');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('quantity');
             $table->integer('weight')->nullable();
             $table->string('order_type');

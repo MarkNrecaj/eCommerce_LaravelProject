@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@include('inc.messages')
 
 @section('content')
 <div class="container">
