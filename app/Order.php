@@ -23,6 +23,7 @@ class Order extends Model
         'description',
         'price',
         'status',
-        'seller_id'
+        'seller_id',
+        'total_price'
     ];
 }

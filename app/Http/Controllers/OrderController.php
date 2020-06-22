@@ -50,8 +50,8 @@ class OrderController extends Controller
                 'state' => 'required|max:255',
                 'city' => 'required|max:255',
                 'address' => 'nullable|max:255',
-                'quantity' => 'required|numeric',
-                'weight' => 'nullable|numeric',
+                'quantity' => 'required|numeric|min:1',
+                'weight' => 'nullable|numeric|min:0',
                 'order_type' => 'required|max:255',
                 // 'is_openable' => 'required|boolean',
                 // 'is_returnable' => 'required|boolean',
@@ -62,20 +62,20 @@ class OrderController extends Controller
             ]
         );
 
-        // if (
-        //     strcasecmp($request['state'], 'Kosove') != 0 ||
-        //     strcasecmp($request['state'], 'Albania') != 0 ||
-        //     strcasecmp($request['state'], 'Maccedonia') != 0
-        // ) {
-        //     return redirect('/order')->with('error', 'Me inspect element po don me haku a? -_-');
-        // }
+        if (
+            strcasecmp($request['state'], 'Kosove') != 0 &&
+            strcasecmp($request['state'], 'Albania') != 0 &&
+            strcasecmp($request['state'], 'Maccedonia') != 0
+        ) {
+            return redirect('/order')->with('error', 'Me inspect element po don me haku a? -_-');
+        }
 
-        // if (
-        //     strcasecmp($request['order_type'], 'Normal') != 0 ||
-        //     strcasecmp($request['order_type'], 'Fragile') != 0
-        // ) {
-        //     return redirect('/order')->with('error', 'Me inspect element po don me haku a? -_-');
-        // }
+        if (
+            strcasecmp($request['order_type'], 'Normal') != 0 &&
+            strcasecmp($request['order_type'], 'Fragile') != 0
+        ) {
+            return redirect('/order')->with('error', 'Me inspect element po don me haku a? -_-');
+        }
 
         Order::create([
             'receiver_name' => $request['receiver_name'],
@@ -94,7 +94,8 @@ class OrderController extends Controller
             'description' => $request['description'],
             'price' => $request['price'],
             'status' => 'Processing',
-            'seller_id' => Auth::user()->id
+            'seller_id' => Auth::user()->id,
+            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar 
         ]);
 
         //return redirect()->route('seller')->with('success', 'Order added successfully');
