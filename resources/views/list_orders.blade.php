@@ -39,8 +39,18 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$order->receiver_name}}</td>
-                                        <td>{{$order->receiver_tel. " ose " .$order->receiver_tel2}}</td>
-                                        <td>{{$order->state. ', '.$order->city. ', ' .$order->address}}</td>
+                                        <td>@if($order->receiver_tel2 == null)
+                                                {{$order->receiver_tel}}
+                                            @else
+                                                {{$order->receiver_tel. " ose " .$order->receiver_tel2}}
+                                            @endif
+                                        </td>
+                                        <td>@if($order->address == null)
+                                                {{$order->state. ', '.$order->city}}
+                                            @else
+                                                {{$order->state. ', '.$order->city. ', ' .$order->address}}
+                                            @endif
+                                            </td>
                                         <td>{{$order->quantity}}</td>
                                         <td>{{$order->weight}}</td>
                                         <td>{{$order->order_type}}</td>
