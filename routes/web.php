@@ -24,7 +24,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
-Route::get('/seller', 'SellerController@index')->name('seller')->middleware('seller');
-Route::get('/order', 'OrderController@index')->name('order')->middleware('seller');
-Route::post('/order', 'OrderController@store')->middleware('seller');
+Route::group(['middleware'=>['seller']], function () {
+    Route::get('/seller', 'SellerController@index')->name('seller');
+    Route::get('/orders', 'OrderController@index')->name('list_orders');
+    Route::get('/order', 'OrderController@create')->name('order');
+    Route::post('/order', 'OrderController@store');
+});
 Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');
