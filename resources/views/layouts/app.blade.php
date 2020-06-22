@@ -35,18 +35,15 @@
                     <ul class="navbar-nav mr-auto">
                         @guest
                         @else
-                        {{-- render following lines only if user is seller. Something like:
-                        @if ({{$userinfo->id == 3}}) --}}
+
+                        @if (Auth::user()->role_id == 3)
                             <li class="nav-item active">
                                 <a class="nav-link" href="/order">New Order<span class="sr-only"></span></a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">All Orders <span class="sr-only"></span></a>
+                                <a class="nav-link" href="/orders">All Orders <span class="sr-only"></span></a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Reset Password <span class="sr-only"></span></a>
-                            </li> 
-                        {{-- @endif --}}
+                        @endif
                         @endguest
                     </ul>
 
@@ -69,11 +66,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="#">Reset Password</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
