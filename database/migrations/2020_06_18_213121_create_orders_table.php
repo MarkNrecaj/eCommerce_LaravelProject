@@ -16,12 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('receiver_name');
-            $table->string('receiver_last_name');
             $table->string('receiver_tel');
+            $table->string('receiver_tel2')->nullable();
             $table->string('state');
             $table->string('city');
-            $table->string('street_name')->nullable();
-            $table->string('street_number')->nullable();
+            $table->string('address');
             $table->integer('quantity');
             $table->integer('weight')->nullable();
             $table->string('order_type');
