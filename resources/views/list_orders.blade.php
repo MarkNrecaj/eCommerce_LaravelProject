@@ -27,10 +27,11 @@
                                     <th scope="col">Order Type</th>
                                     <th scope="col">Openable</th>
                                     <th scope="col">Returnable</th>
-                                    <th scope="col">Additional_notes</th>
+                                    <th scope="col">Additional Notes</th>
                                     <th scope="col">Order Name</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Price</th>
+                                    <th scope="col">Total Price</th>
                                     <th scope="col">Status</th>
                                 </tr>
                                 </thead>
@@ -65,6 +66,7 @@
                                         <td>{{$order->order_name}}</td>
                                         <td>{{$order->description}}</td>
                                         <td>{{$order->price}}</td>
+                                        <td>{{$order->total_price}}</td>
                                         <td>{{$order->status}}</td>
                                     </tr>
                                 @endforeach
