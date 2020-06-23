@@ -41,7 +41,7 @@
                                     <a class="nav-link" href="#">Manage workers<span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="orders">All Orders <span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{{route('admin.orders')}}">All Orders <span class="sr-only"></span></a>
                                 </li>
                             @endif
 
