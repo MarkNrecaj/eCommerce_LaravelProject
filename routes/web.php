@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostalWorkerController;
 use App\Http\Controllers\SellerController;
+use App\Http\Middleware\PostalWorker;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -24,12 +26,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware'=>['admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
+    Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
+    Route::get('/orders', 'AdminController@list_orders')->name('admin/orders');
+    //Route::post('/postalworker', 'PostalWorkerController@destroy');
+    Route::resource('/postalworker', 'PostalWorkerController');
+    Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
+    Route::post('/addworker', 'PostalWorkerController@store');
 });
 
-Route::group(['middleware'=>['seller']], function () {
+Route::group(['middleware' => ['seller']], function () {
     Route::get('/seller', 'SellerController@index')->name('seller');
     Route::get('/orders', 'OrderController@index')->name('list_orders');
     Route::get('/order', 'OrderController@create')->name('order');

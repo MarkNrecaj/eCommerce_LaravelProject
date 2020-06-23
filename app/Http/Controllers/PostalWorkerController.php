@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class PostalWorkerController extends Controller
 {
@@ -23,7 +25,7 @@ class PostalWorkerController extends Controller
      */
     public function create()
     {
-        //
+        return view('addworker');
     }
 
     /**
@@ -34,7 +36,30 @@ class PostalWorkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $user = new User();
+        $user->name = $request['name'];
+        $user->last_name = $request['last_name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->tel = $request['tel'];
+        $user->state = $request['state'];
+        $user->city = $request['city'];
+        $user->role_id = 2;
+
+        $user->save();
+
+        return redirect('workers')->with('success', 'User added successfuly');
+
+        // User::create([
+        //     'name' => $request['name'],
+        //     'last_name' => $request['last_name'],
+        //     'email' => $request['email'],
+        //     'password' => $request['password'],
+        //     'tel' => $request['tel'],
+        //     'state' => $request['state'],
+        //     'city' => $request['city']
+        // ]);
     }
 
     /**
@@ -79,6 +104,9 @@ class PostalWorkerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $worker = User::find($id);
+        $worker->delete();
+
+        return redirect('/workers')->with('success', 'Worker ' . $worker->name . ' deleted successfuly');
     }
 }
