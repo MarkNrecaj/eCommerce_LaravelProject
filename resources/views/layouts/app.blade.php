@@ -38,7 +38,7 @@
 
                             @if (Auth::user()->role_id == 1) {{-- if admin --}}
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Manage workers<span class="sr-only"></span></a>
+                                    <a class="nav-link" href="/workers">Manage workers<span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="#">All Orders <span class="sr-only"></span></a>

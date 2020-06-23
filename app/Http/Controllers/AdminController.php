@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -14,6 +15,13 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin');
+    }
+
+    public function showAllWorkers()
+    {
+        $workers = User::where('role_id', 2)->get();
+        //dd($workers);
+        return view('all_workers')->with('workers', $workers);
     }
 
     /**
