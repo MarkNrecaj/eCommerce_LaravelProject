@@ -24,6 +24,7 @@
                                     <th scope="col">Address</th>
                                     <th scope="col">Seller Name</th>
                                     <th scope="col">Postman Name</th>
+                                    <th scope="col">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -49,6 +50,11 @@
                                                     {{$user->name. " " .$user->last_name}}
                                                 @endif
                                              @endforeach
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-secondary">View</button>
+                                            <button class="btn btn-secondary">Edit</button>
+                                            <button class="btn btn-secondary">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
