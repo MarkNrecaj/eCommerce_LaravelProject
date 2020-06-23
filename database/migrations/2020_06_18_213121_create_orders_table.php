@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOrdersTable extends Migration
 {
     /**
-     * Run the migrations. 
+     * Run the migrations.
      *
      * @return void
      */
@@ -33,6 +33,7 @@ class CreateOrdersTable extends Migration
             $table->float('total_price');
             $table->string('status');
             $table->foreignId('seller_id')->constrained('users', 'id');
+            $table->foreignId('poster_id')->constrained('users', 'id');
             $table->timestamps();
         });
     }
