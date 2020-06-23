@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware'=>['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('/orders', 'AdminController@list_orders')->name('admin/orders');
+    Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
 });
 
 Route::group(['middleware'=>['seller']], function () {
