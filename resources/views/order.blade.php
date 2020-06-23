@@ -229,10 +229,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price *') }}</label>
+                                    <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Unit Price *') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="price" type="number" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" name="price" value="{{ old('price') }}" autocomplete="off" required>
+                                        <input id="price" type="number" value="0" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" name="price" value="{{ old('price') }}" autocomplete="off" required>
         
                                         @error('price')
                                             <span class="invalid-feedback" role="alert">
@@ -246,7 +246,7 @@
                                     <label for="total_price" class="col-md-4 col-form-label text-md-right">{{ __('Total price + postal service') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="total_price" disabled name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
+                                        <input id="total_price" disabled value="2.00 €" name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
                                         @error('total_price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -36,14 +36,30 @@
                         @guest
                         @else
 
-                        @if (Auth::user()->role_id == 3)
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/order">New Order<span class="sr-only"></span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/orders">All Orders <span class="sr-only"></span></a>
-                            </li>
-                        @endif
+                            @if (Auth::user()->role_id == 1) {{-- if admin --}}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Manage workers<span class="sr-only"></span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">All Orders <span class="sr-only"></span></a>
+                                </li>
+                                
+                            @endif 
+                            
+                            @if (Auth::user()->role_id == 2) {{-- if postal worker --}}
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">My orders<span class="sr-only"></span></a>
+                                    </li> 
+
+                            @endif 
+                            @if (Auth::user()->role_id == 3) {{-- if seller --}}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/order">New Order<span class="sr-only"></span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/orders">All Orders <span class="sr-only"></span></a>
+                                </li>
+                            @endif
                         @endguest
                     </ul>
 
