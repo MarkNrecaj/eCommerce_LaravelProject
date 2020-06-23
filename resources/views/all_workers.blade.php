@@ -48,10 +48,10 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table>           
+                            </table>
                         </div>
                         <br/>
-                        <a class="btn btn-primary float-right" href="/addworker" role="button" >Add worker</a>                 
+                        <a class="btn btn-primary float-right" href="{{route('addworker')}}" role="button" >Add worker</a>
                     </div>
                 </div>
             </div>

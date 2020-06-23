@@ -29,11 +29,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
-    Route::get('/orders', 'AdminController@list_orders')->name('admin/orders');
-    //Route::post('/postalworker', 'PostalWorkerController@destroy');
+    Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
+    Route::post('/postalworker', 'PostalWorkerController@destroy')->name('postalworker.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
-    Route::post('/addworker', 'PostalWorkerController@store');
+    Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
 });
 
 Route::group(['middleware' => ['seller']], function () {

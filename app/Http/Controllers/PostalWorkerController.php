@@ -49,7 +49,7 @@ class PostalWorkerController extends Controller
 
         $user->save();
 
-        return redirect('workers')->with('success', 'User added successfuly');
+        return redirect('admin/workers')->with('success', 'User added successfuly');
 
         // User::create([
         //     'name' => $request['name'],
@@ -107,6 +107,6 @@ class PostalWorkerController extends Controller
         $worker = User::find($id);
         $worker->delete();
 
-        return redirect('/workers')->with('success', 'Worker ' . $worker->name . ' deleted successfuly');
+        return redirect('admin/workers')->with('success', 'Worker ' . $worker->name . ' deleted successfuly');
     }
 }
