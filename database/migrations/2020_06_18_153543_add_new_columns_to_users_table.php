@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Schema;
 class AddNewColumnsToUsersTable extends Migration
 {
     /**
-     * Run the migrations. 
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained('roles', 'id')->after('email');
+            $table->foreignId('role_id')->after('email')->constrained('roles', 'id');
             $table->string('last_name')->after('name');
             $table->string('company')->nullable()->after('last_name');
             $table->string('tel')->after('password');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +15,19 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        return view('admin.admin');
+    }
+
+    /**
+     * List of orders.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list_orders()
+    {
+        $orders = Order::get();
+        $users=User::get();
+        return view('/admin/list_orders',compact('orders','users'));
     }
 
     /**

@@ -23,7 +23,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
+
+Route::group(['prefix' => 'admin', 'middleware'=>['admin']], function () {
+    Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/orders', 'AdminController@list_orders')->name('admin/orders');
+});
+
 Route::group(['middleware'=>['seller']], function () {
     Route::get('/seller', 'SellerController@index')->name('seller');
     Route::get('/orders', 'OrderController@index')->name('list_orders');
