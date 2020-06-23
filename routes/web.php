@@ -25,9 +25,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware' => ['admin']], function () {
-    Route::get('/admin', 'AdminController@index')->name('admin');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+    Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
+    Route::get('/orders', 'AdminController@list_orders')->name('admin/orders');
     //Route::post('/postalworker', 'PostalWorkerController@destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');

@@ -33,7 +33,7 @@ class CreateOrdersTable extends Migration
             $table->float('total_price');
             $table->string('status');
             $table->foreignId('seller_id')->constrained('users', 'id');
-            $table->foreignId('poster_id')->constrained('users', 'id');
+            $table->foreignId('poster_id')->nullable()->constrained('users', 'id');
             $table->timestamps();
         });
     }
