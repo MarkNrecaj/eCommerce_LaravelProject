@@ -3,18 +3,18 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center table-responsive">
             <div class="col-md-16">
                 <div class="card">
                     <div class="card-header">Orders</div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <div class="card">
+                        <div class="card table-responsive">
                             <table class="table">
                                 <thead class="thead-light">
                                 <tr>
@@ -53,8 +53,6 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-secondary">View</button>
-                                            <button class="btn btn-secondary">Edit</button>
-                                            <button class="btn btn-secondary">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach

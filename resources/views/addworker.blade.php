@@ -57,7 +57,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" value="12345678" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                             <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
 
                             <div class="col-md-6">
-                                <input id="state" type="text" class="form-control @error('state') nuk eshte valid @enderror" name="state" value="{{ old('state') }}" required autocomplete="country-name">
+                                <input id="state" type="text" value="Kosove" class="form-control @error('state') nuk eshte valid @enderror" name="state" value="{{ old('state') }}" required autocomplete="country-name">
 
                                 @error('state')
                                     <span class="invalid-feedback" role="alert">

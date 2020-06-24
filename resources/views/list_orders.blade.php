@@ -1,9 +1,8 @@
 @extends('layouts.app')
-@include('inc.messages')
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center table-responsive">
             <div class="col-md-16">
                 <div class="card">
                     <div class="card-header">Orders</div>
@@ -14,7 +13,7 @@
                             </div>
                         @endif
 
-                        <div class="card">
+                        <div class="card table-responsive">
                             <table class="table">
                                 <thead class="thead-light">
                                 <tr>

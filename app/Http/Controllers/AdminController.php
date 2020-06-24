@@ -26,8 +26,19 @@ class AdminController extends Controller
     public function list_orders()
     {
         $orders = Order::get();
-        $users=User::get();
-        return view('/admin/list_orders',compact('orders','users'));
+        $users = User::get();
+        return view('/admin/list_orders', compact('orders', 'users'));
+    }
+
+    public function post_settings()
+    {
+        return view('/admin/post_settings');
+    }
+
+    public function showAllClients()
+    {
+        $clients = User::where('role_id', 3)->get();
+        return view('admin/all_clients')->with('clients', $clients);
     }
 
     public function showAllWorkers()

@@ -29,7 +29,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
+    Route::get('/clients', 'AdminController@showAllClients')->name('clients');
     Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
+    Route::get('/settings', 'AdminController@post_settings')->name('admin.settings');
     Route::post('/postalworker', 'PostalWorkerController@destroy')->name('postalworker.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
