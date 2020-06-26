@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PostalWorkerController extends Controller
 {
@@ -30,7 +32,26 @@ class PostalWorkerController extends Controller
      */
     public function create()
     {
-        //
+        return view('addworker');
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'tel' => ['required'],
+            'state' => ['required'],
+            'city' => ['required']
+        ]);
     }
 
     /**
@@ -41,7 +62,30 @@ class PostalWorkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $user = new User();
+        $user->name = $request['name'];
+        $user->last_name = $request['last_name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->tel = $request['tel'];
+        $user->state = $request['state'];
+        $user->city = $request['city'];
+        $user->role_id = 2;
+
+        $user->save();
+
+        return redirect('admin/workers')->with('success', 'User added successfuly');
+
+        // User::create([
+        //     'name' => $request['name'],
+        //     'last_name' => $request['last_name'],
+        //     'email' => $request['email'],
+        //     'password' => $request['password'],
+        //     'tel' => $request['tel'],
+        //     'state' => $request['state'],
+        //     'city' => $request['city']
+        // ]);
     }
 
     /**
@@ -86,6 +130,9 @@ class PostalWorkerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $worker = User::find($id);
+        $worker->delete();
+
+        return redirect('admin/workers')->with('success', 'Worker ' . $worker->name . ' deleted successfuly');
     }
 }
