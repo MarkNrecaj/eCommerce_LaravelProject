@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostalWorkerController extends Controller
 {
@@ -12,6 +14,11 @@ class PostalWorkerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $orders = Order::where('poster_id', auth()->id())->get();
+        return view('postal_worker_orders', compact('orders'));
+    }
+    public function index2()
     {
         return view('postal_worker');
     }

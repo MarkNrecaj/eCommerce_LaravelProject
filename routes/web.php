@@ -30,4 +30,5 @@ Route::group(['middleware'=>['seller']], function () {
     Route::get('/order', 'OrderController@create')->name('order');
     Route::post('/order', 'OrderController@store');
 });
-Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');
+Route::get('/postalworker', 'PostalWorkerController@index2')->name('postalworker')->middleware('postal_worker');
+Route::get('/postalworker_orders', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');

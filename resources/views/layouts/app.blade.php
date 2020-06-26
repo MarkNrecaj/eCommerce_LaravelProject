@@ -45,6 +45,16 @@
                             </li>
                         @endif
                         @endguest
+
+                        @guest
+                        @else
+
+                        @if (Auth::user()->role_id == 2)
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/postalworker_orders">My Orders <span class="sr-only"></span></a>
+                            </li>
+                        @endif
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
