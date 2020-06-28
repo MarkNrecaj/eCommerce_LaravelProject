@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::patch('/postalsettings/{settings}', 'PostalSettingsController@update');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
     Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
+    Route::get('/ordersof/{sellerId}', 'PostalClientsController@allOrders')->name('ordersof');
 });
 
 Route::group(['middleware' => ['seller']], function () {

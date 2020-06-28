@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Seller;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,5 +21,12 @@ class PostalClientsController extends Controller
         $client->delete();
 
         return redirect('admin/clients')->with('success', 'Client ' . $client->name . ' deleted successfuly');
+    }
+
+    public function allOrders($sellerId)
+    {
+        $orders = Order::where('seller_id', $sellerId)->get();
+        //dd($orders);
+        return view('admin.orders_of')->with('orders', $orders);
     }
 }

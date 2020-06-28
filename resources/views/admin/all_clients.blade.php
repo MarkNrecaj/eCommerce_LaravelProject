@@ -40,7 +40,7 @@
                                         <td>{{$item->state}}</td>
                                         <td>{{$item->city}}</td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-secondary">Orders</a>
+                                            <a href="{{route('ordersof', $item->id)}}" class="btn btn-secondary">Orders</a>
                                         </td>
                                         <td class="text-center">
                                             <a href="#" class="btn btn-warning">Disable</a>
@@ -48,7 +48,7 @@
                                         <td class="text-center">
                                             <form action="{{ route('postalclient.destroy', $item->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+                                                <button type="submit" onclick="return confirm('Are you sure you want to delete {{$item->name}} {{$item->last_name}} (ID:{{$item->id}})?')" class="btn btn-danger">Delete</button>
                                                 @method('DELETE')
                                             </form>
                                         </td>
