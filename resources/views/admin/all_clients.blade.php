@@ -43,7 +43,11 @@
                                             <a href="{{route('ordersof', $item->id)}}" class="btn btn-secondary">Orders</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-warning">Disable</a>
+                                            <form action="{{route('disableacc', $item->id)}}" method="POST">
+                                                @method('PATCH')
+                                                @csrf
+                                            <input name="disable" class="btn {{$item->isActive?'btn-warning':'btn-info'}}" type="submit" onclick="return confirm('Confirm account {{$item->isActive?'disabling':'enabling'}} for {{$item->name}}?')" value="{{$item->isActive?'Disable':'Enable'}}">
+                                            </form>
                                         </td>
                                         <td class="text-center">
                                             <form action="{{ route('postalclient.destroy', $item->id) }}" method="POST">

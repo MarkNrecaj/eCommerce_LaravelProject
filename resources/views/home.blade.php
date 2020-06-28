@@ -13,8 +13,25 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    @if (Auth::user()->isActive)
+                        You are logged in!
+                    @else
+                        <div class="alert alert-danger" role="alert">
+                          <h4 class="alert-heading">Account disabled</h4>
+                          <p>Your account has been disabled. Contact support for more info</p>
+                          <a href="mailto:support@test.test">Contact support</a>
+                            <div>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

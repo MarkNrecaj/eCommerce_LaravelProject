@@ -43,6 +43,15 @@ class AdminController extends Controller
         return view('all_workers')->with('workers', $workers);
     }
 
+    public function disableAccount($id)
+    {
+        $user = User::find($id);
+        $user->isActive = !$user->isActive;
+        $user->save();
+
+        return redirect()->route('clients')->with('success', $user->name . ' account ' . ($user->isActive ? 'enabled' : 'disabled') . ' successfully');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

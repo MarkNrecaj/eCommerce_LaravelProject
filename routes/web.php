@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('/postalworker', 'PostalWorkerController');
     Route::get('/postalsettings', 'PostalSettingsController@index')->name('postalsettings');
     Route::patch('/postalsettings/{settings}', 'PostalSettingsController@update');
+    Route::patch('/disableacc/{id}', 'AdminController@disableAccount')->name('disableacc');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
     Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
     Route::get('/ordersof/{sellerId}', 'PostalClientsController@allOrders')->name('ordersof');
