@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostalClientsController;
+use App\Http\Controllers\PostalSettingsController;
 use App\Http\Controllers\PostalWorkerController;
 use App\Http\Controllers\SellerController;
 use App\Http\Middleware\PostalWorker;
@@ -31,9 +33,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
     Route::get('/clients', 'AdminController@showAllClients')->name('clients');
     Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
-    Route::get('/settings', 'AdminController@post_settings')->name('admin.settings');
-    Route::post('/postalworker', 'PostalWorkerController@destroy')->name('postalworker.destroy');
+    Route::delete('/clients/{client}', 'PostalClientsController@destroy')->name('postalclient.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
+    Route::get('/postalsettings', 'PostalSettingsController@index')->name('postalsettings');
+    Route::patch('/postalsettings/{settings}', 'PostalSettingsController@update');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
     Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
 });

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include('inc.messages')
 
 @section('content')
     <div class="container">
@@ -47,7 +46,7 @@
                                             <a href="#" class="btn btn-warning">Disable</a>
                                         </td>
                                         <td class="text-center">
-                                            <form action="{{ route('postalworker.destroy', $item->id) }}" method="POST">
+                                            <form action="{{ route('postalclient.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
                                                 @method('DELETE')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\PostalSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order');
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+        // dd($transfer_fee);
+        return view('order')->with('transfer_fee', $transfer_fee);
     }
 
     /**
@@ -96,11 +99,11 @@ class OrderController extends Controller
             'price' => $request['price'],
             'status' => 'Processing',
             'seller_id' => Auth::user()->id,
-            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar 
+            'total_price' => (float) $request['price'] * (int) $request['quantity'] + PostalSetting::find(1)->transfer_fee
         ]);
 
         //return redirect()->route('seller')->with('success', 'Order added successfully');
-        return redirect()->back()->with('success', 'Order added successfully');
+        return redirect()->back()->with('success', 'Order added successfully ');
     }
 
     /**

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\User;
+use App\PostalSetting;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class PostalSettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,32 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.admin');
-    }
-
-    /**
-     * List of orders.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list_orders()
-    {
-        $orders = Order::get();
-        $users = User::get();
-        return view('/admin/list_orders', compact('orders', 'users'));
-    }
-
-    public function showAllClients()
-    {
-        $clients = User::where('role_id', 3)->get();
-        return view('admin/all_clients')->with('clients', $clients);
-    }
-
-    public function showAllWorkers()
-    {
-        $workers = User::where('role_id', 2)->get();
-        //dd($workers);
-        return view('all_workers')->with('workers', $workers);
+        $setting = PostalSetting::find(1);
+        return view('admin.post_settings')->with('setting', $setting);
     }
 
     /**
@@ -93,9 +68,21 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostalSetting $settings)
     {
-        //
+        // $this->validate($request, [
+        //     'transfer_fee' => 'required|number|min:0'
+        // ]);
+
+        $data = request()->validate([
+            'transfer_fee' => 'required|regex:/^\d+(\.\d{1,2})?$/|min:0'
+        ]);
+
+        //dd($settings);
+
+        $settings->update($data);
+
+        return redirect('admin/postalsettings')->with('success', 'Changes saved successfully');
     }
 
     /**

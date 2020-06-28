@@ -245,7 +245,7 @@
                                     <label for="total_price" class="col-md-4 col-form-label text-md-right">{{ __('Total price + postal service') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="total_price" disabled value="2.00 €" name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
+                                        <input id="total_price" disabled value="{{$transfer_fee}}.00 €" name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
                                         @error('total_price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -264,7 +264,7 @@
                                 <small class="text-muted">* - required fields</small>
                                 <script>
                                     function calculateTotalPrice() {
-                                        document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + 2).toFixed(2) + " €";   
+                                        document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + {{$transfer_fee}}).toFixed(2) + " €";   
                                     }
                                 </script>
                             

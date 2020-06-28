@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@include('inc.messages')
 
 @section('content')
 <div class="container">
@@ -9,14 +8,14 @@
                 <div class="card-header">{{ __('Postal settings') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="/admin/postalsettings/{{$setting->id}}">
                         @csrf
-
+                        @method('PATCH')
                         <div class="form-group row">
                             <label for="transfer_fee" class="col-md-4 col-form-label text-md-right">{{ __('Transfer fee') }}</label>
 
                             <div class="col-md-6">
-                                <input id="transfer_fee" type="number" value="2" min="0" step="0.01" class="form-control @error('transfer_fee') eshte jo valide @enderror" name="transfer_fee" value="{{ old('transfer_fee') }}" autocomplete="off">
+                                <input id="transfer_fee" type="number" value="{{$setting->transfer_fee}}" min="0" step="0.01" class="form-control @error('transfer_fee') eshte jo valide @enderror" name="transfer_fee" value="{{ old('transfer_fee') }}" autocomplete="off">
 
                                 @error('transfer_fee')
                                     <span class="invalid-feedback" role="alert">
