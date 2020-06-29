@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class PostalWorkerController extends Controller
 {
@@ -19,10 +20,6 @@ class PostalWorkerController extends Controller
     {
         $orders = Order::where('poster_id', auth()->id())->get();
         return view('postal_worker_orders', compact('orders'));
-    }
-    public function index2()
-    {
-        return view('postal_worker');
     }
 
     /**
