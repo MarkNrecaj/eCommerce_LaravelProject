@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\PostalSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order');
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+        // dd($transfer_fee);
+        return view('order')->with('transfer_fee', $transfer_fee);
     }
 
     /**
@@ -96,10 +99,20 @@ class OrderController extends Controller
             'price' => $request['price'],
             'status' => 'Processing',
             'seller_id' => Auth::user()->id,
-            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar
+            'total_price' => (float) $request['price'] * (int) $request['quantity'] + PostalSetting::find(1)->transfer_fee
         ]);
 
-        return redirect()->back()->with('success', 'Order added successfully');
+        return redirect()->route('list_orders')->with('success', 'Order added successfully');
+        // return redirect()->back()->with('success', 'Order added successfully ');
+    }
+
+    public function choosePostalWorker(Request $request, $id){
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->save();
+        return redirect(route('admin.newOrders'));
     }
 
     /**
@@ -134,16 +147,6 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         //
-    }
-
-    public function choosePostalWorker(Request $request, $id){
-        //dd($request);
-        $order = Order::find($id);
-
-        $order->poster_id = $request->get('postman');
-        $order->status = 'Delivering';
-        $order->save();
-        return redirect(route('admin.allOrders'));
     }
 
     /**
