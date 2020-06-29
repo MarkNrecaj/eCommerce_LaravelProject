@@ -50,11 +50,11 @@
                                     <a class="nav-link" href="{{route('postalsettings')}}">Post settings<span class="sr-only"></span></a>
                                 </li>
                             @endif
-
+                            
                             @if (Auth::user()->role_id == 2) {{-- if postal worker --}}
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">My orders<span class="sr-only"></span></a>
-                                    </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/postalworker">My orders<span class="sr-only"></span></a>
+                                </li>
                             @endif
 
                             @if (Auth::user()->role_id == 3 && Auth::user()->isActive) {{-- if seller --}}
