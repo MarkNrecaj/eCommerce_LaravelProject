@@ -37,10 +37,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('all_orders/{id}', 'AdminController@showOrder')->name('viewOrder');
     Route::get('delivered_orders/{id}', 'AdminController@showDeliveredOrder')->name('viewDeliveredOrder');
     Route::get('/settings', 'AdminController@post_settings')->name('admin.settings');
-    Route::post('/postalworker', 'PostalWorkerController@destroy')->name('postalworker.destroy');
+    Route::delete('/clients/{client}', 'PostalClientsController@destroy')->name('postalclient.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
+    Route::get('/postalsettings', 'PostalSettingsController@index')->name('postalsettings');
+    Route::patch('/postalsettings/{settings}', 'PostalSettingsController@update');
+    Route::patch('/disableacc/{id}', 'AdminController@disableAccount')->name('disableacc');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
-    Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
+    Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');
+    Route::get('/ordersof/{sellerId}', 'PostalClientsController@allOrders')->name('ordersof');
 });
 
 Route::group(['middleware' => ['seller']], function () {

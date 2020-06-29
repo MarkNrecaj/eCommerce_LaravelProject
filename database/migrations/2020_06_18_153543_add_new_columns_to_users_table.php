@@ -18,7 +18,7 @@ class AddNewColumnsToUsersTable extends Migration
             $table->string('last_name')->after('name');
             $table->string('company')->nullable()->after('last_name');
             $table->string('tel')->after('password');
-            $table->string('tel2')->after('tel');
+            $table->string('tel2')->after('tel')->nullable();
             $table->string('state')->after('tel2');
             $table->string('city')->after('state');
             $table->boolean('isActive')->default(1)->after('city');

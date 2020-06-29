@@ -99,7 +99,6 @@ class OrderController extends Controller
             'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar
         ]);
 
-        //return redirect()->route('seller')->with('success', 'Order added successfully');
         return redirect()->back()->with('success', 'Order added successfully');
     }
 
