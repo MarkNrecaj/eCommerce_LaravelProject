@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PostalClientsController;
-use App\Http\Controllers\PostalSettingsController;
 use App\Http\Controllers\PostalWorkerController;
 use App\Http\Controllers\SellerController;
 use App\Http\Middleware\PostalWorker;
@@ -32,14 +30,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/workers', 'AdminController@showAllWorkers')->name('workers');
     Route::get('/clients', 'AdminController@showAllClients')->name('clients');
-    Route::get('/orders', 'AdminController@list_orders')->name('admin.orders');
+    Route::get('/all_orders', 'AdminController@list_orders')->name('admin.allOrders');
+    Route::get('/new_orders', 'AdminController@list_new_orders')->name('admin.newOrders');
+    Route::get('/delivered_orders', 'AdminController@list_delivered_orders')->name('admin.deliveredOrders');
+    Route::patch('/new_orders/choosePostalWorker/{id}', 'OrderController@choosePostalWorker')->name('choosePostalWorker');
+    Route::get('all_orders/{id}', 'AdminController@showOrder')->name('viewOrder');
+    Route::get('delivered_orders/{id}', 'AdminController@showDeliveredOrder')->name('viewDeliveredOrder');
+    Route::get('all_orders/editPostalWorker/{id}', 'OrderController@editPostalWorker')->name('editPostalWorker');
+    Route::patch('all_orders/editPostalWorker/{id}', 'OrderController@updatePostalWorker')->name('updatePostalWorker');
+    Route::get('/settings', 'AdminController@post_settings')->name('admin.settings');
     Route::delete('/clients/{client}', 'PostalClientsController@destroy')->name('postalclient.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
     Route::get('/postalsettings', 'PostalSettingsController@index')->name('postalsettings');
     Route::patch('/postalsettings/{settings}', 'PostalSettingsController@update');
     Route::patch('/disableacc/{id}', 'AdminController@disableAccount')->name('disableacc');
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
-    Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');;
+    Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');
     Route::get('/ordersof/{sellerId}', 'PostalClientsController@allOrders')->name('ordersof');
 });
 

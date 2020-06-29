@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\PostalSetting;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,6 +107,16 @@ class OrderController extends Controller
         // return redirect()->back()->with('success', 'Order added successfully ');
     }
 
+    public function choosePostalWorker(Request $request, $id)
+    {
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->save();
+        return redirect(route('admin.newOrders'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -126,6 +137,23 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //
+    }
+
+    public function editPostalWorker($id)
+    {
+        $order = Order::find($id);
+        $users = User::all();
+        return view('admin/editPostalWorker', compact('order', 'users'));
+    }
+
+    public function updatePostalWorker(Request $request, $id)
+    {
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->update();
+        return redirect(route('admin.allOrders'));
     }
 
     /**
