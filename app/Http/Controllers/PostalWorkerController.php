@@ -18,8 +18,21 @@ class PostalWorkerController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('poster_id', auth()->id())->get();
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivering')->get();
         return view('postal_worker_orders', compact('orders'));
+    }
+    public function listDeliveredOrders(){
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivered')->get();
+        return view('postalworker_delivered', compact('orders'));
+    }
+
+    public function changeOrderStatus(Request $request, $id){
+        $order = Order::find($id);
+        if (isset($request->status)) {
+            $order->status = $request->get('status');
+            $order->save();
+        }
+        return redirect(route('listDeliveredOrders'));
     }
 
     /**

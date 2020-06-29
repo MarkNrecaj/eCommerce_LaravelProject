@@ -3,9 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center table-responsive">
-        <div class="col-md-12">
+        <div class="col-md-18">
             <div class="card">
-                <div class="card-header">Orders</div>
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{route("postalworker")}}">New Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route("listDeliveredOrders")}}">Delivered Orders</a>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,6 +26,8 @@
                         <h3>No orders assigned for you yet.</h3>
                     @else
                         <div class="card table-responsive">
+
+                    <div class="card table-responsive" >
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -72,6 +83,32 @@
                                             <td>{{$order->status}}</td>
                                         </tr>
                                     @endforeach
+                                        <td>{{$order->quantity}}</td>
+                                        <td>{{$order->weight}}</td>
+                                        <td>{{$order->order_type}}</td>
+                                        <td>@if($order->is_openable) YES
+                                            @else No
+                                            @endif
+                                        </td>
+                                        <td>@if($order->is_returnable) YES
+                                            @else No
+                                            @endif</td>
+                                        <td>{{$order->additional_notes}}</td>
+                                        <td>{{$order->order_name}}</td>
+                                        <td>{{$order->description}}</td>
+                                        <td>{{$order->price}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <form  class="input-group" action="{{route('changeOrderStatus', $order->id)}}" method="POST">
+                                                @method('PATCH')
+                                                @csrf
+                                                <input type="checkbox" id="status" name="status" value="Delivered">
+                                                <label for="status"> Delivered</label><br>
+                                                <button  type="submit"  class="btn btn-primary">Save</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
