@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row justify-content-center table-responsive">
             <div class="col-md-16">
-                <div class="card">
+                <div class="card text">
                     <div class="card-header">Orders</div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
