@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::patch('/new_orders/choosePostalWorker/{id}', 'OrderController@choosePostalWorker')->name('choosePostalWorker');
     Route::get('all_orders/{id}', 'AdminController@showOrder')->name('viewOrder');
     Route::get('delivered_orders/{id}', 'AdminController@showDeliveredOrder')->name('viewDeliveredOrder');
+    Route::get('all_orders/editPostalWorker/{id}', 'OrderController@editPostalWorker')->name('editPostalWorker');
+    Route::patch('all_orders/editPostalWorker/{id}', 'OrderController@updatePostalWorker')->name('updatePostalWorker');
     Route::get('/settings', 'AdminController@post_settings')->name('admin.settings');
     Route::delete('/clients/{client}', 'PostalClientsController@destroy')->name('postalclient.destroy');
     Route::resource('/postalworker', 'PostalWorkerController');
