@@ -12,10 +12,10 @@
                                 <a class="nav-link" href="{{route("admin.newOrders")}}">New Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{route("admin.allOrders")}}">All Orders</a>
+                                <a class="nav-link" href="{{route("admin.allOrders")}}">All Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route("admin.deliveredOrders")}}">Delivered Orders</a>
+                                <a class="nav-link active" href="{{route("admin.deliveredOrders")}}">Delivered Orders</a>
                             </li>
                         </ul>
                     </div>
@@ -36,7 +36,6 @@
                                     <th scope="col">Address</th>
                                     <th scope="col">Seller Name</th>
                                     <th scope="col">Postman Name</th>
-                                    <th scope="col">Status</th>
                                     <th scope="col">Options</th>
                                 </tr>
                                 </thead>
@@ -54,19 +53,18 @@
                                         </td>
                                         <td>@foreach($users as $user)
                                                 @if($order->seller_id == $user->id)
-                                            {{$user->name. " " .$user->last_name}}
+                                                    {{$user->name. " " .$user->last_name}}
                                                 @endif
                                             @endforeach
                                         </td>
-                                            <td>@foreach($users as $user)
-                                                    @if($order->poster_id == $user->id)
-                                                        {{$user->name. " " .$user->last_name}}
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                        <td>{{$order->status}}</td>
+                                        <td>@foreach($users as $user)
+                                                @if($order->poster_id == $user->id)
+                                                    {{$user->name. " " .$user->last_name}}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>
-                                            <button onclick="window.location.href = '/admin/all_orders/{{ $order->id }}'" class="btn btn-primary">View</button>
+                                            <button onclick="window.location.href = '/admin/delivered_orders/{{ $order->id }}'" class="btn btn-primary">View</button>
                                         </td>
                                     </tr>
                                 @endforeach

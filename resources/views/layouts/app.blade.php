@@ -44,7 +44,7 @@
                                     <a class="nav-link" href="{{route('clients')}}">Manage clients<span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{{route('admin.orders')}}">All Orders <span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{{route('admin.newOrders')}}">Orders <span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{route('admin.settings')}}">Post settings<span class="sr-only"></span></a>

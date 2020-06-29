@@ -9,10 +9,10 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route("admin.newOrders")}}">New Orders</a>
+                                <a class="nav-link active" href="{{route("admin.newOrders")}}">New Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{route("admin.allOrders")}}">All Orders</a>
+                                <a class="nav-link" href="{{route("admin.allOrders")}}">All Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route("admin.deliveredOrders")}}">Delivered Orders</a>
@@ -36,43 +36,47 @@
                                     <th scope="col">Address</th>
                                     <th scope="col">Seller Name</th>
                                     <th scope="col">Postman Name</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $order)
                                     <tr>
-                                        <td>{{$order->id}}</td>
-                                        <td>{{$order->order_name}}</td>
-                                        <td>{{$order->receiver_name}}</td>
-                                        <td>@if($order->address == null)
-                                                {{$order->state. ', '.$order->city}}
-                                            @else
-                                                {{$order->state. ', '.$order->city. ', ' .$order->address}}
-                                            @endif
-                                        </td>
-                                        <td>@foreach($users as $user)
-                                                @if($order->seller_id == $user->id)
-                                            {{$user->name. " " .$user->last_name}}
+                                            <td>{{$order->id}}</td>
+                                            <td>{{$order->order_name}}</td>
+                                            <td>{{$order->receiver_name}}</td>
+                                            <td>@if($order->address == null)
+                                                    {{$order->state. ', '.$order->city}}
+                                                @else
+                                                    {{$order->state. ', '.$order->city. ', ' .$order->address}}
                                                 @endif
-                                            @endforeach
-                                        </td>
+                                            </td>
                                             <td>@foreach($users as $user)
-                                                    @if($order->poster_id == $user->id)
+                                                    @if($order->seller_id == $user->id)
                                                         {{$user->name. " " .$user->last_name}}
                                                     @endif
                                                 @endforeach
                                             </td>
-                                        <td>{{$order->status}}</td>
-                                        <td>
-                                            <button onclick="window.location.href = '/admin/all_orders/{{ $order->id }}'" class="btn btn-primary">View</button>
-                                        </td>
+                                            <td>
+                                                <form  class="input-group" action="{{route('choosePostalWorker', $order->id)}}" method="POST">
+                                                    @method('PATCH')
+                                                    @csrf
+                                                    <select class="form-control" name="postman">
+                                                        <option value="" selected disabled hidden>Choose a postman here</option>
+                                                        @foreach($users as $user)
+                                                            @if($user->role_id==2)
+                                                                <option value="{{$user->id}}">{{$user->city. " - " .$user->name." ".$user->last_name}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+
+                                                    <button  type="submit"  class="btn btn-primary">Save</button>
+                                                </form>
+
+                                            </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>

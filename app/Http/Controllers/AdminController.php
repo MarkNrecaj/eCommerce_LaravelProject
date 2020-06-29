@@ -23,11 +23,25 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function list_new_orders()
+    {
+        $orders = Order::where('poster_id', null)->orderBy('created_at', 'DESC')->get();
+        $users = User::get();
+        return view('/admin/list_new_orders', compact('orders', 'users'));
+    }
+
     public function list_orders()
     {
-        $orders = Order::get();
+        $orders = Order::whereNotNull('poster_id')->where('status','<>','delivered')->orderBy('created_at', 'DESC')->get();
         $users = User::get();
         return view('/admin/list_orders', compact('orders', 'users'));
+    }
+
+    public function list_delivered_orders()
+    {
+        $orders = Order::where('status', 'delivered')->orderBy('created_at', 'DESC')->get();
+        $users = User::get();
+        return view('/admin/list_delivered_orders', compact('orders', 'users'));
     }
 
     public function post_settings()
@@ -46,6 +60,20 @@ class AdminController extends Controller
         $workers = User::where('role_id', 2)->get();
         //dd($workers);
         return view('all_workers')->with('workers', $workers);
+    }
+
+    public function showOrder($id)
+    {
+        $order = Order::find($id);
+        $users = User::get();
+        return view('admin.view_orders', compact('order', 'users'));
+    }
+
+    public function showDeliveredOrder($id)
+    {
+        $order = Order::find($id);
+        $users = User::get();
+        return view('admin.view_delivered_orders', compact('order', 'users'));
     }
 
     /**

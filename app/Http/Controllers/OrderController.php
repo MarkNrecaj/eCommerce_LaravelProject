@@ -96,7 +96,7 @@ class OrderController extends Controller
             'price' => $request['price'],
             'status' => 'Processing',
             'seller_id' => Auth::user()->id,
-            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar 
+            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar
         ]);
 
         //return redirect()->route('seller')->with('success', 'Order added successfully');
@@ -135,6 +135,16 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         //
+    }
+
+    public function choosePostalWorker(Request $request, $id){
+        //dd($request);
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->save();
+        return redirect(route('admin.allOrders'));
     }
 
     /**
