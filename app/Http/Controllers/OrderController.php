@@ -102,8 +102,8 @@ class OrderController extends Controller
             'total_price' => (float) $request['price'] * (int) $request['quantity'] + PostalSetting::find(1)->transfer_fee
         ]);
 
-        //return redirect()->route('seller')->with('success', 'Order added successfully');
-        return redirect()->back()->with('success', 'Order added successfully ');
+        return redirect()->route('list_orders')->with('success', 'Order added successfully');
+        // return redirect()->back()->with('success', 'Order added successfully ');
     }
 
     /**

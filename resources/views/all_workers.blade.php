@@ -6,7 +6,7 @@
             <div class="col-md-16">
                 <div class="card">
                     <div class="card-header">All workers</div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -50,9 +50,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            @else
+                        @else
                             <h1>No workers registered. Add one to get started</h1>
-                            @endif
+                        @endif
                         <br/>
                         <a class="btn btn-primary float-right" href="{{route('addworker')}}" role="button" >Add worker</a>
                     </div>
