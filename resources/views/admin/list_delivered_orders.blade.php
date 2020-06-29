@@ -35,7 +35,7 @@
                                     <th scope="col">Address</th>
                                     <th scope="col">Seller Name</th>
                                     <th scope="col">Postman Name</th>
-                                    <th scope="col">Options</th>
+                                    <th scope="col">View Order</th>
                                 </tr>
                                 </thead>
                                 <tbody>
