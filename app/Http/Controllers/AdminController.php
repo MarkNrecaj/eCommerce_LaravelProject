@@ -32,7 +32,7 @@ class AdminController extends Controller
 
     public function list_orders()
     {
-        $orders = Order::whereNotNull('poster_id')->where('status','<>','delivered')->orderBy('created_at', 'DESC')->get();
+        $orders = Order::whereNotNull('poster_id')->where('status', '<>', 'delivered')->orderBy('created_at', 'DESC')->get();
         $users = User::get();
         return view('/admin/list_orders', compact('orders', 'users'));
     }
@@ -53,6 +53,14 @@ class AdminController extends Controller
     {
         $clients = User::where('role_id', 3)->get();
         return view('admin/all_clients')->with('clients', $clients);
+    }
+
+    public function disableAccount(User $id)
+    {
+        $id->isActive = !$id->isActive;
+        $id->save();
+
+        return redirect('admin/clients')->with('success', 'Changes saved successfully');
     }
 
     public function showAllWorkers()
