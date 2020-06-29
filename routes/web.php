@@ -55,4 +55,9 @@ Route::group(['middleware' => ['seller']], function () {
     Route::get('/order', 'OrderController@create')->name('order');
     Route::post('/order', 'OrderController@store');
 });
-Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker')->middleware('postal_worker');
+
+Route::group(['middleware' => ['postal_worker']], function () {
+    Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker');
+    Route::get('/postalworker/delivered_orders', 'PostalWorkerController@listDeliveredOrders')->name('listDeliveredOrders');
+    Route::patch('/postalworker/changeOrderStatus/{id}', 'PostalWorkerController@changeOrderStatus')->name('changeOrderStatus');
+});
