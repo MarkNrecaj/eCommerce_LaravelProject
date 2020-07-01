@@ -7,6 +7,8 @@ use App\PostalSetting;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
@@ -177,5 +179,13 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function downloadReport(Order $id)
+    {
+        $data = ['name' => $id->receiver_name, 'tel' => $id->receiver_tel . ' | ' . $id->receiver_tel2, 'address' => $id->address, 'quantity' => $id->quantity, 'order_type' => $id->order_type, 'openable' => $id->is_openable, 'returnable' => $id->is_returnable, 'additional_notes' => $id->additional_notes, 'order_name' => $id->order_name, 'description' => $id->description, 'price' => $id->total_price];
+        //dd($data);
+        $pdf = PDF::loadView('invoice', $data);
+        return $pdf->download('invoice' . $id->id . ' ' . Carbon::now()->toDateTimeString() . '.pdf');
     }
 }

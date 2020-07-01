@@ -54,6 +54,7 @@ Route::group(['middleware' => ['seller']], function () {
     Route::get('/orders', 'OrderController@index')->name('list_orders');
     Route::get('/order', 'OrderController@create')->name('order');
     Route::post('/order', 'OrderController@store');
+    Route::get('/report/{id}', 'OrderController@downloadReport')->name('report');
 });
 
 Route::group(['middleware' => ['postal_worker']], function () {

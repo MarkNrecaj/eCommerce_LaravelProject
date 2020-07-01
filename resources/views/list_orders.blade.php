@@ -35,6 +35,7 @@
                                             <th scope="col">Price</th>
                                             <th scope="col">Total Price</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Download</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,6 +71,9 @@
                                                 <td>{{$order->price}}</td>
                                                 <td>{{$order->total_price}}</td>
                                                 <td>{{$order->status}}</td>
+                                                <td>
+                                                    <a class="btn btn-outline-primary" href="{{route('report', $order)}}" role="button">PDF</a>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
