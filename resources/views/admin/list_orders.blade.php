@@ -74,6 +74,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            {{$orders->links()}}
                         @else
                             <h1>No orders yet. Wait for any than try again</h1>
                         @endif

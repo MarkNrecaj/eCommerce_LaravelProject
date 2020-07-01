@@ -25,7 +25,7 @@
                             </div>
                         @endif
 
-                        <div class="card table-responsive">
+                        <div class="card table-responsive row" >
                             <table class="table">
                                 <thead class="thead-light">
                                 <tr>
@@ -77,6 +77,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{$orders->links()}}
                     </div>
                 </div>
             </div>

@@ -25,21 +25,21 @@ class AdminController extends Controller
      */
     public function list_new_orders()
     {
-        $orders = Order::where('poster_id', null)->orderBy('created_at', 'DESC')->get();
+        $orders = Order::where('poster_id', null)->orderBy('created_at', 'DESC')->paginate(5);
         $users = User::get();
         return view('/admin/list_new_orders', compact('orders', 'users'));
     }
 
     public function list_orders()
     {
-        $orders = Order::whereNotNull('poster_id')->where('status', '<>', 'delivered')->orderBy('created_at', 'DESC')->get();
+        $orders = Order::whereNotNull('poster_id')->where('status', '<>', 'delivered')->orderBy('created_at', 'DESC')->paginate(5);;
         $users = User::get();
         return view('/admin/list_orders', compact('orders', 'users'));
     }
 
     public function list_delivered_orders()
     {
-        $orders = Order::where('status', 'delivered')->orderBy('created_at', 'DESC')->get();
+        $orders = Order::where('status', 'delivered')->orderBy('created_at', 'DESC')->paginate(5);
         $users = User::get();
         return view('/admin/list_delivered_orders', compact('orders', 'users'));
     }
