@@ -7,6 +7,23 @@
                 <div class="card">
                     <div class="card-header">All clients</div>
                         <div class="card-body text-center">
+                            <!-- Search form -->
+                            <div class="main">                                    
+                                    <form action="{{route('searchClients')}}" method="post" class="input-group">
+                                        @csrf
+                                        <input name="query" class="form-control" type="text" placeholder="Search clients" aria-label="Search">
+                                        <div class="input-group-append">
+                                            <input type="submit" value="Search" class="btn btn-secondary">
+                                        </div>  
+                                    </form>
+                              </div>
+                        {{-- <div class="md-form mt-0">
+                            <form action="{{route('searchClients')}}" method="post">
+                                @csrf
+                                <input name="query" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                <input type="submit" value="Search" class="btn btn-primary float-right">
+                            </form> --}}
+                        </div>
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -62,7 +79,7 @@
                                 </table>
                             </div>
                         @else
-                        <h1>No clients registered yet. Wait for any registration then try again</h1>
+                        <h1 class="text-center">No clients registered yet. Wait for any registration then try again</h1>
                         @endif
                         <br/>
                      </div>

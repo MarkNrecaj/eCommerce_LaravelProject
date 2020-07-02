@@ -7,39 +7,40 @@
                 <div class="card text">
                     <div class="card-header">Orders</div>
                         <div class="card-body text-center">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
-                        @if (count($orders) <= 0)
-                            <h3>No orders yet. Add one to see results</h3>
-                        @else
-                            <div class="card table-responsive">
-                                <table class="table">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Receiver</th>
-                                            <th scope="col">Tel</th>
-                                            <th scope="col">Full Address</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Weight</th>
-                                            <th scope="col">Order Type</th>
-                                            <th scope="col">Openable</th>
-                                            <th scope="col">Returnable</th>
-                                            <th scope="col">Additional Notes</th>
-                                            <th scope="col">Order Name</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Total Price</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($orders as $key =>$order)
-                                        <tr>
+                            @if (count($orders) <= 0)
+                                <h3>No orders yet. Add one to see results</h3>
+                            @else
+                                <div class="card table-responsive">
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Receiver</th>
+                                                <th scope="col">Tel</th>
+                                                <th scope="col">Full Address</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Weight</th>
+                                                <th scope="col">Order Type</th>
+                                                <th scope="col">Openable</th>
+                                                <th scope="col">Returnable</th>
+                                                <th scope="col">Additional Notes</th>
+                                                <th scope="col">Order Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Total Price</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Download</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($orders as $key =>$order)
+                                            <tr>
                                             <td>{{$key+1}}</td>
                                             <td>{{$order->receiver_name}}</td>
                                             <td>@if($order->receiver_tel2 == null)
@@ -70,12 +71,16 @@
                                                 <td>{{$order->price}}</td>
                                                 <td>{{$order->total_price}}</td>
                                                 <td>{{$order->status}}</td>
+                                                <td>
+                                                    <a class="btn btn-outline-primary" href="{{route('report', $order)}}" role="button">PDF</a>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             @endif
+                            {{$orders->links()}}
                         </div>
                     </div>
                 </div>

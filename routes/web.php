@@ -45,6 +45,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/addworker', 'PostalWorkerController@create')->name('addworker');
     Route::post('/addworker', 'PostalWorkerController@store')->name('post.addworker');
     Route::get('/ordersof/{sellerId}', 'PostalClientsController@allOrders')->name('ordersof');
+    Route::get('/users/{id}', 'AdminController@generateContract')->name('workerContract');
+    Route::post('/search_clients', 'AdminController@searchClients')->name('searchClients');
 });
 
 Route::group(['middleware' => ['seller']], function () {
@@ -52,6 +54,7 @@ Route::group(['middleware' => ['seller']], function () {
     Route::get('/orders', 'OrderController@index')->name('list_orders');
     Route::get('/order', 'OrderController@create')->name('order');
     Route::post('/order', 'OrderController@store');
+    Route::get('/report/{id}', 'OrderController@downloadReport')->name('report');
     Route::get('/newProduct', 'ProductController@create')->name('newProduct');
     Route::post('/newProduct', 'ProductController@store')->name('addProduct');
 });
