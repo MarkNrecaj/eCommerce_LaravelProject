@@ -1,6 +1,30 @@
-<h1>Invoice for {{$name}}</h1>
+<style>
+    table{
+        border-collapse: collapse;
+        border: 1px solid rgb(216, 216, 216);
+    }
+    td{
+        border-collapse: collapse;
+        border: 1px solid rgb(216, 216, 216);
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: rgb(87, 87, 87);
+    }
 
-<table border="1px">
+    th{
+        border-collapse: collapse;
+        border: 1px solid rgb(216, 216, 216);
+        font-weight: bold;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: rgb(87, 87, 87);
+    }
+</style>
+
+<h1 style="text-align: center; color: rgb(44, 44, 44);">Invoice for {{$name}}</h1>
+
+<table>
     <tr>
         <th>Reciever</th>
         <th>Tel</th>
