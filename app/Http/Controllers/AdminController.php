@@ -170,6 +170,9 @@ class AdminController extends Controller
             $query->orWhere('name', 'LIKE', '%' . $request['query'] . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $request['query'] . '%')
                 ->orWhere('company', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('email', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('tel', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('tel2', 'LIKE', '%' . $request['query'] . '%')
                 ->orWhere('state', 'LIKE', '%' . $request['query'] . '%')
                 ->orWhere('city', 'LIKE', '%' . $request['query'] . '%');
         })
@@ -179,8 +182,7 @@ class AdminController extends Controller
         if (count($users) > 0) {
             return view('admin/all_clients')->with('clients', $users);
         } else {
-            $clients = User::where('role_id', 3);
-            return view('admin/all_clients')->with('clients', $clients);
+            return view('admin/all_clients')->with('clients', User::where('role_id', 3));
         }
     }
 }
