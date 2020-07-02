@@ -44,6 +44,8 @@ class ProductController extends Controller
             $request,
             [
                 'name' => 'required|max:255',
+                'images'=>'nullable|array|max:5',
+                'images.*'=>'image|max:2000',
                 'description' => 'nullable|max:255',
                 'price' => 'required|numeric|gte:0',
                 'weight' => 'nullable|numeric|min:0',
@@ -51,45 +53,39 @@ class ProductController extends Controller
             ]
         );
 
-        if(!($request->hasFile('images'))){
-            $product = new Product();
-            $product->name = $request->get('name');
-            $product->description = $request->get('description');
-            $product->price = $request->get('price');
-            $product->weight = $request->get('weight');
-            $product->product_type = $request->get('product_type');
-            $product->seller_id = Auth::user()->id;
-            $product->save();
-        }
+        $product = new Product();
+
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->price = $request->get('price');
+        $product->weight = $request->get('weight');
+        $product->product_type = $request->get('product_type');
+        $product->seller_id = Auth::user()->id;
+        $product->save();
+
         if($request->hasFile('images')){
-            if (count($request->images)>5){
-                return redirect()->route('newProduct')->with('error', 'You exceeded the limit of pictures!');
-            }
-
-            $product = new Product();
-            $product->name = $request->get('name');
-            $product->description = $request->get('description');
-            $product->price = $request->get('price');
-            $product->weight = $request->get('weight');
-            $product->product_type = $request->get('product_type');
-            $product->seller_id = Auth::user()->id;
-            $product->save();
-
             foreach ($request->images as $image){
 
                 $image_name_with_ext = $image->getClientOriginalName();
                 $image_name= pathinfo($image_name_with_ext, PATHINFO_FILENAME);
                 $extension = $image->extension();
-                $stored_image_name = $image_name."_".time().'.'.$extension;
-                $image->storeAs('public/images', $stored_image_name);
+                $full_image_name = $image_name."_".time().'.'.$extension;
+                $image->storeAs('public/images', $full_image_name);
 
                 $product_image = new ProductImage();
 
-                    $product_image->path=$stored_image_name;
+                    $product_image->path=$full_image_name;
                     $product_image->product_id = $product->id;;
                     $product_image->save();
             }
         }
+            else {
+                $product_image = new ProductImage();
+                $full_image_name = 'no_image.jpg';
+                $product_image->path= $full_image_name;
+                $product_image->product_id = $product->id;;
+                $product_image->save();
+            }
 
         return redirect()->route('newProduct')->with('success', 'Product added successfully');
     }
