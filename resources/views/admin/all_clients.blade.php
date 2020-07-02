@@ -79,7 +79,7 @@
                                 </table>
                             </div>
                         @else
-                        <h1>No clients registered yet. Wait for any registration then try again</h1>
+                        <h1 class="text-center">No clients registered yet. Wait for any registration then try again</h1>
                         @endif
                         <br/>
                      </div>
