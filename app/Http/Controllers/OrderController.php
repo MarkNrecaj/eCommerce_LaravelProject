@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('seller_id', auth()->id())->get();
+        $orders = Order::where('seller_id', auth()->id())->orderBy('created_at', 'DESC')->get();
         return view('list_orders', compact('orders'));
     }
 
