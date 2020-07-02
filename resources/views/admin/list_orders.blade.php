@@ -74,8 +74,11 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            {{$orders->links()}}
+{{--                            <nav aria-label="Page navigation example" class="py-4">--}}
+{{--                                <ul class="pagination justify-content-center">--}}
+                                        {{$orders->links()}}
+{{--                                </ul>--}}
+{{--                            </nav>--}}
                         @else
                             <h1>No orders yet. Wait for any than try again</h1>
                         @endif
