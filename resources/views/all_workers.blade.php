@@ -26,6 +26,7 @@
                                         <th scope="col">State</th>
                                         <th scope="col">City</th>
                                         <th scope="col">Manage</th>
+                                        <th scope="col">Contract</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -45,6 +46,7 @@
                                                     @method('DELETE')
                                                 </form>
                                             </td>
+                                            <td><a class="btn btn-outline-primary" href="{{route('workerContract',$item->id)}}">PDF</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

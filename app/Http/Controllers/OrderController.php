@@ -185,7 +185,7 @@ class OrderController extends Controller
     {
         $data = ['name' => $id->receiver_name, 'tel' => $id->receiver_tel . ' | ' . $id->receiver_tel2, 'address' => $id->address, 'quantity' => $id->quantity, 'order_type' => $id->order_type, 'openable' => $id->is_openable, 'returnable' => $id->is_returnable, 'additional_notes' => $id->additional_notes, 'order_name' => $id->order_name, 'description' => $id->description, 'price' => $id->total_price];
         //dd($data);
-        $pdf = PDF::loadView('invoice', $data);
+        $pdf = PDF::loadView('pdf.invoice', $data);
         return $pdf->download('invoice' . $id->id . ' ' . Carbon::now()->toDateTimeString() . '.pdf');
     }
 }

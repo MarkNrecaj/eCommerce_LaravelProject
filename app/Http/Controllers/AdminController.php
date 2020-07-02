@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -148,5 +151,36 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function generateContract(User $id)
+    {
+        $data = ['name' => $id->name, 'last_name' => $id->last_name, 'state' => $id->state, 'city' => $id->city];
+        //dd($data);
+        $pdf = PDF::loadView('pdf.contract', $data);
+        return $pdf->download('contract' . $id->id . ' ' . Carbon::now()->toDateTimeString() . '.pdf');
+    }
+
+    public function searchClients(Request $request)
+    {
+        //Following code translates to
+        //SELECT * FROM User WHERE role_id = 3 and (name LIKE $request OR last_name LIKE $request...)
+
+        $users = User::where(function ($query) use ($request) {
+            $query->orWhere('name', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('company', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('state', 'LIKE', '%' . $request['query'] . '%')
+                ->orWhere('city', 'LIKE', '%' . $request['query'] . '%');
+        })
+            ->where('role_id', '=', '3')
+            ->get();
+
+        if (count($users) > 0) {
+            return view('admin/all_clients')->with('clients', $users);
+        } else {
+            $clients = User::where('role_id', 3);
+            return view('admin/all_clients')->with('clients', $clients);
+        }
     }
 }

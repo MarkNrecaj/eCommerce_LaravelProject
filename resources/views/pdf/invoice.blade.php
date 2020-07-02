@@ -1,14 +1,14 @@
 <h1>Invoice for {{$name}}</h1>
 
-<table>
+<table border="1px">
     <tr>
         <th>Reciever</th>
         <th>Tel</th>
         <th>Full Address</th>
-        <th>Quantity</th>
+        <th>Qty</th>
         <th>Order Type</th>
-        <th>Openable</th>
-        <th>Returnable</th>
+        <th>Can Open</th>
+        <th>Can Return</th>
         <th>Additional Notes</th>
         <th>Order Name</th>
         <th>Description</th>
