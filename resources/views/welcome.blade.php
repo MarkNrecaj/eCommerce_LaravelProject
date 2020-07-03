@@ -64,7 +64,7 @@
                                         </div>
                                         <p class="card-text"> {{$product->description}}</p>
                                         <div class="btn-group">
-                                            <a href="#" class="card-link btn btn-outline-secondary">View</a>
+                                            <a href="{{ url('product-details/' .$product->id)}}" class="card-link btn btn-outline-secondary">View</a>
                                             <a href="#" class="card-link btn btn-outline-secondary">Add to Cart</a>
                                         </div>
                                         </div>

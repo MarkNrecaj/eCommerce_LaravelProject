@@ -94,6 +94,13 @@ class ProductController extends Controller
         return redirect()->route('newProduct')->with('success', 'Product added successfully');
     }
 
+    public function productDetails($id){
+        $productDetails = Product::where('id', $id)->first();
+        $product_images = ProductImage::get();
+        
+        return view('product-details')->with(compact('productDetails','product_images'));
+    }
+
     /**
      * Display the specified resource.
      *
