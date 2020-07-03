@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'ProductController@index')->name('dashboard');
+Route::get('/product-details/{id}', 'ProductController@productDetails')->name('product-details');
+
 
 Auth::routes();
 
@@ -60,6 +62,7 @@ Route::group(['middleware' => ['seller']], function () {
     Route::get('/newProduct', 'ProductController@create')->name('newProduct');
     Route::post('/newProduct', 'ProductController@store')->name('addProduct');
 });
+
 
 Route::group(['middleware' => ['postal_worker']], function () {
     Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker');
