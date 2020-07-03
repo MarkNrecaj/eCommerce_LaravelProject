@@ -36,5 +36,9 @@ class Seller
 
             return $next($request);
         }
+
+        if (Auth::user()->role_id == 4) {
+            return redirect()->route('buyer')->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class PostalWorker
+class Buyer
 {
     /**
      * Handle an incoming request.
@@ -21,19 +21,19 @@ class PostalWorker
         }
 
         if (Auth::user()->role_id == 1) {
-            return redirect()->route('admin')->with('error', 'You can\'t go to that link, because you aren\'t logged in as postal worker.');
+            return redirect()->route('admin')->with('error', 'You can\'t go to that link, because you aren\'t logged in as buyer.');
         }
 
         if (Auth::user()->role_id == 2) {
-            return $next($request);
+            return redirect()->route('postalworker')->with('error', 'You can\'t go to that link, because you aren\'t logged in as buyer.');
         }
 
         if (Auth::user()->role_id == 3) {
-            return redirect()->route('seller')->with('error', 'You can\'t go to that link, because you aren\'t logged in as postal worker.');
+            return redirect()->route('seller')->with('error', 'You can\'t go to that link, because you aren\'t logged in as buyer.');
         }
 
         if (Auth::user()->role_id == 4) {
-            return redirect()->route('buyer')->with('error', 'You can\'t go to that link, because you aren\'t logged in as postal worker.');
+            return $next($request);
         }
     }
 }

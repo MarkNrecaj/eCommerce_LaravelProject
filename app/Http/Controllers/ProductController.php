@@ -18,8 +18,8 @@ class ProductController extends Controller
     {
         $products = Product::get();
         //$product_images = ProductImage::get();
-        $product_images = ProductImage::select('id','path','product_id')->groupBy('product_id')->paginate(6);
-        return view('welcome',compact('products','product_images'));
+        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
+        return view('welcome', compact('products', 'product_images'));
     }
 
     /**
@@ -44,8 +44,8 @@ class ProductController extends Controller
             $request,
             [
                 'name' => 'required|max:255',
-                'images'=>'nullable|array|max:5',
-                'images.*'=>'image|max:2000',
+                'images' => 'nullable|array|max:5',
+                'images.*' => 'image|max:2000',
                 'description' => 'nullable|max:255',
                 'price' => 'required|numeric|gte:0',
                 'weight' => 'nullable|numeric|min:0',
@@ -63,29 +63,28 @@ class ProductController extends Controller
         $product->seller_id = Auth::user()->id;
         $product->save();
 
-        if($request->hasFile('images')){
-            foreach ($request->images as $image){
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $image) {
 
                 $image_name_with_ext = $image->getClientOriginalName();
-                $image_name= pathinfo($image_name_with_ext, PATHINFO_FILENAME);
+                $image_name = pathinfo($image_name_with_ext, PATHINFO_FILENAME);
                 $extension = $image->extension();
-                $full_image_name = $image_name."_".time().'.'.$extension;
+                $full_image_name = $image_name . "_" . time() . '.' . $extension;
                 $image->storeAs('public/images', $full_image_name);
 
                 $product_image = new ProductImage();
 
-                    $product_image->path=$full_image_name;
-                    $product_image->product_id = $product->id;;
-                    $product_image->save();
-            }
-        }
-            else {
-                $product_image = new ProductImage();
-                $full_image_name = 'no_image.jpg';
-                $product_image->path= $full_image_name;
+                $product_image->path = $full_image_name;
                 $product_image->product_id = $product->id;;
                 $product_image->save();
             }
+        } else {
+            $product_image = new ProductImage();
+            $full_image_name = 'no_image.jpg';
+            $product_image->path = $full_image_name;
+            $product_image->product_id = $product->id;;
+            $product_image->save();
+        }
 
         return redirect()->route('newProduct')->with('success', 'Product added successfully');
     }

@@ -65,7 +65,12 @@
                                         <p class="card-text"> {{$product->description}}</p>
                                         <div class="btn-group">
                                             <a href="#" class="card-link btn btn-outline-secondary">View</a>
-                                            <a href="#" class="card-link btn btn-outline-secondary">Add to Cart</a>
+                                            
+                                            <form action="{{route('cart', $product->id)}}" method="post">
+                                                @csrf
+                                                
+                                                <input type="submit" class="card-link btn btn-outline-secondary" value="Add to Cart" />
+                                            </form>
                                         </div>
                                         </div>
                                 </div>

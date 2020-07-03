@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostalWorkerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use App\Http\Middleware\PostalWorker;
 use Illuminate\Support\Facades\Route;
@@ -64,3 +66,11 @@ Route::group(['middleware' => ['postal_worker']], function () {
     Route::get('/postalworker/delivered_orders', 'PostalWorkerController@listDeliveredOrders')->name('listDeliveredOrders');
     Route::patch('/postalworker/changeOrderStatus/{id}', 'PostalWorkerController@changeOrderStatus')->name('changeOrderStatus');
 });
+
+Route::group(['middleware' => ['buyer']], function () {
+    Route::get('/buyer', 'BuyerController@index')->name('buyer');
+    Route::get('/cart', 'BuyerController@loadCart')->name('cart');
+    Route::post('/cart/{id}', 'BuyerController@addToCart')->name('cart');
+});
+
+// Route::get('productDetails/{id}', 'ProductController@showProductDetails')->name('productDetails');

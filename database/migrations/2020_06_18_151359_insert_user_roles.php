@@ -18,6 +18,7 @@ class InsertUserRoles extends Migration
             \App\Role::create(['name' => 'administrator', 'description' => 'Has access everywhere. Can register,delete or update user data']);
             \App\Role::create(['name' => 'postal_worker', 'description' => 'Can process orders.']);
             \App\Role::create(['name' => 'seller', 'description' => 'Can add orders in website.']);
+            \App\Role::create(['name' => 'buyer', 'description' => 'Will buy products. Has access to his cart.']);
             \Illuminate\Support\Facades\DB::commit();
         } catch (Exception $e) {
             \Illuminate\Support\Facades\DB::rollBack();
