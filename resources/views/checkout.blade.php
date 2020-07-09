@@ -163,141 +163,128 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Checkout</div>
-
-                    <div class="card-body text-center">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill">{{count($products)}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    @foreach($products as $product)
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">{{$product->name}}</h6>
+                                <small class="text-muted">{{$product->description}}</small>
                             </div>
-                        @endif
-                        <div class="container">
-
-                            <h3>Billing Details</h3>
-                            <div class="card-body">
-                                <form  id="payment-form" action="{{route('checkout.store')}}" method="POST">
-                                    @csrf
-
-                                    <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name *') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name Lastname" required autocomplete="given-name">
-
-                                            @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email Address *') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="example@email.com" required autocomplete="email">
-
-                                            @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State *') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state"  value="{{ old('state') }}" placeholder="State" required autocomplete="state" >
-
-                                            @error('state')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City *') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ old('city') }}" placeholder="City" required autocomplete="city" >
-
-                                            @error('city')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="address" type="text" class="form-control @error('address') eshte jo valide @enderror" name="address" placeholder="Street Address" value="{{ old('address') }}" autocomplete="off">
-
-                                            @error('address')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="dropdown-divider"></div>
-
-                                    <h3>Payment Details</h3>
-
-                                    <div class="form-group row">
-                                        <label for="cardholder_name" class="col-md-4 col-form-label text-md-right">{{ __('Cardholder Name *') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="cardholder_name" type="text" class="form-control @error('cardholder_name') is-invalid @enderror" name="cardholder_name"  placeholder="Cardholder Name" required autocomplete="off">
-
-                                            @error('cardholder_name')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="card-element" class="col-md-4 col-form-label text-md-right">
-                                            Credit or debit card *
-                                        </label>
-                                        <div class="col-md-6">
-                                            <div id="card-element" >
-                                                <!-- A Stripe Element will be inserted here. -->
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Used to display form errors. -->
-                                        <div id="card-errors" role="alert"></div>
-                                    </div>
-
-
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4">
-                                            <button type="submit" id="complete-order" class="btn btn-primary">
-                                                {{ __('Submit Payment') }}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </form>
+                            <span class="text-muted">{{$product->price}}$</span>
+                        </li>
+                    @endforeach
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Shipping Cost</h6>
                             </div>
+                            <span class="text-success">+$2</span>
+                        </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (EUR)</span>
+                        <strong>$25</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Billing address</h4>
+                <form  id="payment-form" action="{{route('checkout.store')}}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name">Full Name <span class="text-muted">*</span></label>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name Lastname" required autocomplete="given-name">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">Email <span class="text-muted">*</span></label>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="you@example.com" required autocomplete="email">
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">Address<span class="text-muted">(Optional)</span></label>
+                        <input id="address" type="text" class="form-control @error('address') eshte jo valide @enderror" name="address" placeholder="1234 Main St" value="{{ old('address') }}" autocomplete="off">
+
+                        @error('address')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city">City<span class="text-muted">*</span></label>
+                            <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ old('city') }}" placeholder="City" required autocomplete="city" >
+
+                            @error('city')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state">State<span class="text-muted">*</span></label>
+                            <select class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}">
+                                <option value="" selected disabled hidden>Choose..</option>
+                                <option value="Kosovo">Kosovo</option>
+                                <option value="Albania">Albania</option>
+                                <option value="North Macedonia">North Macedonia</option>
+                            </select>
+
+                            @error('state')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
-                </div>
+
+                    <hr class="mb-4">
+
+                    <h4 class="mb-3">Payment</h4>
+                    <div class="mb-3">
+                        <label for="cardholder_name">Cardholder Name<span class="text-muted">*</span></label>
+
+                        <input id="cardholder_name" type="text" class="form-control @error('cardholder_name') is-invalid @enderror" name="cardholder_name"  placeholder="Cardholder Name" required autocomplete="off">
+
+                        @error('cardholder_name')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-row">
+                        <label for="card-element">
+                            Credit or debit card *
+                        </label>
+                            <div id="card-element" >
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+
+                    <hr class="mb-4">
+                    <button type="submit" id="complete-order" class="btn btn-primary btn-lg btn-block" >Checkout</button>
+                </form>
             </div>
         </div>
     </div>

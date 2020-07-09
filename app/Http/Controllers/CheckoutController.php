@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\ProductImage;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
@@ -15,7 +17,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('checkout');
+        $products = Product::all(); //Duhet mi marr produktet prej Cart
+        return view('checkout')->with(compact('products'));
     }
 
     /**
@@ -36,7 +39,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
 
         $this->validate(
             $request,
