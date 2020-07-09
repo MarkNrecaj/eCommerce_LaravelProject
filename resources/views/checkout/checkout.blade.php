@@ -176,18 +176,18 @@
                                 <h6 class="my-0">{{$product->name}}</h6>
                                 <small class="text-muted">{{$product->description}}</small>
                             </div>
-                            <span class="text-muted">{{$product->price}}$</span>
+                            <span class="text-muted">{{$product->price}} €</span>
                         </li>
                     @endforeach
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
                                 <h6 class="my-0">Shipping Cost</h6>
                             </div>
-                            <span class="text-success">+$2</span>
+                            <span class="text-success">+ 2 €</span>
                         </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (EUR)</span>
-                        <strong>$25</strong>
+                        <strong>{{$total_price}} €</strong>
                     </li>
                 </ul>
             </div>
@@ -240,7 +240,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="state">State<span class="text-muted">*</span></label>
-                            <select class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}">
+                            <select  id="state" class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}">
                                 <option value="" selected disabled hidden>Choose..</option>
                                 <option value="Kosovo">Kosovo</option>
                                 <option value="Albania">Albania</option>
@@ -274,9 +274,9 @@
                         <label for="card-element">
                             Credit or debit card *
                         </label>
-                            <div id="card-element" >
-                                <!-- A Stripe Element will be inserted here. -->
-                            </div>
+                        <div id="card-element" >
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
 
                         <!-- Used to display form errors. -->
                         <div id="card-errors" role="alert"></div>

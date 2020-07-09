@@ -80,3 +80,4 @@ Route::group(['middleware' => ['buyer']], function () {
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+//Route::get('/checkoutProduct/{id}', 'CheckoutController@show')->name('checkout.index');

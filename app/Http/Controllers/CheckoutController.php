@@ -18,7 +18,11 @@ class CheckoutController extends Controller
     public function index()
     {
         $products = Product::all(); //Duhet mi marr produktet prej Cart
-        return view('checkout')->with(compact('products'));
+        $total_price = 2;
+        foreach ($products as $product){
+            $total_price = $total_price + $product->price;
+        }
+        return view('checkout/checkout')->with(compact('products','total_price'));
     }
 
     /**
@@ -39,7 +43,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
 
         $this->validate(
             $request,
@@ -51,10 +55,16 @@ class CheckoutController extends Controller
             ]
         );
 
+        $products = Product::all(); //Duhet mi marr produktet prej Cart
+        $total_price = 2;
+        foreach ($products as $product){
+            $total_price = $total_price + $product->price;
+        }
+
         try {
             $stripe = Stripe::make('sk_test_51H0mlKK5oDGBuQ7Kkgj6KVsIowcTCS99NPDtO00r3Y011Xa2GShmBkotvPkXDKVW4H7yjpAIo0rFnDeGflrDulHr00ukWffyBZ');
             $change = $stripe->charges()->create([
-                'amount' => 100, //E merr vleren prej cart
+                'amount' => $total_price, //E merr vleren prej cart
                 'currency' => 'EUR',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
@@ -62,10 +72,10 @@ class CheckoutController extends Controller
                 'metatadata' => [],
             ]);
 
-            return view('checkout')->with('success_message',"Thank you! Your payment has been successfully accepted");
+            return view('checkout/checkout')->with(compact('products','total_price'));
 
         } catch (CardErrorException $e) {
-            return view('checkout')->withErrors('Error!', $e->getMessage());
+            return view('checkout/checkout')->withErrors(compact('products','total_price'));
         }
     }
 
@@ -77,7 +87,13 @@ class CheckoutController extends Controller
      */
     public function show($id)
     {
-        //
+//        $products = Product::where('id', $id)->get();
+//        //dd($product);
+//        $total_price = 2;
+//        foreach ($products as $product){
+//            $total_price = $total_price + $product->price;
+//        }
+//        return view('checkout/checkout')->with(compact('products','total_price'));
     }
 
     /**
