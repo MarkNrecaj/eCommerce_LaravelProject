@@ -25,6 +25,8 @@ Route::get('/product-details/{id}', 'ProductController@productDetails')->name('p
 
 
 Auth::routes();
+Route::get('register/buyer', 'Auth\RegisterController@showBuyerRegistrationForm')->name('registerBuyer');
+Route::post('register/buyer', 'Auth\RegisterController@registerBuyer');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
