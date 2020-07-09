@@ -6,6 +6,7 @@ use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Cart;
 
 class ProductController extends Controller
 {
@@ -89,11 +90,12 @@ class ProductController extends Controller
         return redirect()->route('newProduct')->with('success', 'Product added successfully');
     }
 
-    public function productDetails($id){
+    public function productDetails($id)
+    {
         $productDetails = Product::where('id', $id)->first();
         $product_images = ProductImage::get();
-        
-        return view('product-details')->with(compact('productDetails','product_images'));
+
+        return view('product-details')->with(compact('productDetails', 'product_images'));
     }
 
     /**
@@ -136,8 +138,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cart $id)
     {
-        //
+        $id->delete();
+        return redirect()->back()->with('success', 'Item with id ' . $id->id . ' removed from cart');
     }
 }
