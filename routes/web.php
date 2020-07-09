@@ -76,3 +76,9 @@ Route::group(['middleware' => ['buyer']], function () {
     Route::post('/cart/{id}', 'BuyerController@addToCart')->name('cart');
     Route::delete('/product/{id}', 'ProductController@destroy')->name('product.destroy');
 });
+
+// Route::get('productDetails/{id}', 'ProductController@showProductDetails')->name('productDetails');
+
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+//Route::get('/checkoutProduct/{id}', 'CheckoutController@show')->name('checkout.index');

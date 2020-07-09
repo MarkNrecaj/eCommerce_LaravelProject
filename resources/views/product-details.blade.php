@@ -23,7 +23,7 @@
                       <div class="carousel-item">
                         <img class="d-block w-100" src="../storage/images/{{$product_image->path}}" alt="Third slide">
                       </div>
-                 @endif                            
+                 @endif
                  @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -40,7 +40,6 @@
                 <div class="single-product-details">
                     <h2>{{$productDetails->name}}</h2>
                     <h5> <del>$ 60.00</del> ${{$productDetails->price}}</h5>
-                        <p>
                             <h4>Short Description:</h4>
                             <p>{{$productDetails->description}} </p>
                             <ul class="ul-style">
@@ -70,6 +69,7 @@
                             <div class="price-box-bar">
                                 <div class="cart-and-bay-btn">
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
+{{--                                    <a class="btn hvr-hover" data-fancybox-close="" href="{{ url('checkoutProduct/' .$productDetails->id)}}">Buy New</a>--}}
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
                                 </div>
                             </div>

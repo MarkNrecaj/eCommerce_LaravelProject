@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,7 +20,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
-    
+
+    @yield('extra-css')
+
 </head>
 <body>
     <div id="app">
@@ -118,5 +120,10 @@
             @yield('content')
         </main>
     </div>
+
+@section('extra-js')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+@show
+
 </body>
 </html>
