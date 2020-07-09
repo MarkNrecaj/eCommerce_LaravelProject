@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Cart;
+use App\ProductImage;
+use Illuminate\Support\Facades\Auth;
 
 class BuyerController extends Controller
 {
@@ -85,11 +88,38 @@ class BuyerController extends Controller
 
     public function loadCart()
     {
-        dd('cart');
+        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $products = [];
+        $productsImage = [];
+        foreach ($cart as $item) {
+            array_push($products, Product::find($item->product_id));
+            try {
+                $image = ProductImage::where('product_id', $item->product_id)->get();
+                //dd($image);
+                array_push($productsImage, $image);
+            } catch (\Throwable $th) {
+                array_push($productsImage, 'no_image.jpg');
+            }
+        }
+
+        //dd($products);
+
+        return view('buyer.cart')->with('cart', $cart)
+            ->with('products', $products)
+            ->with('productsImage', $productsImage);
     }
 
-    public function addToCart(Product $id)
+    public function addToCart($id)
     {
-        dd('adding product ' . $id);
+        if (count(Cart::where('product_id', $id)
+            ->where('buyer_id', Auth::user()->id)->get()) > 0) {
+            return redirect()->back()->with('error', 'Product already added to cart');
+        } else {
+            Cart::create([
+                'buyer_id' => Auth::user()->id,
+                'product_id' => $id
+            ]);
+            return redirect()->back()->with('success', 'Product added to cart');
+        }
     }
 }
