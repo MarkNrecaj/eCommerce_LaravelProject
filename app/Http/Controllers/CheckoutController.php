@@ -75,11 +75,15 @@ class CheckoutController extends Controller
                 'metatadata' => [],
             ]);
 
-            return view('checkout/checkout')->with(compact('products','total_price','transfer_fee'));
+            return redirect(route('thankyou'));
 
         } catch (CardErrorException $e) {
-            return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
+            //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
         }
+    }
+
+    public function thankyou(){
+        return view('checkout/thankyou');
     }
 
     /**

@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
@@ -78,7 +79,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                            <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -105,6 +106,13 @@
                                 </li>
                             @endif
                         @else
+                            @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
+                            <li class="nav-item">
+                                <a href="/cart" class="nav-link" >
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart
+                                </a>
+                            </li>
+                            @endif
                             @if (Auth::user()->isActive)
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
