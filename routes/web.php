@@ -77,3 +77,6 @@ Route::group(['middleware' => ['buyer']], function () {
 });
 
 // Route::get('productDetails/{id}', 'ProductController@showProductDetails')->name('productDetails');
+
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
