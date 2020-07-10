@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PostalSetting;
 use App\Product;
 use App\ProductImage;
 use Cartalyst\Stripe\Exception\CardErrorException;
@@ -18,11 +19,12 @@ class CheckoutController extends Controller
     public function index()
     {
         $products = Product::all(); //Duhet mi marr produktet prej Cart
-        $total_price = 2;
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+        $total_price = $transfer_fee;
         foreach ($products as $product){
             $total_price = $total_price + $product->price;
         }
-        return view('checkout/checkout')->with(compact('products','total_price'));
+        return view('checkout/checkout')->with(compact('products','total_price','transfer_fee'));
     }
 
     /**
@@ -55,8 +57,9 @@ class CheckoutController extends Controller
             ]
         );
 
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
         $products = Product::all(); //Duhet mi marr produktet prej Cart
-        $total_price = 2;
+        $total_price = $transfer_fee;
         foreach ($products as $product){
             $total_price = $total_price + $product->price;
         }
@@ -72,11 +75,15 @@ class CheckoutController extends Controller
                 'metatadata' => [],
             ]);
 
-            return view('checkout/checkout')->with(compact('products','total_price'));
+            return redirect(route('thankyou'));
 
         } catch (CardErrorException $e) {
-            return view('checkout/checkout')->withErrors(compact('products','total_price'));
+            //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
         }
+    }
+
+    public function thankyou(){
+        return view('checkout/thankyou');
     }
 
     /**

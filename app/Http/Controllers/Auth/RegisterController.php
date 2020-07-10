@@ -84,4 +84,26 @@ class RegisterController extends Controller
             'isActive' => 1
         ]);
     }
+
+    /**
+     * Create a new buyer instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function createBuyer(array $data)
+    {
+        return User::create([
+            'role_id' => 4,
+            'name' => $data['name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'tel' => $data['tel'],
+            'tel2' => $data['tel2'],
+            'state' => $data['state'],
+            'city' => $data['city'],
+            'isActive' => 1
+        ]);
+    }
 }

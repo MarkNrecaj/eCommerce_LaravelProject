@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
@@ -78,17 +79,40 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                            <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+{{--                                </li>--}}
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Register <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('register') }}">
+                                            {{ __('As seller') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('registerBuyer') }}">
+                                            {{ __('As buyer') }}
+                                        </a>
+                                    </div>
                                 </li>
                             @endif
                         @else
+                            @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
+                            <li class="nav-item">
+                                <a href="/cart" class="nav-link" >
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart
+                                </a>
+                            </li>
+                            @endif
                             @if (Auth::user()->isActive)
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -97,11 +121,11 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
                                         <a class="dropdown-item" href="#">Reset Password</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf

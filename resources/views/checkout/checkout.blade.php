@@ -183,7 +183,7 @@
                             <div class="text-success">
                                 <h6 class="my-0">Shipping Cost</h6>
                             </div>
-                            <span class="text-success">+ 2 €</span>
+                            <span class="text-success">+ {{$transfer_fee}} €</span>
                         </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (EUR)</span>
