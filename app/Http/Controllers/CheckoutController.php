@@ -88,7 +88,7 @@ class CheckoutController extends Controller
         try {
             $stripe = Stripe::make('sk_test_51H0mlKK5oDGBuQ7Kkgj6KVsIowcTCS99NPDtO00r3Y011Xa2GShmBkotvPkXDKVW4H7yjpAIo0rFnDeGflrDulHr00ukWffyBZ');
             $change = $stripe->charges()->create([
-                'amount' => $total_price, //E merr vleren prej cart
+                'amount' => $total_price,
                 'currency' => 'EUR',
                 'source' => $request->stripeToken,
                 'description' => 'Order',

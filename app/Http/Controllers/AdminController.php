@@ -177,7 +177,7 @@ class AdminController extends Controller
                 ->orWhere('city', 'LIKE', '%' . $request['query'] . '%');
         })
             ->where('role_id', '=', '3')
-            ->get();
+            ->paginate(5);
 
         if (count($users) > 0) {
             return view('admin/all_clients')->with('clients', $users);
