@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'ProductController@index')->name('dashboard');
 Route::get('/product-details/{id}', 'ProductController@productDetails')->name('product-details');
-
+Route::post('/track', 'ProductController@trackOrder')->name('order.track');
+Route::get('/track', 'ProductController@trackView')->name('order.track.view');
 
 Auth::routes();
 Route::get('register/buyer', 'Auth\RegisterController@showBuyerRegistrationForm')->name('registerBuyer');
@@ -84,5 +85,3 @@ Route::group(['middleware' => ['buyer']], function () {
 });
 
 // Route::get('productDetails/{id}', 'ProductController@showProductDetails')->name('productDetails');
-
-

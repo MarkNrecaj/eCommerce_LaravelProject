@@ -134,6 +134,9 @@
                                 </li>
                             @endif
                         @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>

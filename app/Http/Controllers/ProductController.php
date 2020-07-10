@@ -7,6 +7,7 @@ use App\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Cart;
+use App\Order;
 
 class ProductController extends Controller
 {
@@ -96,6 +97,27 @@ class ProductController extends Controller
         $product_images = ProductImage::get();
 
         return view('product-details')->with(compact('productDetails', 'product_images'));
+    }
+
+    public function trackOrder(Request $request)
+    {
+        dd($request);
+        $this->validate(
+            $request,
+            ['tracking_id' => 'number']
+        );
+
+        $order = Order::find($request->tracking_id);
+
+        $msg = $order == null ? 'Sorry , We couldn\'t find your order' : 'We found your order, ' . $order->receiver_name;
+        $status = $order == null ? 'Please make sure you correctly entered tracking ID. Otherwise, try again in a while.' : 'You order status is: ' . $order->status;
+
+        return view('track.track')->with('msg', $msg)->with('status', $status);
+    }
+
+    public function trackView()
+    {
+        return view('track.view');
     }
 
     /**
