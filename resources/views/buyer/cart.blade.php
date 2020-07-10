@@ -32,8 +32,8 @@
                                 <tr>
                                     <td><img style="align-text: center; object-fit: cover" width="100" height="100" src="../storage/images/{{$productsImage[$i][0]->path}}" /></td>
                                     <td style="min-width: 5px; max-width: 50px; padding:10px; padding-top:18px;">{{$products[$i]->name}}</td>
-                                    <td style="padding: 10px; padding-top:18px;">{{$products[$i]->price}}</td>
-                                    {{-- <td style="padding: 10px"><input type="number" class="form-control" name="amount" value="{{$cart[$i]->amount}}" min="1" max="20"></td> --}}
+                                    <td style="padding: 10px; padding-top:18px;">{{$products[$i]->price}} &euro;</td>
+                                    {{-- <td style="padding: 10px"><input type="number" class="form-contr ol" name="amount" value="{{$cart[$i]->amount}}" min="1" max="20"></td> --}}
                                     <td style="padding: 10px"> 
                                         <form action="{{route('product.destroy',$cart[$i]->id)}}" method="post">
                                             @csrf
@@ -49,7 +49,7 @@
                     </table>
                     <div>
                         <hr>
-                        <h5 style="text-align: right;"><strong>Total price: {{$totalPrice}}</strong></h5>
+                        <h5 style="text-align: right;"><strong>Total price: {{$totalPrice}} &euro;</strong></h5>
                     </div>
                     <div>
                         <a href="{{route('checkout.index')}}" class="btn btn-primary float-right">Continue</a>
