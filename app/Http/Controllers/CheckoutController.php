@@ -8,6 +8,8 @@ use App\ProductImage;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
+use App\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -18,13 +20,18 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); //Duhet mi marr produktet prej Cart
+        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $products = [];
+        foreach ($cart as $item) {
+            array_push($products, Product::find($item->product_id));
+        }
+
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
         $total_price = $transfer_fee;
-        foreach ($products as $product){
-            $total_price = $total_price + $product->price;
+        foreach ($products as $product) {
+            $total_price += $product->price;
         }
-        return view('checkout/checkout')->with(compact('products','total_price','transfer_fee'));
+        return view('checkout/checkout')->with(compact('products', 'total_price', 'transfer_fee'));
     }
 
     /**
@@ -49,8 +56,9 @@ class CheckoutController extends Controller
 
         $this->validate(
             $request,
-            [   'name' => 'required',
-                'email'=> 'required|email',
+            [
+                'name' => 'required',
+                'email' => 'required|email',
                 'state' => 'required',
                 'city' => 'required',
                 'address' => 'nullable'
@@ -60,7 +68,7 @@ class CheckoutController extends Controller
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
         $products = Product::all(); //Duhet mi marr produktet prej Cart
         $total_price = $transfer_fee;
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $total_price = $total_price + $product->price;
         }
 
@@ -76,13 +84,13 @@ class CheckoutController extends Controller
             ]);
 
             return redirect(route('thankyou'));
-
         } catch (CardErrorException $e) {
             //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
         }
     }
 
-    public function thankyou(){
+    public function thankyou()
+    {
         return view('checkout/thankyou');
     }
 
@@ -94,13 +102,13 @@ class CheckoutController extends Controller
      */
     public function show($id)
     {
-//        $products = Product::where('id', $id)->get();
-//        //dd($product);
-//        $total_price = 2;
-//        foreach ($products as $product){
-//            $total_price = $total_price + $product->price;
-//        }
-//        return view('checkout/checkout')->with(compact('products','total_price'));
+        //        $products = Product::where('id', $id)->get();
+        //        //dd($product);
+        //        $total_price = 2;
+        //        foreach ($products as $product){
+        //            $total_price = $total_price + $product->price;
+        //        }
+        //        return view('checkout/checkout')->with(compact('products','total_price'));
     }
 
     /**
