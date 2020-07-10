@@ -47,11 +47,16 @@
                           
                         </tbody>
                     </table>
-
-                    <a href="{{route('checkout.index')}}" class="btn btn-primary float-right">Buy all</a>
-                    @else
-                        <p>No products added to cart</p>
-                    @endif
+                    <div>
+                        <hr>
+                        <h5 style="text-align: center"><strong>Total price: {{$totalPrice}}</strong></h5>
+                    </div>
+                    <div>
+                        <a href="{{route('checkout.index')}}" class="btn btn-primary float-right">Buy all</a>
+                        @else
+                            <p>No products added to cart</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

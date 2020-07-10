@@ -44,6 +44,15 @@ class CheckoutController extends Controller
         //
     }
 
+    private function wipeCart()
+    {
+        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        foreach ($cart as $item) {
+            $item->delete();
+        }
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -66,7 +75,11 @@ class CheckoutController extends Controller
         );
 
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
-        $products = Product::all(); //Duhet mi marr produktet prej Cart
+        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $products = [];
+        foreach ($cart as $item) {
+            array_push($products, Product::find($item->product_id));
+        }
         $total_price = $transfer_fee;
         foreach ($products as $product) {
             $total_price = $total_price + $product->price;
@@ -83,6 +96,7 @@ class CheckoutController extends Controller
                 'metatadata' => [],
             ]);
 
+            $this->wipeCart();
             return redirect(route('thankyou'));
         } catch (CardErrorException $e) {
             //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
