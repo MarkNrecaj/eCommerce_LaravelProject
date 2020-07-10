@@ -16,36 +16,39 @@
                         </div>
                     @endif
                     @if (count($cart) > 0)
-                        <table border="1px" style="width: 100%; text-align:justify; margin: 10px">
-                            <tr>
-                                <th style="text-align: justify;">Image</th>
-                                <th style="text-align: justify;">Product name</th>
-                                <th style="text-align: justify;">Price</th>
-                                <th style="text-align: justify;">Amount </th>
-                                <th style="text-align: justify;">Remove </th>
-                            </tr>
+                    <table class="table" style="text-align: center">
+                        <thead>
+                          <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Remove</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                             @for ($i = 0; $i < count($cart); $i++)
                                 
-                                    <tr>
-                                        <td><img style="align-text: center" width="100" height="100" src="../storage/images/{{$productsImage[$i][0]->path}}" /></td>
-                                        <td style="min-width: 5px; max-width: 50px; padding:10px;">{{$products[$i]->name}}</td>
-                                        <td style="padding: 10px">{{$products[$i]->price}}</td>
-                                        <td style="padding: 10px">{{$cart[$i]->amount}}</td>
-                                        <td style="padding: 10px"> 
-                                            <form action="{{route('product.destroy',$cart[$i]->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <input type="submit" value="X" class="btn btn-danger">
-                                            </form>
-                                        </td>
-                                    </tr>
-                                
-                            @endfor    
+                                <tr>
+                                    <td><img style="align-text: center; object-fit: cover" width="100" height="100" src="../storage/images/{{$productsImage[$i][0]->path}}" /></td>
+                                    <td style="min-width: 5px; max-width: 50px; padding:10px;">{{$products[$i]->name}}</td>
+                                    <td style="padding: 10px">{{$products[$i]->price}}</td>
+                                    <td style="padding: 10px">{{$cart[$i]->amount}}</td>
+                                    <td style="padding: 10px"> 
+                                        <form action="{{route('product.destroy',$cart[$i]->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="X" class="btn btn-danger">
+                                        </form>
+                                    </td>
+                                </tr>
                             
-                        </table>
+                            @endfor
+                          
+                        </tbody>
+                    </table>
 
-                        <a href="" class="btn btn-primary float-right">Buy all</a>
+                    <a href="{{route('checkout.index')}}" class="btn btn-primary float-right">Buy all</a>
                     @else
                         <p>No products added to cart</p>
                     @endif
