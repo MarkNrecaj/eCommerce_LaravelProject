@@ -8,13 +8,13 @@
                     <div class="card-header">All clients</div>
                         <div class="card-body text-center">
                             <!-- Search form -->
-                            <div class="main">                                    
+                            <div class="main">
                                     <form action="{{route('searchClients')}}" method="post" class="input-group">
                                         @csrf
                                         <input name="query" class="form-control" type="text" placeholder="Search clients" aria-label="Search">
                                         <div class="input-group-append">
                                             <input type="submit" value="Search" class="btn btn-secondary">
-                                        </div>  
+                                        </div>
                                     </form>
                               </div>
                         {{-- <div class="md-form mt-0">
@@ -29,7 +29,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @if (count($clients) > 0)                        
+                        @if (count($clients) > 0)
                             <div class="card table-responsive">
                                 <table class="table">
                                     <thead class="thead-light">
@@ -78,6 +78,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                        {{$clients->links()}}
                         @else
                         <h1 class="text-center">No clients registered yet. Wait for any registration then try again</h1>
                         @endif

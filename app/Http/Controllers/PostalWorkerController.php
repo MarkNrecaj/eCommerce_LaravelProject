@@ -18,11 +18,11 @@ class PostalWorkerController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('poster_id', auth()->id())->where('status','Delivering')->get();
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivering')->paginate(5);
         return view('postal_worker_orders', compact('orders'));
     }
     public function listDeliveredOrders(){
-        $orders = Order::where('poster_id', auth()->id())->where('status','Delivered')->get();
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivered')->paginate(5);
         return view('postalworker_delivered', compact('orders'));
     }
 

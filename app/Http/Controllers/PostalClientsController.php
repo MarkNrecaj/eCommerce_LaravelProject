@@ -25,7 +25,7 @@ class PostalClientsController extends Controller
 
     public function allOrders($sellerId)
     {
-        $orders = Order::where('seller_id', $sellerId)->get();
+        $orders = Order::where('seller_id', $sellerId)->paginate(5);
         //dd($orders);
         return view('admin.orders_of')->with('orders', $orders);
     }

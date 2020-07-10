@@ -13,7 +13,7 @@
                             </div>
                         @endif
                         @if (count($workers) > 0)
-                                
+
                             <div class="card table-responsive">
                                 <table class="table">
                                     <thead class="thead-light">
@@ -52,6 +52,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                                {{$workers->links()}}
                         @else
                             <h1>No workers registered. Add one to get started</h1>
                         @endif
