@@ -54,7 +54,7 @@ class AdminController extends Controller
 
     public function showAllClients()
     {
-        $clients = User::where('role_id', 3)->get();
+        $clients = User::where('role_id', 3)->paginate(5);
         return view('admin/all_clients')->with('clients', $clients);
     }
 
@@ -68,7 +68,7 @@ class AdminController extends Controller
 
     public function showAllWorkers()
     {
-        $workers = User::where('role_id', 2)->get();
+        $workers = User::where('role_id', 2)->paginate(5);
         //dd($workers);
         return view('all_workers')->with('workers', $workers);
     }

@@ -12,7 +12,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        
+
                         @if (count($orders) <= 0)
                             <h3>No orders yet. Add one to see results</h3>
                         @else
@@ -75,6 +75,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{$orders->links()}}
                             @endif
                         </div>
                     </div>
