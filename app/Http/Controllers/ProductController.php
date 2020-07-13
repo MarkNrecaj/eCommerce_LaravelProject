@@ -104,7 +104,10 @@ class ProductController extends Controller
         //dd($request);
         $this->validate(
             $request,
-            ['tracking_id' => 'numeric']
+            [
+                'tracking_id' => 'numeric',
+                'buyerEmail' => 'email'
+            ]
         );
 
         $order = Order::find($request->tracking_id);

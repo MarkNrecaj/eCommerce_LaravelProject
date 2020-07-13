@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     @if (count($cart) > 0)
-                    <table class="table" style="text-align: center">
+                    <table class="table table-responsive" style="text-align: center">
                         <thead>
                           <tr>
                             <th scope="col">Image</th>
