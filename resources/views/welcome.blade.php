@@ -9,14 +9,14 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>First slide label</h1>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Second slide label</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

@@ -67,7 +67,7 @@
                                                 <button onclick="window.location.href = '/admin/all_orders/{{ $order->id }}'" class="btn btn-primary">View</button>
                                             </td>
                                             <td>
-                                                <button onclick="window.location.href = '{{route('editPostalWorker', $order->id)}}'" class="btn btn-primary">Edit Postman</button>
+                                                <button onclick="window.location.href = '{{route('editPostalWorker', $order->id)}}'" class="btn btn-primary">Edit</button>
                                             </td>
                                         </tr>
                                     @endforeach

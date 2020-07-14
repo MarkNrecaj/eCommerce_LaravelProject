@@ -42,7 +42,7 @@
                     <h5> <del>$ {{$productDetails->price * 2}}</del> ${{$productDetails->price}}</h5>
                             <h4>Product Description:</h4>
                             <p>{{$productDetails->description}} </p>
-                            {{-- <ul class="ul-style">
+                            <ul class="ul-style">
                                 <li>
                                     <div class="form-group size-st">
                                         <label class="size-label">Size</label>
@@ -63,7 +63,7 @@
                                         <input class="form-control" value="1" min="1" max="20" type="number">
                                     </div>
                                 </li>
-                            </ul> --}}
+                            </ul>
 
                             <div class="price-box-bar">
                                 <div class="cart-and-bay-btn">
