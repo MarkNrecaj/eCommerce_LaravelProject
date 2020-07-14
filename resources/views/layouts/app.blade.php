@@ -109,7 +109,9 @@
                             @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
                             <li class="nav-item">
                                 <a href="/cart" class="nav-link" >
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart
+{{--                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;--}}
+                                    Cart
+                                    <span class="badge badge-secondary badge-pill">{{$cartItems}}</span>
                                 </a>
                             </li>
                             @endif
