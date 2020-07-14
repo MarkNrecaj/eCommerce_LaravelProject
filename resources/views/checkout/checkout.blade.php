@@ -226,7 +226,6 @@
                         </span>
                         @enderror
                     </div>
-
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="city">City<span class="text-muted">*</span></label>
@@ -253,6 +252,16 @@
                             </span>
                             @enderror
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="additional_notes">Additional Notes<span class="text-muted">(Optional)</span></label>
+                        <textarea name="additional_notes" placeholder="Special instructions?" value="{{ old('additional_notes') }}" class="form-control @error('additional_notes') eshte jo valide @enderror" rows = "5" autocomplete="off"></textarea>
+
+                        @error('address')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
                     <hr class="mb-4">

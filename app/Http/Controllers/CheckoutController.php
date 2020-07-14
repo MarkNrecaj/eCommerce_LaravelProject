@@ -9,7 +9,9 @@ use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use App\Cart;
+use App\Order;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class CheckoutController extends Controller
 {
@@ -70,7 +72,8 @@ class CheckoutController extends Controller
                 'email' => 'required|email',
                 'state' => 'required',
                 'city' => 'required',
-                'address' => 'nullable'
+                'address' => 'nullable',
+                'additional_notes' => 'nullable'
             ]
         );
 
@@ -84,6 +87,11 @@ class CheckoutController extends Controller
         foreach ($products as $product) {
             $total_price = $total_price + $product->price;
         }
+        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
+        $this->addNewOrders($cart, $products, $request, $transfer_fee);
+        $this->wipeCart();
+        return redirect(route('thankyou'));
+        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
 
         try {
             $stripe = Stripe::make('sk_test_51H0mlKK5oDGBuQ7Kkgj6KVsIowcTCS99NPDtO00r3Y011Xa2GShmBkotvPkXDKVW4H7yjpAIo0rFnDeGflrDulHr00ukWffyBZ');
@@ -95,11 +103,42 @@ class CheckoutController extends Controller
                 'receipt_email' => $request->email,
                 'metatadata' => [],
             ]);
-
+            $this->addNewOrders($cart, $products, $request, $transfer_fee);
             $this->wipeCart();
             return redirect(route('thankyou'));
         } catch (CardErrorException $e) {
             //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
+        }
+    }
+
+    public function addNewOrders($cart, $products, $request, $transfer_fee)
+    {
+        $user = Auth::user();
+
+        for ($i = 0; $i < count($cart); $i++) {
+            // dd($cart[$i]->amount * $products[$i]->price + PostalSetting::find(1)->transfer_fee);
+            Order::create(
+                [
+                    'receiver_name' => $user->name . ' ' . $user->last_name,
+                    'receiver_tel' => $user->tel,
+                    'receiver_tel2' => $user->tel2,
+                    'state' => $user->state,
+                    'city' => $user->city,
+                    'address' => $request['address'],
+                    'quantity' => $cart[$i]->amount,
+                    'weight' => $products[$i]->weight,
+                    'order_type' => $products[$i]->product_type,
+                    // 'is_openable' => '',
+                    // 'is_returnable' => '',
+                    'additional_notes' => $request['additional_notes'],
+                    'order_name' => $products[$i]->name,
+                    'description' => $products[$i]->description,
+                    'price' => $products[$i]->price,
+                    'total_price' => $cart[$i]->amount * $products[$i]->price + $transfer_fee,
+                    'status' => 'Processing',
+                    'seller_id' => $products[$i]->seller_id
+                ]
+            );
         }
     }
 
