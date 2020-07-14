@@ -113,9 +113,13 @@ class ProductController extends Controller
             ]
         );
 
-        $order = Order::where('id', $request['tracking_id'])
-            ->where('receiver_tel', $request['buyerPhone'])->first();
-        //dd($order);
+        $order = Order::where(function ($query) use ($request) {
+            $query->orWhere('receiver_tel', $request['buyerPhone'])
+                ->orWhere('receiver_tel2', $request['buyerPhone']);
+        })
+            ->where('id', $request['tracking_id'])
+            ->first();
+
         $msg = $order == null ? 'Sorry , We couldn\'t find your order' : 'We found your order, ' . $order->receiver_name;
         $status = $order == null ? 'Please make sure you correctly entered tracking ID. Otherwise, try again in a while.' : 'You order status is: ' . $order->status;
 
