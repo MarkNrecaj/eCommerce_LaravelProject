@@ -60,8 +60,6 @@ class OrderController extends Controller
                 'quantity' => 'required|numeric|min:1',
                 'weight' => 'nullable|numeric|min:0',
                 'order_type' => 'required|max:255',
-                // 'is_openable' => 'required|boolean',
-                // 'is_returnable' => 'required|boolean',
                 'additional_notes' => 'nullable|max:255',
                 'order_name' => 'required|max:255',
                 'description' => 'nullable|max:255',
@@ -94,8 +92,6 @@ class OrderController extends Controller
             'quantity' => $request['quantity'],
             'weight' => $request['weight'],
             'order_type' => $request['order_type'],
-            'is_openable' => $request->has('is_openable'), // $request['is_openable'],
-            'is_returnable' => $request->has('is_returnable'), //['is_returnable'],
             'additional_notes' => $request['additional_notes'],
             'order_name' => $request['order_name'],
             'description' => $request['description'],
@@ -183,8 +179,7 @@ class OrderController extends Controller
 
     public function downloadReport(Order $id)
     {
-        $data = ['name' => $id->receiver_name, 'tel' => $id->receiver_tel . ' | ' . $id->receiver_tel2, 'address' => $id->address, 'quantity' => $id->quantity, 'order_type' => $id->order_type, 'openable' => $id->is_openable, 'returnable' => $id->is_returnable, 'additional_notes' => $id->additional_notes, 'order_name' => $id->order_name, 'description' => $id->description, 'price' => $id->total_price];
-        //dd($data);
+        $data = ['name' => $id->receiver_name, 'tel' => $id->receiver_tel . ' | ' . $id->receiver_tel2, 'address' => $id->address, 'quantity' => $id->quantity, 'order_type' => $id->order_type, 'openable' => $id->is_openable ? 'Yes' : 'No', 'returnable' => $id->is_returnable ? 'Yes' : 'No', 'additional_notes' => $id->additional_notes, 'order_name' => $id->order_name, 'description' => $id->description, 'price' => $id->total_price];
         $pdf = PDF::loadView('pdf.invoice', $data);
         return $pdf->download('invoice' . $id->id . ' ' . Carbon::now()->toDateTimeString() . '.pdf');
     }

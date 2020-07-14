@@ -112,6 +112,34 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group row">
+                                        <label for="is_openable" class="col-md-4 col-form-label text-md-right">{{ __('Can be opened') }}</label>
+            
+                                        <div class="col-md-6">
+                                            <input id="is_openable" type="checkbox" class="form-control @error('is_openable') eshte jo valide @enderror" name="is_openable" value="{{ old('is_openable') }}" autocomplete="off">
+            
+                                            @error('is_openable')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group row">
+                                        <label for="is_returnable" class="col-md-4 col-form-label text-md-right">{{ __('Can be returned') }}</label>
+            
+                                        <div class="col-md-6">
+                                            <input id="is_returnable" type="checkbox" class="form-control @error('is_returnable') eshte jo valide @enderror" name="is_returnable" value="{{ old('is_returnable') }}" autocomplete="off">
+            
+                                            @error('is_returnable')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary">

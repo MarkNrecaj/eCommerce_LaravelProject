@@ -63,6 +63,9 @@ class ProductController extends Controller
         $product->weight = $request->get('weight');
         $product->product_type = $request->get('product_type');
         $product->seller_id = Auth::user()->id;
+        $product->is_openable = $request->has('is_openable');
+        $product->is_returnable = $request->has('is_returnable');
+
         $product->save();
 
         if ($request->hasFile('images')) {
