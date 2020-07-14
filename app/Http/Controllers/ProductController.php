@@ -105,12 +105,13 @@ class ProductController extends Controller
         $this->validate(
             $request,
             [
-                'tracking_id' => 'numeric',
-                'buyerEmail' => 'email'
+                'tracking_id' => 'required|numeric',
+                'buyerPhone' => 'required|numeric'
             ]
         );
 
-        $order = Order::find($request->tracking_id);
+        $order = Order::where('id', $request['tracking_id'])
+            ->where('receiver_tel', $request['buyerPhone'])->first();
         //dd($order);
         $msg = $order == null ? 'Sorry , We couldn\'t find your order' : 'We found your order, ' . $order->receiver_name;
         $status = $order == null ? 'Please make sure you correctly entered tracking ID. Otherwise, try again in a while.' : 'You order status is: ' . $order->status;
