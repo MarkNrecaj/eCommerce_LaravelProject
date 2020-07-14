@@ -150,6 +150,9 @@ class CheckoutController extends Controller
             if ($product->quantity == 1){
                 $product->delete();
             }
+//            elseif ($product->quantity < $item->amount){
+//              handle amount tek cart dhe te product details
+//              }
             else
                 $product->decrement('quantity', $item->amount);
         }
