@@ -170,18 +170,22 @@
                     <span class="badge badge-secondary badge-pill">{{count($products)}}</span>
                 </h4>
                 <ul class="list-group mb-3">
+                    @foreach($cart as $item)
                     @foreach($products as $product)
+                        @if($product->id == $item->product_id)
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
                                 <h6 class="my-0">{{$product->name}}</h6>
                                 <small class="text-muted">{{$product->description}}</small>
                             </div>
-                            <span class="text-muted">{{$product->price}} €</span>
+                            <span class="text-muted">{{$product->price * $item->amount}} €</span>
                         </li>
+                        @endif
+                    @endforeach
                     @endforeach
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
-                                <h6 class="my-0">Shipping Cost</h6>
+                                <h6 class="my-0">Shipping Cost/Each Product</h6>
                             </div>
                             <span class="text-success">+ {{$transfer_fee}} €</span>
                         </li>

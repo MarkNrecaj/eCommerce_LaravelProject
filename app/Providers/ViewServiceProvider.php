@@ -31,13 +31,8 @@ class ViewServiceProvider extends ServiceProvider
             View::composer('layouts/app', function ($view) {
 
                 if (Auth::check()) {
-                $cart = Cart::where('buyer_id', Auth::user()->id)->get();
-                $products = [];
-                foreach ($cart as $item) {
-                    array_push($products, Product::find($item->product_id));
-                }
-                $cartItems = count($products);
-                $view->with('cartItems', $cartItems );
+                $cartItems = Cart::where('buyer_id', Auth::user()->id)->get();
+                $view->with('cartItems', count($cartItems) );
                 }
             });
 

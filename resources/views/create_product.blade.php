@@ -82,6 +82,20 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label for="weight" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="quantity" type="number" value="1" class="form-control @error('quantity') eshte jo valide @enderror" name="quantity" value="{{ old('quantity') }}" autocomplete="off" min="1" required>
+
+                                            @error('quantity')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label for="weight" class="col-md-4 col-form-label text-md-right">{{ __('Weight (gr)') }}</label>
 
                                         <div class="col-md-6">
@@ -114,10 +128,10 @@
 
                                     <div class="form-group row">
                                         <label for="is_openable" class="col-md-4 col-form-label text-md-right">{{ __('Can be opened') }}</label>
-            
+
                                         <div class="col-md-6">
                                             <input id="is_openable" type="checkbox" class="form-control @error('is_openable') eshte jo valide @enderror" name="is_openable" value="{{ old('is_openable') }}" autocomplete="off">
-            
+
                                             @error('is_openable')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -125,13 +139,13 @@
                                             @enderror
                                         </div>
                                     </div>
-    
+
                                     <div class="form-group row">
                                         <label for="is_returnable" class="col-md-4 col-form-label text-md-right">{{ __('Can be returned') }}</label>
-            
+
                                         <div class="col-md-6">
                                             <input id="is_returnable" type="checkbox" class="form-control @error('is_returnable') eshte jo valide @enderror" name="is_returnable" value="{{ old('is_returnable') }}" autocomplete="off">
-            
+
                                             @error('is_returnable')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

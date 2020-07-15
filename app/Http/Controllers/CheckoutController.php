@@ -24,16 +24,16 @@ class CheckoutController extends Controller
     {
         $cart = Cart::where('buyer_id', Auth::user()->id)->get();
         $products = [];
+        $total_price = 0;
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+
         foreach ($cart as $item) {
-            array_push($products, Product::find($item->product_id));
+            $product = Product::find($item->product_id);
+            array_push($products, $product);
+            $total_price += $product->price * $item->amount + $transfer_fee;
         }
 
-        $transfer_fee = PostalSetting::find(1)->transfer_fee;
-        $total_price = $transfer_fee;
-        foreach ($products as $product) {
-            $total_price += $product->price;
-        }
-        return view('checkout/checkout')->with(compact('products', 'total_price', 'transfer_fee'));
+        return view('checkout/checkout')->with(compact('cart','products', 'total_price', 'transfer_fee'));
     }
 
     /**
@@ -87,11 +87,11 @@ class CheckoutController extends Controller
         foreach ($products as $product) {
             $total_price = $total_price + $product->price;
         }
-        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
-        $this->addNewOrders($cart, $products, $request, $transfer_fee);
-        $this->wipeCart();
-        return redirect(route('thankyou'));
-        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
+//        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
+//        $this->addNewOrders($cart, $products, $request, $transfer_fee);
+//        $this->wipeCart();
+//        return redirect(route('thankyou'));
+//        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
 
         try {
             $stripe = Stripe::make('sk_test_51H0mlKK5oDGBuQ7Kkgj6KVsIowcTCS99NPDtO00r3Y011Xa2GShmBkotvPkXDKVW4H7yjpAIo0rFnDeGflrDulHr00ukWffyBZ');
@@ -105,6 +105,7 @@ class CheckoutController extends Controller
             ]);
             $this->addNewOrders($cart, $products, $request, $transfer_fee);
             $this->wipeCart();
+            $this->deleteItem($cart);
             return redirect(route('thankyou'));
         } catch (CardErrorException $e) {
             //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
@@ -139,6 +140,17 @@ class CheckoutController extends Controller
                     'seller_id' => $products[$i]->seller_id
                 ]
             );
+        }
+    }
+
+    public function deleteItem($cart)
+    {
+        foreach ($cart as $item) {
+            $product = Product::find($item->product_id);
+            $product->decrement('quantity', $item->amount);
+            if ($product->quantity == 0){
+                $product->delete();
+            }
         }
     }
 

@@ -120,15 +120,28 @@ class BuyerController extends Controller
         return redirect()->back()->with('success', 'Cart updated successfuly');
     }
 
-    public function addToCart($id)
+    // public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
+        $this->validate(
+            $request,
+            [
+                'quantity' => 'nullable|numeric'
+            ]
+        );
+
+        //If user adds product from welcome page (possible solution)
+        if ($request->quantity == null) {
+            $request->quantity = 1;
+        }
         if (count(Cart::where('product_id', $id)
             ->where('buyer_id', Auth::user()->id)->get()) > 0) {
             return redirect()->back()->with('error', 'Product already added to cart');
         } else {
             Cart::create([
                 'buyer_id' => Auth::user()->id,
-                'product_id' => $id
+                'product_id' => $id,
+                'amount' => $request->quantity
             ]);
             return redirect()->back()->with('success', 'Product added to cart');
         }
