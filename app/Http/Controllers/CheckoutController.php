@@ -24,16 +24,16 @@ class CheckoutController extends Controller
     {
         $cart = Cart::where('buyer_id', Auth::user()->id)->get();
         $products = [];
+        $total_price = 0;
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+
         foreach ($cart as $item) {
-            array_push($products, Product::find($item->product_id));
+            $product = Product::find($item->product_id);
+            array_push($products, $product);
+            $total_price += $product->price * $item->amount + $transfer_fee;
         }
 
-        $transfer_fee = PostalSetting::find(1)->transfer_fee;
-        $total_price = $transfer_fee;
-        foreach ($products as $product) {
-            $total_price += $product->price;
-        }
-        return view('checkout/checkout')->with(compact('products', 'total_price', 'transfer_fee'));
+        return view('checkout/checkout')->with(compact('cart','products', 'total_price', 'transfer_fee'));
     }
 
     /**
