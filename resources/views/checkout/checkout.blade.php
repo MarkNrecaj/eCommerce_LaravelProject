@@ -185,13 +185,13 @@
                     @endforeach
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
-                                <h6 class="my-0">Shipping Cost/Each Product</h6>
+                                <h6 class="my-0">Shipping Cost</h6>
                             </div>
                             <span class="text-success">+ {{$transfer_fee}} €</span>
                         </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (EUR)</span>
-                        <strong>{{$total_price}} €</strong>
+                        <strong>{{$total_price + $transfer_fee}} €</strong>
                     </li>
                 </ul>
             </div>

@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             array_push($products, $product);
-            $total_price += $product->price * $item->amount + $transfer_fee;
+            $total_price += $product->price * $item->amount;
         }
 
         return view('checkout/checkout')->with(compact('cart','products', 'total_price', 'transfer_fee'));

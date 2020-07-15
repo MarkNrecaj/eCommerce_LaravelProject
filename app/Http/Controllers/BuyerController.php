@@ -120,7 +120,6 @@ class BuyerController extends Controller
         return redirect()->back()->with('success', 'Cart updated successfuly');
     }
 
-    // public function addToCart($id)
     public function addToCart(Request $request, $id)
     {
         $this->validate(
