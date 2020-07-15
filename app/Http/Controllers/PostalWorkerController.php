@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
-use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class PostalWorkerController extends Controller
 {
@@ -16,7 +18,21 @@ class PostalWorkerController extends Controller
      */
     public function index()
     {
-        return view('postal_worker');
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivering')->paginate(5);
+        return view('postal_worker_orders', compact('orders'));
+    }
+    public function listDeliveredOrders(){
+        $orders = Order::where('poster_id', auth()->id())->where('status','Delivered')->paginate(5);
+        return view('postalworker_delivered', compact('orders'));
+    }
+
+    public function changeOrderStatus(Request $request, $id){
+        $order = Order::find($id);
+        if (isset($request->status)) {
+            $order->status = $request->get('status');
+            $order->save();
+        }
+        return redirect(route('listDeliveredOrders'));
     }
 
     /**

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\PostalSetting;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
@@ -15,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('seller_id', auth()->id())->get();
+        $orders = Order::where('seller_id', auth()->id())->orderBy('created_at', 'DESC')->paginate(5);
         return view('list_orders', compact('orders'));
     }
 
@@ -26,7 +30,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order');
+        $transfer_fee = PostalSetting::find(1)->transfer_fee;
+        // dd($transfer_fee);
+        return view('order')->with('transfer_fee', $transfer_fee);
     }
 
     /**
@@ -54,8 +60,6 @@ class OrderController extends Controller
                 'quantity' => 'required|numeric|min:1',
                 'weight' => 'nullable|numeric|min:0',
                 'order_type' => 'required|max:255',
-                // 'is_openable' => 'required|boolean',
-                // 'is_returnable' => 'required|boolean',
                 'additional_notes' => 'nullable|max:255',
                 'order_name' => 'required|max:255',
                 'description' => 'nullable|max:255',
@@ -88,19 +92,27 @@ class OrderController extends Controller
             'quantity' => $request['quantity'],
             'weight' => $request['weight'],
             'order_type' => $request['order_type'],
-            'is_openable' => $request->has('is_openable'), // $request['is_openable'],
-            'is_returnable' => $request->has('is_returnable'), //['is_returnable'],
             'additional_notes' => $request['additional_notes'],
             'order_name' => $request['order_name'],
             'description' => $request['description'],
             'price' => $request['price'],
             'status' => 'Processing',
             'seller_id' => Auth::user()->id,
-            'total_price' => (float) $request['price'] * (int) $request['quantity'] + 2 //ku 2 eshte sherbimi postar 
+            'total_price' => (float) $request['price'] * (int) $request['quantity'] + PostalSetting::find(1)->transfer_fee
         ]);
 
-        //return redirect()->route('seller')->with('success', 'Order added successfully');
-        return redirect()->back()->with('success', 'Order added successfully');
+        return redirect()->route('list_orders')->with('success', 'Order added successfully');
+        // return redirect()->back()->with('success', 'Order added successfully ');
+    }
+
+    public function choosePostalWorker(Request $request, $id)
+    {
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->save();
+        return redirect(route('admin.newOrders'));
     }
 
     /**
@@ -125,6 +137,23 @@ class OrderController extends Controller
         //
     }
 
+    public function editPostalWorker($id)
+    {
+        $order = Order::find($id);
+        $users = User::all();
+        return view('admin/editPostalWorker', compact('order', 'users'));
+    }
+
+    public function updatePostalWorker(Request $request, $id)
+    {
+        $order = Order::find($id);
+
+        $order->poster_id = $request->get('postman');
+        $order->status = 'Delivering';
+        $order->update();
+        return redirect(route('admin.allOrders'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -146,5 +175,12 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function downloadReport(Order $id)
+    {
+        $data = ['name' => $id->receiver_name, 'tel' => $id->receiver_tel . ' | ' . $id->receiver_tel2, 'address' => $id->address, 'quantity' => $id->quantity, 'order_type' => $id->order_type, 'openable' => $id->is_openable ? 'Yes' : 'No', 'returnable' => $id->is_returnable ? 'Yes' : 'No', 'additional_notes' => $id->additional_notes, 'order_name' => $id->order_name, 'description' => $id->description, 'price' => $id->total_price];
+        $pdf = PDF::loadView('pdf.invoice', $data);
+        return $pdf->download('invoice' . $id->id . ' ' . Carbon::now()->toDateTimeString() . '.pdf');
     }
 }

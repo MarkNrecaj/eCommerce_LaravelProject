@@ -6,14 +6,14 @@
             <div class="col-md-16">
                 <div class="card">
                     <div class="card-header">All workers</div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
                         @if (count($workers) > 0)
-                                
+
                             <div class="card table-responsive">
                                 <table class="table">
                                     <thead class="thead-light">
@@ -26,6 +26,7 @@
                                         <th scope="col">State</th>
                                         <th scope="col">City</th>
                                         <th scope="col">Manage</th>
+                                        <th scope="col">Contract</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -45,14 +46,16 @@
                                                     @method('DELETE')
                                                 </form>
                                             </td>
+                                            <td><a class="btn btn-outline-primary" href="{{route('workerContract',$item->id)}}">PDF</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            @else
+                                {{$workers->links()}}
+                        @else
                             <h1>No workers registered. Add one to get started</h1>
-                            @endif
+                        @endif
                         <br/>
                         <a class="btn btn-primary float-right" href="{{route('addworker')}}" role="button" >Add worker</a>
                     </div>

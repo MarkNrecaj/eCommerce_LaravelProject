@@ -31,5 +31,9 @@ class PostalWorker
         if (Auth::user()->role_id == 3) {
             return redirect()->route('seller')->with('error', 'You can\'t go to that link, because you aren\'t logged in as postal worker.');
         }
+
+        if (Auth::user()->role_id == 4) {
+            return redirect()->route('buyer')->with('error', 'You can\'t go to that link, because you aren\'t logged in as postal worker.');
+        }
     }
 }

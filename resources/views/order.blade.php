@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">New Order</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -186,34 +186,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="is_openable" class="col-md-4 col-form-label text-md-right">{{ __('Can be opened') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="is_openable" type="checkbox" class="form-control @error('is_openable') eshte jo valide @enderror" name="is_openable" value="{{ old('is_openable') }}" autocomplete="off">
-        
-                                        @error('is_openable')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="is_returnable" class="col-md-4 col-form-label text-md-right">{{ __('Can be returned') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="is_returnable" type="checkbox" class="form-control @error('is_returnable') eshte jo valide @enderror" name="is_returnable" value="{{ old('is_returnable') }}" autocomplete="off">
-        
-                                        @error('is_returnable')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label for="additional_notes" class="col-md-4 col-form-label text-md-right">{{ __('Additional Notes') }}</label>
         
                                     <div class="col-md-6">
@@ -231,8 +203,13 @@
                                     <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Unit Price *') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="price" type="number" value="0" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" name="price" value="{{ old('price') }}" autocomplete="off" required>
-        
+                                        {{-- <input id="price" type="number" value="0" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" name="price" value="{{ old('price') }}" autocomplete="off" required> --}}
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text">€</span>
+                                            </div>
+                                            <input name="price" id="price" type="number" value="0" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" value="{{ old('price') }}" autocomplete="off" required>
+                                          </div>
                                         @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -245,7 +222,7 @@
                                     <label for="total_price" class="col-md-4 col-form-label text-md-right">{{ __('Total price + postal service') }}</label>
         
                                     <div class="col-md-6">
-                                        <input id="total_price" disabled value="2.00 €" name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
+                                        <input id="total_price" disabled value="{{$transfer_fee}}.00 €" name="total_price" type="text" min="0" step="0.01" class="form-control @error('total_price') eshte jo valide @enderror" value="{{ old('total_price') }}" >
                                         @error('total_price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -264,7 +241,7 @@
                                 <small class="text-muted">* - required fields</small>
                                 <script>
                                     function calculateTotalPrice() {
-                                        document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + 2).toFixed(2) + " €";   
+                                        document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + {{$transfer_fee}}).toFixed(2) + " €";   
                                     }
                                 </script>
                             

@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
+
+    @yield('extra-css')
+
 </head>
 <body>
     <div id="app">
@@ -44,25 +50,28 @@
                                     <a class="nav-link" href="{{route('clients')}}">Manage clients<span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{{route('admin.orders')}}">All Orders <span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{{route('admin.newOrders')}}">Orders <span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{{route('admin.settings')}}">Post settings<span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{{route('postalsettings')}}">Post settings<span class="sr-only"></span></a>
                                 </li>
                             @endif
 
                             @if (Auth::user()->role_id == 2) {{-- if postal worker --}}
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">My orders<span class="sr-only"></span></a>
-                                    </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/postalworker">My orders<span class="sr-only"></span></a>
+                                </li>
                             @endif
 
-                            @if (Auth::user()->role_id == 3) {{-- if seller --}}
+                            @if (Auth::user()->role_id == 3 && Auth::user()->isActive) {{-- if seller --}}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/order">New Order<span class="sr-only"></span></a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/orders">All Orders <span class="sr-only"></span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/newProduct">New Product<span class="sr-only"></span></a>
                                 </li>
                             @endif
                         @endguest
@@ -70,37 +79,66 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                            <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+{{--                                </li>--}}
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Register <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('register') }}">
+                                            {{ __('As seller') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('registerBuyer') }}">
+                                            {{ __('As buyer') }}
+                                        </a>
+                                    </div>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
+                            <li class="nav-item">
+                                <a href="/cart" class="nav-link" >
+{{--                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;--}}
+                                    Cart
+                                    <span class="badge badge-secondary badge-pill">{{$cartItems}}</span>
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <a class="dropdown-item" href="#">Reset Password</a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
+                            @endif
+                            @if (Auth::user()->isActive)
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <a class="dropdown-item" href="#">Reset Password</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endif
                         @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -111,5 +149,10 @@
             @yield('content')
         </main>
     </div>
+
+@section('extra-js')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+@show
+
 </body>
 </html>

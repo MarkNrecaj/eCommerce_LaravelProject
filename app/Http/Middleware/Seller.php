@@ -29,7 +29,16 @@ class Seller
         }
 
         if (Auth::user()->role_id == 3) {
+            if (!Auth::user()->isActive) {
+                Auth::logout();
+                return redirect('/login')->with('error', 'Account disabled. Contact support for more info.');
+            }
+
             return $next($request);
+        }
+
+        if (Auth::user()->role_id == 4) {
+            return redirect()->route('buyer')->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
         }
     }
 }

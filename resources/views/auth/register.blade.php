@@ -13,7 +13,7 @@
 
 
                         <div class="form-group row">
-                            <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
+                            <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}<small class="text-muted"><br>(Required for businesses)</small></label>
 
                             <div class="col-md-6">
                                 <input id="company" type="text" class="form-control @error('company') eshte jo valide @enderror" name="company" value="{{ old('company') }}" autocomplete="off">
