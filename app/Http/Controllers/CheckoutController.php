@@ -147,14 +147,10 @@ class CheckoutController extends Controller
     {
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
-            if ($product->quantity == 1){
+            $product->decrement('quantity', $item->amount);
+            if ($product->quantity == 0){
                 $product->delete();
             }
-//            elseif ($product->quantity < $item->amount){
-//              handle amount tek cart dhe te product details
-//              }
-            else
-                $product->decrement('quantity', $item->amount);
         }
     }
 
