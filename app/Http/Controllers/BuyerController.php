@@ -113,6 +113,13 @@ class BuyerController extends Controller
             ->with('totalPrice', $totalPrice);
     }
 
+    public function updateCart(Cart $cartId, Request $request)
+    {
+        $cartId->amount = $request['amount'];
+        $cartId->update();
+        return redirect()->back()->with('success', 'Cart updated successfuly');
+    }
+
     public function addToCart(Request $request,$id)
     {
         $this->validate(
@@ -123,11 +130,11 @@ class BuyerController extends Controller
         );
 
         //If user adds product from welcome page (possible solution)
-        if ($request->quantity == null){
+        if ($request->quantity == null) {
             $request->quantity = 1;
         }
         if (count(Cart::where('product_id', $id)
-            ->where('buyer_id', Auth::user()->id)->get()) > 0) {
+                ->where('buyer_id', Auth::user()->id)->get()) > 0) {
             return redirect()->back()->with('error', 'Product already added to cart');
         } else {
             Cart::create([
