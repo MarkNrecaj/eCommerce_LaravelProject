@@ -95,7 +95,7 @@ class BuyerController extends Controller
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             array_push($products, $product);
-            $totalPrice += $product->price;
+            $totalPrice += $product->price * $item->amount;
             try {
                 $image = ProductImage::where('product_id', $item->product_id)->get();
                 //dd($image);
@@ -113,15 +113,27 @@ class BuyerController extends Controller
             ->with('totalPrice', $totalPrice);
     }
 
-    public function addToCart($id)
+    public function addToCart(Request $request,$id)
     {
+        $this->validate(
+            $request,
+            [
+                'quantity' => 'nullable|numeric'
+            ]
+        );
+
+        //If user adds product from welcome page (possible solution)
+        if ($request->quantity == null){
+            $request->quantity = 1;
+        }
         if (count(Cart::where('product_id', $id)
             ->where('buyer_id', Auth::user()->id)->get()) > 0) {
             return redirect()->back()->with('error', 'Product already added to cart');
         } else {
             Cart::create([
                 'buyer_id' => Auth::user()->id,
-                'product_id' => $id
+                'product_id' => $id,
+                'amount' => $request->quantity
             ]);
             return redirect()->back()->with('success', 'Product added to cart');
         }
