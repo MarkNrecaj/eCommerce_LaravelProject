@@ -95,7 +95,7 @@ class BuyerController extends Controller
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             array_push($products, $product);
-            $totalPrice += $product->price;
+            $totalPrice += $product->price * $item->amount;
             try {
                 $image = ProductImage::where('product_id', $item->product_id)->get();
                 //dd($image);
@@ -111,6 +111,13 @@ class BuyerController extends Controller
             ->with('products', $products)
             ->with('productsImage', $productsImage)
             ->with('totalPrice', $totalPrice);
+    }
+
+    public function updateCart(Cart $cartId, Request $request)
+    {
+        $cartId->amount = $request['amount'];
+        $cartId->update();
+        return redirect()->back()->with('success', 'Cart updated successfuly');
     }
 
     public function addToCart($id)

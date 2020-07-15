@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostalWorkerController;
 use App\Http\Controllers\ProductController;
@@ -83,6 +84,7 @@ Route::group(['middleware' => ['buyer']], function () {
     Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
     //Route::get('/checkoutProduct/{id}', 'CheckoutController@show')->name('checkout.index');
     Route::get('/thankyou', 'CheckoutController@thankyou')->name('thankyou');
+    Route::post('/cartUpdate/{cartId}', 'BuyerController@updateCart')->name('cart.update');
 });
 
 // Route::get('productDetails/{id}', 'ProductController@showProductDetails')->name('productDetails');
