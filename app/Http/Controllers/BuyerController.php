@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Cart;
 use App\ProductImage;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class BuyerController extends Controller
 {
@@ -88,7 +89,9 @@ class BuyerController extends Controller
 
     public function loadCart()
     {
-        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $cart = Cart::where('buyer_id', Auth::user()->id)
+            ->where('purchased', false)
+            ->get();
         $products = [];
         $productsImage = [];
         $totalPrice = 0;
@@ -134,7 +137,9 @@ class BuyerController extends Controller
             $request->quantity = 1;
         }
         if (count(Cart::where('product_id', $id)
-            ->where('buyer_id', Auth::user()->id)->get()) > 0) {
+            ->where('buyer_id', Auth::user()->id)
+            ->where('purchased', false)
+            ->get()) > 0) {
             return redirect()->back()->with('error', 'Product already added to cart');
         } else {
             Cart::create([
@@ -144,5 +149,18 @@ class BuyerController extends Controller
             ]);
             return redirect()->back()->with('success', 'Product added to cart');
         }
+    }
+
+    function purchaseHistory(User $buyer)
+    {
+        $carts = Cart::where('buyer_id', $buyer->id)->paginate(5);
+        $products = [];
+        foreach ($carts as $item) {
+            array_push($products, Product::find($item->product_id));
+        }
+        return view('buyer.purchase_history')
+            ->with('buyer', $buyer)
+            ->with('carts', $carts)
+            ->with('products', $products);
     }
 }
