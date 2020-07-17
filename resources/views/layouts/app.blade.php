@@ -123,12 +123,15 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
+                                        @if (Auth::user()->role_id == 4)
+                                            <a class="dropdown-item" href={{route('purchaseHistory', Auth::user()->id)}}>My Purchases</a>
+                                        @endif
+                                        <a class="dropdown-item" href="#">Reset Password</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-                                        <a class="dropdown-item" href="#">Reset Password</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>

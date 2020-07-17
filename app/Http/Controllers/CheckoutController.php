@@ -22,7 +22,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $cart = Cart::where('buyer_id', Auth::user()->id)
+            ->where('purchased', false)
+            ->get();
         $products = [];
         $total_price = 0;
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
@@ -30,10 +32,10 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             array_push($products, $product);
-            $total_price += $product->price * $item->amount + $transfer_fee;
+            $total_price += $product->price * $item->amount;
         }
 
-        return view('checkout/checkout')->with(compact('cart','products', 'total_price', 'transfer_fee'));
+        return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'transfer_fee'));
     }
 
     /**
@@ -46,11 +48,14 @@ class CheckoutController extends Controller
         //
     }
 
-    private function wipeCart()
+    private function markCartPaid()
     {
-        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $cart = Cart::where('buyer_id', Auth::user()->id)
+            ->where('purchased', false)
+            ->get();
         foreach ($cart as $item) {
-            $item->delete();
+            $item->purchased = true;
+            $item->update();
         }
     }
 
@@ -78,7 +83,9 @@ class CheckoutController extends Controller
         );
 
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
-        $cart = Cart::where('buyer_id', Auth::user()->id)->get();
+        $cart = Cart::where('buyer_id', Auth::user()->id)
+            ->where('purchased', false)
+            ->get();
         $products = [];
         foreach ($cart as $item) {
             array_push($products, Product::find($item->product_id));
@@ -87,11 +94,11 @@ class CheckoutController extends Controller
         foreach ($products as $product) {
             $total_price = $total_price + $product->price;
         }
-//        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
-//        $this->addNewOrders($cart, $products, $request, $transfer_fee);
-//        $this->wipeCart();
-//        return redirect(route('thankyou'));
-//        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
+        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
+        // $this->addNewOrders($cart, $products, $request, $transfer_fee);
+        // $this->markCartPaid();
+        // return redirect(route('thankyou'));
+        //DELETE EVERYTHING BETWEEN THESE TWO COMMENTS (INCLUDE COMMENTS ALSO :P)
 
         try {
             $stripe = Stripe::make('sk_test_51H0mlKK5oDGBuQ7Kkgj6KVsIowcTCS99NPDtO00r3Y011Xa2GShmBkotvPkXDKVW4H7yjpAIo0rFnDeGflrDulHr00ukWffyBZ');
@@ -104,7 +111,7 @@ class CheckoutController extends Controller
                 'metatadata' => [],
             ]);
             $this->addNewOrders($cart, $products, $request, $transfer_fee);
-            $this->wipeCart();
+            $this->markCartPaid();
             $this->deleteItem($cart);
             return redirect(route('thankyou'));
         } catch (CardErrorException $e) {
@@ -148,7 +155,7 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             $product->decrement('quantity', $item->amount);
-            if ($product->quantity == 0){
+            if ($product->quantity == 0) {
                 $product->delete();
             }
         }

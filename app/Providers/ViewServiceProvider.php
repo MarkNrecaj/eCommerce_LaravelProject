@@ -27,14 +27,15 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-            // Using Closure based composers...
-            View::composer('layouts/app', function ($view) {
+        // Using Closure based composers...
+        View::composer('layouts/app', function ($view) {
 
-                if (Auth::check()) {
-                $cartItems = Cart::where('buyer_id', Auth::user()->id)->get();
-                $view->with('cartItems', count($cartItems) );
-                }
-            });
-
+            if (Auth::check()) {
+                $cartItems = Cart::where('buyer_id', Auth::user()->id)
+                    ->where('purchased', false)
+                    ->get();
+                $view->with('cartItems', count($cartItems));
+            }
+        });
     }
 }
