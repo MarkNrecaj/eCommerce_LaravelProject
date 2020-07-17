@@ -301,4 +301,5 @@
             </div>
         </div>
     </div>
-@endsection
+    @include('inc.footer')
+    @endsection

@@ -89,4 +89,6 @@
         }
     </script>
 
+</div>
+@include('inc.footer')
 @endsection
