@@ -16,7 +16,7 @@
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="{{ url('/') }}">Home Page</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="{{ route('order.track.view') }}">Track Order</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="/cart">Shopping Cart</a></li>
-                            <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="#">Products</a></li>
+                            <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="{{ url('/') }}">Products</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="#">Privacy Policy</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i><a href="#">Delivery Information</a></li>
                         </ul>
@@ -44,5 +44,5 @@
 </footer>
 
 <div class="footer-copyright">
-    <p class="footer-company">All Rights Reserved. &copy; 2020 <a href="#">F4NTAST1CS</a></p>
+    <p class="footer-company">All Rights Reserved. &copy; {{now()->year}} <a href="{{ url('/') }}">F4NTAST1CS</a></p>
 </div>
