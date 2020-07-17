@@ -9,5 +9,4 @@
         <a class="btn btn-secondary" href="{{route('dashboard')}}" role="button">Continue Shopping</a>
     </p>
 </div>
-@include('inc.footer')
 @endsection

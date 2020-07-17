@@ -10,5 +10,4 @@
         <a class="btn btn-secondary" href="{{route('dashboard')}}" role="button">Check our other products</a>
     </p>
 </div>
-@include('inc.footer')
 @endsection

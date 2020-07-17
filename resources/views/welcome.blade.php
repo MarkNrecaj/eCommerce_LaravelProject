@@ -86,6 +86,5 @@
             </nav>
         @endif
     </div>
-    @include('inc.footer')
 @endsection
 
