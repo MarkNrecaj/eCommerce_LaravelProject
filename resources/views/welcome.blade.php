@@ -55,8 +55,8 @@
                     @foreach($product_images as $product_image)
                         @if($product_image->product_id==$product->id)
                             <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                    <img class="card-img-top" src="../storage/images/{{$product_image->path}}" alt="Card image cap" >
+                                <div class="card mb-4 box-shadow card-product">
+                                    <div class="img-wrap"><img class="card-img-top" src="../storage/images/{{$product_image->path}}" alt="Card image cap" ></div>
                                     <div class="card-body">
                                         <div class="card-text d-flex justify-content-between align-items-center">
                                             <p> {{$product->name}}</p>

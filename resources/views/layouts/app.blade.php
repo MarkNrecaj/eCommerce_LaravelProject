@@ -21,6 +21,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/footer.css')}}" type="text/css">
+    
 
     @yield('extra-css')
 
@@ -150,6 +152,7 @@
         <main class="py-4">
             @include('inc.messages')
             @yield('content')
+            @include('inc.footer')
         </main>
     </div>
 
