@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/card.css') }}">
     <div id="carouselExampleCaptions" class=" carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -55,7 +56,27 @@
                     @foreach($product_images as $product_image)
                         @if($product_image->product_id==$product->id)
                             <div class="col-md-4">
-                                <div class="card mb-4 box-shadow card-product">
+                                <div class="card">
+                                    <div style="--aspect-ratio:1/1.2;">
+                                        <img src="../storage/images/{{$product_image->path}}">
+                                    </div>
+                                    <h1>{{$product->name}}</h1>
+                                    <p class="price">{{$product->price}}</p>
+                                    <div>
+                                        <p>{{$product->description}}</p>
+                                    </div>
+                                    <div class="button_parent">
+                                        <a href="{{ url('product-details/' .$product->id)}}">View</a>    
+                                        {{-- <button>Add to Cart</button> --}}
+                                        <form action="{{route('cart', $product->id)}}" method="post">
+                                            @csrf
+                                            
+                                            <input type="submit" style="background-color: rgb(0,0,0,0); border: 0; color: whitesmoke;" value="Add to Cart" />
+                                        </form>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="card mb-4 box-shadow card-product">
                                     <div class="img-wrap"><img class="card-img-top" src="../storage/images/{{$product_image->path}}" alt="Card image cap" ></div>
                                     <div class="card-body">
                                         <div class="card-text d-flex justify-content-between align-items-center">
@@ -73,7 +94,7 @@
                                             </form>
                                         </div>
                                         </div>
-                                </div>
+                                </div> --}}
                             </div>
                         @endif
                     @endforeach
