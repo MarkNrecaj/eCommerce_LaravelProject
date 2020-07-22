@@ -1,76 +1,105 @@
-.card {
-  display: block !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: 20px;
-  text-align: center;
-  font-family: arial;
-  border-radius: 5px;
-  transition: 0.1s;
-  background-color: #028090;
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700);* {
+  box-sizing: border-box;
 }
 
-.card:hover {
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5);
-  transform: scale(1.02);
+body {
+  font-family: "Raleway";
 }
 
-.card p :not(.price) {
-  color: #03222e;
+.my_card {
+  width: 350px;
+  background: white;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.3s;
 }
 
-.card button,
-.card a,
-.card form {
-  text-decoration: none;
-  border: none;
-  outline: 0;
-  padding: 8px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  color: #f0f3bd;
-  background-color: rgba(0, 0, 0, 0);
-  border: 1px solid #f0f3bd;
-  text-align: center;
-  cursor: pointer;
-  width: 50%;
-  font-size: 18px;
-  border-radius: 25px;
-  flex-basis: 50%;
-  transition: all 0.25s ease-in-out;
+.my_card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.card button:hover,
-.card a:hover,
-.card form:hover {
-  transition: all 0.1s;
-  transform: scale(1.05);
-  box-shadow: 0 3px 5px 0 black;
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
-.input_submit {
-  background-color: rgba(0, 0, 0, 0);
+.my_card hr {
   border: 0;
-  color: #f0f3bd;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-.price {
-  color: #f0f3bd;
-  /* color: rgb(63, 148, 38); */
-  font-size: 22px;
-}
-
-.price_deleted {
-  color: gray;
-  font-size: 15px;
-  margin: 0;
+.my_card .photo {
+  padding: 30px;
   text-align: center;
-  margin-right: 10px;
+  float: left;
 }
 
-.button_parent {
+.my_card .photo img {
+  margin-bottom: 20px;
+  max-height: 200px;
+  max-width: 270px;
+}
+
+.my_card .photo h1 {
+  color: #515151;
+  font-weight: 300;
+  padding-top: 15px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.my_card .photo h2 {
+  color: #515151;
+  margin: 0;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.my_card .photo h4 {
+  margin: 0;
+  color: #727272;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.my_card .photo p {
+  font-size: 12px;
+  line-height: 20px;
+  color: #727272;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.my_card a,
+.my_card input {
+  font-size: 17px;
+  text-decoration: none;
+  outline: 0;
+  border: 0;
+  background: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #2b2b2bc0;
+  width: 125px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.my_card a:hover,
+.my_card input:hover {
+  border: 1px solid #81967c;
+  background-color: rgba(54, 38, 139, 0.651);
+  font-weight: 700;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2), 1px -1px 0 rgba(0, 0, 0, 0.2), -1px 1px 0 rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(0, 0, 0, 0.2);
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.my_card .button_parent {
   display: flex;
   justify-content: center;
 }

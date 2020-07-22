@@ -55,24 +55,22 @@
                 @foreach($products as $product)
                     @foreach($product_images as $product_image)
                         @if($product_image->product_id==$product->id)
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div style="--aspect-ratio:1/1.2;">
+                            <div class="col-md-4 mb-2 mb-md-3 mb-lg-4">
+                                <div class="card my_card">
+                                    <div class="photo">
                                         <img src="../storage/images/{{$product_image->path}}">
-                                    </div>
-                                    <h1>{{$product->name}}</h1>
-                                    <p class="price">{{$product->price}}</p>
-                                    <div>
-                                        <p>{{$product->description}}</p>
-                                    </div>
-                                    <div class="button_parent">
-                                        <a href="{{ url('product-details/' .$product->id)}}">View</a>    
-                                        {{-- <button>Add to Cart</button> --}}
-                                        <form action="{{route('cart', $product->id)}}" method="post">
-                                            @csrf
-                                            
-                                            <input type="submit" style="background-color: rgb(0,0,0,0); border: 0; color: whitesmoke;" value="Add to Cart" />
-                                        </form>
+                                        <hr />
+                                        <h2>{{Str::length($product->name) > 13 ? Str::substr($product->name, 0, 13).'...' : $product->name}}</h2>
+                                        {{-- <h4>{{$product->description}}</h4> --}}
+                                        <h1>{{$product->price}}&euro;</h1>
+                                        <p>{{Str::length($product->description) > 38 ? Str::substr($product->description, 0, 38).' ...' : $product->description }}</p>
+                                        <div class="button_parent">
+                                            <a href="{{ url('product-details/' .$product->id)}}">View</a>
+                                            <form action="{{route('cart', $product->id)}}" method="POST">
+                                                @csrf
+                                                <input type="submit" value="Add to Cart">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -93,7 +91,7 @@
                                                 <input type="submit" class="card-link btn btn-outline-secondary" value="Add to Cart" />
                                             </form>
                                         </div>
-                                        </div>
+                                    </div>
                                 </div> --}}
                             </div>
                         @endif
