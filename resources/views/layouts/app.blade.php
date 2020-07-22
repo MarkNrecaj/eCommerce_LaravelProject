@@ -152,7 +152,6 @@
         <main class="py-4">
             @include('inc.messages')
             @yield('content')
-            @include('inc.footer')
         </main>
     </div>
 
@@ -161,4 +160,5 @@
 @show
 
 </body>
+@include('inc.footer')
 </html>
