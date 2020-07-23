@@ -149,7 +149,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-1">
             @include('inc.messages')
             @yield('content')
         </main>

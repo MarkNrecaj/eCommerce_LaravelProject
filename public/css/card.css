@@ -104,6 +104,19 @@ body {
   justify-content: center;
 }
 
+/*aspect ratio usage:
+<div style="--aspect-ratio:815/419;">
+</div>
+
+<div style="--aspect-ratio:16/9;">
+</div>
+
+<div style="--aspect-ratio:1.4;">
+</div>
+
+*/
+
+
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;
 }

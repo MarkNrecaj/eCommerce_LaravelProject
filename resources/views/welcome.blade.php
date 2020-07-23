@@ -10,21 +10,27 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:4/1;">
+                    <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>First slide label</h1>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:4/1;">
+                    <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Second slide label</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:4/1;">
+                    <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Third slide label</h1>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -47,9 +53,9 @@
             </div>
         @else
 
-            <div class="text-center py-5">
-                <h2>New Collection</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <div class="text-center py-3">
+                {{-- <h2>New Collection</h2>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> --}}
             </div>
             <div class="row">
                 @foreach($products as $product)
