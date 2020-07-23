@@ -101,7 +101,20 @@ class ProductController extends Controller
         $productDetails = Product::where('id', $id)->first();
         $product_images = ProductImage::get();
 
-        return view('product-details')->with(compact('productDetails', 'product_images'));
+        //get e products ans store in array
+        $products1 = Product::orderBy('id', 'desc')->take(4)->get();
+        $products = [];
+        foreach ($products1 as $key) {
+            array_push($products, $key);
+        }
+
+        //if array contains product, same as product that we're viewing in this page
+        //remove product from array
+        in_array($productDetails, $products) ? array_splice($products, array_search($productDetails, $products), 1) : array_splice($products, 3);
+
+        $all_product_images = ProductImage::select('id', 'path', 'product_id')->orderBy('id', 'desc')->take(4)->get();
+
+        return view('product-details')->with(compact('productDetails', 'product_images', 'products', 'all_product_images'));
     }
 
     public function trackOrder(Request $request)
@@ -125,12 +138,20 @@ class ProductController extends Controller
         $msg = $order == null ? 'Sorry , We couldn\'t find your order' : 'We found your order, ' . $order->receiver_name;
         $status = $order == null ? 'Please make sure you correctly entered tracking ID. Otherwise, try again in a while.' : 'You order status is: ' . $order->status;
 
-        return view('track.track')->with('msg', $msg)->with('status', $status);
+        $products = Product::orderBy('id', 'desc')->take(3)->get();
+
+        $all_product_images = ProductImage::select('id', 'path', 'product_id')->orderBy('id', 'desc')->take(4)->get();
+
+        return view('track.track')->with(compact('msg', 'status', 'products', 'all_product_images'));
     }
 
     public function trackView()
     {
-        return view('track.view');
+        $products = Product::orderBy('id', 'desc')->take(3)->get();
+
+        $all_product_images = ProductImage::select('id', 'path', 'product_id')->orderBy('id', 'desc')->take(4)->get();
+
+        return view('track.view')->with(compact('products', 'all_product_images'));
     }
 
     /**

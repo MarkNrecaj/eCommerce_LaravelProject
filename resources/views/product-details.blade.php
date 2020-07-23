@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href={{ asset('css/card.css') }}>
 <div class="shop-detail-box-main">
     <div class="container">
         <div class="row">
@@ -37,7 +38,7 @@
                     <h4>Product Description:</h4>
                     <p>{{$productDetails->description}} </p>
                     <form action="{{route('cart', $productDetails->id)}}" method="post">
-                    @csrf
+                        @csrf
                         <ul class="ul-style">
                             <li>
                                 <div class="form-group size-st">
@@ -64,18 +65,46 @@
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
                                 {{-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a> --}}
-{{--                                    <a class="btn hvr-hover" data-fancybox-close="" href="{{ url('checkoutProduct/' .$productDetails->id)}}">Buy New</a>--}}
+                                {{-- <a class="btn hvr-hover" data-fancybox-close="" href="{{ url('checkoutProduct/' .$productDetails->id)}}">Buy New</a>--}}
                                 {{-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a> --}}
 
-                                <br><br><br><br><br>
+                                <br><br>
 
                                 <input type="submit" class="btn btn-primary" value="Add to Cart" />
 
                             </div>
                         </div>
                     </form>
+                    
+                </div>
+                <div style="margin-top: 120px; margin-bottom: 30px;">
+                    <h2>New Arrivals</h2>
                 </div>
             </div>
+            @foreach($products as $product)
+                @foreach($all_product_images as $product_image)
+                    @if($product_image->product_id==$product->id)
+                        <div class="col-md-4 mb-2 mb-md-3 mb-lg-4">
+                            <div class="card my_card">
+                                <div class="photo">
+                                    <img src="../storage/images/{{$product_image->path}}">
+                                    <hr />
+                                    <h2>{{Str::length($product->name) > 13 ? Str::substr($product->name, 0, 13).'...' : $product->name}}</h2>
+                                    <h1>{{$product->price}}&euro;</h1>
+                                    <p>{{Str::length($product->description) > 38 ? Str::substr($product->description, 0, 38).' ...' : $product->description }}</p>
+                                    <div class="button_parent">
+                                        <a href="{{ url('product-details/' .$product->id)}}">View</a>
+                                        <form action="{{route('cart', $product->id)}}" method="POST">
+                                            @csrf
+                                            <input type="submit" value="Add to Cart">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endforeach
         </div>
 
     </div>
