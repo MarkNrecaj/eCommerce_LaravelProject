@@ -38,16 +38,6 @@ class CheckoutController extends Controller
         return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'transfer_fee'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     private function markCartPaid()
     {
         $cart = Cart::where('buyer_id', Auth::user()->id)
@@ -164,56 +154,5 @@ class CheckoutController extends Controller
     public function thankyou()
     {
         return view('checkout/thankyou');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //        $products = Product::where('id', $id)->get();
-        //        //dd($product);
-        //        $total_price = 2;
-        //        foreach ($products as $product){
-        //            $total_price = $total_price + $product->price;
-        //        }
-        //        return view('checkout/checkout')->with(compact('products','total_price'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
