@@ -73,26 +73,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {{-- <div class="card mb-4 box-shadow card-product">
-                                    <div class="img-wrap"><img class="card-img-top" src="../storage/images/{{$product_image->path}}" alt="Card image cap" ></div>
-                                    <div class="card-body">
-                                        <div class="card-text d-flex justify-content-between align-items-center">
-                                            <p> {{$product->name}}</p>
-                                            <p >{{$product->price}} &euro; </p>
-                                        </div>
-                                        <p class="card-text"> {{$product->description}}</p>
-                                        <div class="btn-group">
-                                            
-                                            <a href="{{ url('product-details/' .$product->id)}}" class="card-link btn btn-outline-secondary">View</a>
-                                            <form action="{{route('cart', $product->id)}}" method="post">
-                                                @csrf
-                                                
-                                                <input type="submit" class="card-link btn btn-outline-secondary" value="Add to Cart" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         @endif
                     @endforeach
