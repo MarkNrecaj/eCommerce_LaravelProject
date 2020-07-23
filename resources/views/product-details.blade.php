@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('extra-css')
+    <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
+@endsection
 @section('content')
 <div class="shop-detail-box-main">
     <div class="container">

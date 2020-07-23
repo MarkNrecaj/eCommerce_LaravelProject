@@ -19,10 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/footer.css')}}" type="text/css">
-    
+
 
     @yield('extra-css')
 
