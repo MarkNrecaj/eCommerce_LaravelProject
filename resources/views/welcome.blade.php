@@ -10,7 +10,7 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div style="--aspect-ratio:4/1;">
+                <div style="--aspect-ratio:3/1;">
                     <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-caption d-none d-md-block">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div style="--aspect-ratio:4/1;">
+                <div style="--aspect-ratio:3/1;">
                     <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-caption d-none d-md-block">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div style="--aspect-ratio:4/1;">
+                <div style="--aspect-ratio:3/1;">
                     <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-caption d-none d-md-block">

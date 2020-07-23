@@ -35,7 +35,7 @@
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Total Price</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Download</th>
+                                                <th scope="col">Download Invoice</th>
                                             </tr>
                                         </thead>
                                         <tbody>
