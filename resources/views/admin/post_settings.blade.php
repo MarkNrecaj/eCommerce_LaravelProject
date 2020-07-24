@@ -17,7 +17,7 @@
                             <label for="transfer_fee" class="col-md-4 col-form-label text-md-right">{{ __('Shipping fee') }}</label>
 
                             <div class="col-md-6">
-                                <input id="transfer_fee" type="number" value="{{$setting->transfer_fee}}" min="0" step="0.01" class="form-control @error('transfer_fee') eshte jo valide @enderror" name="transfer_fee" value="{{ old('transfer_fee') }}" autocomplete="off">
+                                <input id="transfer_fee" type="number" value="{{$setting->transfer_fee}}" min="0" step="1" class="form-control @error('transfer_fee') eshte jo valide @enderror" name="transfer_fee" value="{{ old('transfer_fee') }}" autocomplete="off">
 
                                 @error('transfer_fee')
                                     <span class="invalid-feedback" role="alert">
