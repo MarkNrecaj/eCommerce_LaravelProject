@@ -135,11 +135,11 @@
                             <div class="attr-nav">
                                 <ul>
                                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                                    <li class="side-menu">
+                                    <li {{--class="side-menu"--}}>
                                         <a href="/cart">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             {{-- <i class="fa fa-shopping-bag"></i> --}}
-                                            <span class="badge">{{$cartItems}}</span>
+                                            <span class="badge">&nbsp;&nbsp;{{$cartItems}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -183,7 +183,7 @@
 
         
 
-        <main class="py-2">
+        <main >
             @include('inc.messages')
             @yield('content')
         </main>
