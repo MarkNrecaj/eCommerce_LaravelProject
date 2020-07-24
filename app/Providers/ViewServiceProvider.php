@@ -34,7 +34,30 @@ class ViewServiceProvider extends ServiceProvider
                 $cartItems = Cart::where('buyer_id', Auth::user()->id)
                     ->where('purchased', false)
                     ->get();
-                $view->with('cartItems', count($cartItems));
+                
+                    $cart = Cart::where('buyer_id', Auth::user()->id)
+                    ->where('purchased', false)
+                    ->get();
+                $products = [];
+                $productsImage = [];
+                $totalPrice = 0;
+                foreach ($cart as $item) {
+                    $product = Product::find($item->product_id);
+                    array_push($products, $product);
+                    $totalPrice += $product->price * $item->amount;
+                    try {
+                        $image = ProductImage::where('product_id', $item->product_id)->get();
+                        //dd($image);
+                        array_push($productsImage, $image);
+                    } catch (\Throwable $th) {
+                        array_push($productsImage, 'no_image.jpg');
+                    }
+                }    
+                $view->with('cartItems', count($cartItems))
+                    ->with('cart', $cart)    
+                    ->with('products', $products)
+                    ->with('productsImage', $productsImage)
+                    ->with('totalPrice', $totalPrice);;
             }
         });
     }

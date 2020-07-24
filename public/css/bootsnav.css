@@ -40,6 +40,7 @@ nav.navbar.bootsnav {
     background-color: #fff;
     border: none;
     z-index: 9;
+    height: 82px !important;
 }
 
 nav.navbar.bootsnav ul.nav>li>a {
@@ -1157,7 +1158,7 @@ nav.navbar.bootsnav ul.dropdown-menu.megamenu-content .content ul.menu-col li a:
     /* Tabs
     =================================*/
     nav.navbar.bootsnav .megamenu-content.tabbed {
-        padding-left: 0 !mportant;
+        padding-left: 0 !important;
     }
     nav.navbar.bootsnav .tabbed>li {
         padding: 25px 0;
