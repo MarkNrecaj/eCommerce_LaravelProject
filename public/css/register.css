@@ -1,0 +1,85 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Pacifico&display=swap);* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(/images/rg-background.png);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  padding: 0 30px;
+  margin: 0 auto;
+  overflow: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-bottom: 17px;
+}
+
+.card .card-header {
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-size: 3rem;
+  color: #14213d;
+  background-color: white;
+  border-bottom: none;
+}
+
+.card .card-header:hover {
+  color: #fad02c;
+}
+
+.card-body form {
+  padding-left: 25%;
+}
+
+.card-body form input {
+  width: 320px;
+  border: none;
+  font-size: 1.3rem;
+  border-bottom: 1.5px solid #999;
+  background: transparent;
+  outline: none;
+  color: #14213d;
+}
+
+.card-body form input:focus {
+  border-color: #14213d;
+}
+
+.card-body form i {
+  color: #999;
+  padding-top: 16px;
+}
+
+.card-body form i:hover {
+  color: #14213d;
+}
+
+.card-body form button {
+  padding: 1rem 3rem;
+  background-color: #14213d;
+  border: none;
+  border-radius: 50px;
+  color: white;
+}
+
+.card-body form button:hover {
+  color: #14213d;
+  background-color: #fad02c;
+}
+
+.card-body form .offset-md-4 {
+  margin-top: 10px;
+  margin-left: 13.3%;
+}
+
