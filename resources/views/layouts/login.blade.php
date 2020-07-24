@@ -30,7 +30,7 @@
     <div id="app">
         <div class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 
-            <div class="logo"> <a href="#"> <img src="\images\logo.png" alt="logo"> </a></div> 
+            <div class="logo"> <a href="../"> <img src="\images\logo.png" alt="logo"> </a></div> 
 
             <div class="container">
 

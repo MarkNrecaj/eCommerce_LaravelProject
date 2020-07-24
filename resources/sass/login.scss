@@ -70,13 +70,20 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     color: white;
+    background-color: white;
+    padding: 4px;
 
     .card-header{
         font-family: $styled-font;
         font-size: 3rem;
         color: $primary-color;
-        margin-left: 65px;;
-    }
+        text-align: center;
+
+            &:hover{
+                color: $secondary-color;
+            }
+        }
+
 
     .card-body {
          form{
@@ -141,18 +148,13 @@ body{
             border: none;
             border-radius: 50px;
             color: white;
+            
+            &:hover {
+                color: $primary-color;
+                background-color: $secondary-color;
+            }
          }
 
     
-    }
-}
-
-.card-body {
-    .col-md-6{
-        input:focus{
-            i{
-                color: red;
-            }
-        }
     }
 }
