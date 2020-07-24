@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/card.css') }}">
     <div id="carouselExampleCaptions" class=" carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -9,21 +10,27 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:3/1;">
+                    <img src="../storage/images/1.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>First slide label</h1>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:3/1;">
+                    <img src="../storage/images/2.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Second slide label</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                <div style="--aspect-ratio:3/1;">
+                    <img src="../storage/images/3.jpg" class="d-block w-100" alt="...">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Third slide label</h1>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -46,33 +53,31 @@
             </div>
         @else
 
-            <div class="text-center py-5">
-                <h2>New Collection</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <div class="text-center py-3">
+                {{-- <h2>New Collection</h2>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> --}}
             </div>
             <div class="row">
                 @foreach($products as $product)
                     @foreach($product_images as $product_image)
                         @if($product_image->product_id==$product->id)
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow card-product">
-                                    <div class="img-wrap"><img class="card-img-top" src="../storage/images/{{$product_image->path}}" alt="Card image cap" ></div>
-                                    <div class="card-body">
-                                        <div class="card-text d-flex justify-content-between align-items-center">
-                                            <p> {{$product->name}}</p>
-                                            <p >{{$product->price}} &euro; </p>
-                                        </div>
-                                        <p class="card-text"> {{$product->description}}</p>
-                                        <div class="btn-group">
-                                            
-                                            <a href="{{ url('product-details/' .$product->id)}}" class="card-link btn btn-outline-secondary">View</a>
-                                            <form action="{{route('cart', $product->id)}}" method="post">
+                            <div class="col-md-4 mb-2 mb-md-3 mb-lg-4">
+                                <div class="card my_card">
+                                    <div class="photo">
+                                        <img src="../storage/images/{{$product_image->path}}">
+                                        <hr />
+                                        <h2>{{Str::length($product->name) > 13 ? Str::substr($product->name, 0, 13).'...' : $product->name}}</h2>
+                                        {{-- <h4>{{$product->description}}</h4> --}}
+                                        <h1>{{$product->price}}&euro;</h1>
+                                        <p>{{Str::length($product->description) > 38 ? Str::substr($product->description, 0, 38).' ...' : $product->description }}</p>
+                                        <div class="button_parent">
+                                            <a href="{{ url('product-details/' .$product->id)}}">View</a>
+                                            <form action="{{route('cart', $product->id)}}" method="POST">
                                                 @csrf
-                                                
-                                                <input type="submit" class="card-link btn btn-outline-secondary" value="Add to Cart" />
+                                                <input type="submit" value="Add to Cart">
                                             </form>
                                         </div>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endif
