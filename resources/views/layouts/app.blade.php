@@ -19,11 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/product-details-style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/footer.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/navbar-style.css')}}" type="text/css">
-    
 
     @yield('extra-css')
 
@@ -42,7 +40,7 @@
                         <a class="navbar-brand" href="{{ url('/') }}"><img src="images/logo.png" class="logo" alt=""></a>
                     </div>
                     <!-- End Header (brands) Navigation -->
-    
+
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="navbar-menu">
                         <ul class="nav navbar-nav mr-auto" data-in="fadeInDown" data-out="fadeOutUp">
@@ -109,7 +107,7 @@
                             </li>
                             @endif
                         @else
-                            
+
                             @if (Auth::user()->isActive)
                             <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
@@ -135,11 +133,11 @@
                             <div class="attr-nav">
                                 <ul>
                                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                                    <li class="side-menu">
+                                    <li {{--class="side-menu"--}}>
                                         <a href="/cart">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             {{-- <i class="fa fa-shopping-bag"></i> --}}
-                                            <span class="badge">{{$cartItems}}</span>
+                                            <span class="badge">&nbsp;&nbsp;{{$cartItems}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -169,7 +167,7 @@
             </div>
         </nav>
         </header>
-        
+
         <div class="top-search">
             <div class="container">
                 <div class="input-group">
@@ -181,12 +179,11 @@
         </div>
 
 
-        
 
-        <main class="py-4">
+
+        <main >
             @include('inc.messages')
             @yield('content')
-            @include('inc.footer')
         </main>
     </div>
 
@@ -198,4 +195,5 @@
 @show
 
 </body>
+@include('inc.footer')
 </html>

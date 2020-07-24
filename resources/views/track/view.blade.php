@@ -1,17 +1,24 @@
 @extends('layouts.app')
-
+@section('extra-css')
+    <link rel="stylesheet" href="{{asset('css/form.css')}}">
+@endsection
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/card.css') }}">
-<div class="text-center py-3">
-    <h1 >Enter phone number and tracking id</h1>
-    <form action="{{route('order.track')}}" method="post">
+<div class="col-md-4 mx-auto custom-container">
+    <h4 class="text-center">Track Your Order</h4>
+    <form class="custom-form " action="{{route('order.track')}}" method="post">
         @csrf
-        <br> 
-        <input type="number" min="0" placeholder = "Phone number without +" name="buyerPhone" class="form-control" style="width: 300px; display: block; margin : 0 auto;">
         <br>
-        <input type="number" min="0" placeholder = "Tracking ID" name="tracking_id" id="tracking_id" class="form-control" style="width: 300px; display: block; margin : 0 auto;">
-        <br>
-        <button type="submit" class="btn btn-outline-primary">Search</button>
+        <div class="mb-3">
+            <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number without +" autofocus>
+        </div>
+
+        <div class="mb-3">
+            <input id="tracking_id" type="number"  min="0" class="form-control" name="tracking_id" placeholder="Tracking ID">
+        </div>
+
+        <div class="center mb-3">
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
     </form>
     {{-- <hr>
     <p class="lead">
