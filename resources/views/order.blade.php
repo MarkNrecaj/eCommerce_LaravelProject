@@ -263,10 +263,9 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Total price + postal service') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="total_price" disabled value="{{$transfer_fee}}.00 €" name="total_price"
+                                    <input style="color: rgb(108, 117, 125); background-color: rgb(233, 236, 239)" id="total_price" disabled value="{{$transfer_fee}}.00 €" name="total_price"
                                            type="text" min="0" step="0.01"
-                                           class="form-control @error('total_price') eshte jo valide @enderror"
-                                           value="{{ old('total_price') }}">
+                                           class="form-control">
                                     @error('total_price')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

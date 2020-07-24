@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('extra-css')
     <link rel="stylesheet" href="{{asset('css/form.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/card.css') }}">
 @endsection
 @section('content')
 <div class="col-md-4 mx-auto custom-container">
@@ -8,15 +9,15 @@
     <form class="custom-form " action="{{route('order.track')}}" method="post">
         @csrf
         <br>
-        <div class="mb-3">
+        <div>
             <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number without +" autofocus>
         </div>
 
-        <div class="mb-3">
+        <div style="margin-top: 25px; margin-bottom: 10px">
             <input id="tracking_id" type="number"  min="0" class="form-control" name="tracking_id" placeholder="Tracking ID">
         </div>
 
-        <div class="center mb-3">
+        <div class="center">
             <button type="submit" class="btn btn-outline-primary">Search</button>
         </div>
     </form>
@@ -24,7 +25,7 @@
     <p class="lead">
         <a class="btn btn-secondary" href="{{route('dashboard')}}" role="button">Check our other products</a>
     </p> --}}
-    <hr style="margin-top: 50px">
+    {{-- <hr style="margin-top: 50px"> --}}
 </div>
 <div class="container">
     @if(count($products) == 0)
