@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::where('status',1)->get();
         //$product_images = ProductImage::get();
         $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
         return view('welcome', compact('products', 'product_images'));

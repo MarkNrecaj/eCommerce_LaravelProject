@@ -102,7 +102,7 @@ class CheckoutController extends Controller
             ]);
             $this->addNewOrders($cart, $products, $request, $transfer_fee);
             $this->markCartPaid();
-            $this->deleteItem($cart);
+            $this->changeProductStatus($cart);
             return redirect(route('thankyou'));
         } catch (CardErrorException $e) {
             //return view('checkout/checkout')->withErrors(compact('products','total_price','transfer_fee'));
@@ -140,13 +140,15 @@ class CheckoutController extends Controller
         }
     }
 
-    public function deleteItem($cart)
+
+    public function changeProductStatus($cart)
     {
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             $product->decrement('quantity', $item->amount);
             if ($product->quantity == 0) {
-                $product->delete();
+                $product->status = false;
+                $product->save();
             }
         }
     }

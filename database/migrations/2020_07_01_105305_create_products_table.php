@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('product_type');
             $table->boolean('is_openable');
             $table->boolean('is_returnable');
+            $table->boolean('status')->default(true);
             $table->foreignId('seller_id')->constrained('users', 'id');
             $table->timestamps();
         });

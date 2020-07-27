@@ -106,7 +106,7 @@
                     <div class="form-group row align-items-center justify-content-center">
                         <i class="fas fa-globe" aria-hidden="true" style="color: #999;"></i>
                         <div class="col-md-10">
-                        <select  id="state" class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}">
+                        <select  id="state" class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}" required>
                             <option value="" selected disabled hidden>Select your country</option>
                             <option value="Kosovo">Kosovo</option>
                             <option value="Albania">Albania</option>
