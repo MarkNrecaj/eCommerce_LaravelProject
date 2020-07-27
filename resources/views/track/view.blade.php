@@ -9,8 +9,8 @@
     <form class="custom-form " action="{{route('order.track')}}" method="post">
         @csrf
         <br>
-        <div>
-            <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number without +" autofocus>
+        <div class="mb-3">
+            <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number" autofocus>
         </div>
 
         <div style="margin-top: 25px; margin-bottom: 10px">

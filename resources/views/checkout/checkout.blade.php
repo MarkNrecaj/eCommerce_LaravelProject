@@ -4,6 +4,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/form.css') }}" rel="stylesheet">
     <link href="{{ asset('css/checkout.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 @endsection
 
 
@@ -21,7 +22,7 @@
                     <span class="text-muted">Cart Items</span>
                     <span class="badge badge-secondary badge-pill">{{count($products)}}</span>
                 </h4>
-                <ul class="list-group">
+                <ul class="list-group mb-3">
                     @foreach($cart as $item)
                     @foreach($products as $product)
                         @if($product->id == $item->product_id)
@@ -51,51 +52,62 @@
                 <h4 class="mb-3 text-center">Billing Information</h4>
                 <form  class="custom-form" id="payment-form" action="{{route('checkout.store')}}" method="POST">
                     @csrf
-                    <div class="mb-3">
-                        <label for="name">Full Name <span>*</span></label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name Lastname" required autocomplete="given-name">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-user" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Full Name *" required autocomplete="given-name">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="email">Email <span>*</span></label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="you@example.com" required autocomplete="email">
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-envelope" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email *" required autocomplete="email">
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="address">Address <span class="text-muted">(Optional)</span></label>
-                        <input id="address" type="text" class="form-control @error('address') eshte jo valide @enderror" name="address" placeholder="1234 Main St" value="{{ old('address') }}" autocomplete="off">
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-home" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                        <input id="address" type="text" class="form-control @error('address') eshte jo valide @enderror" name="address" placeholder="Address (Optional)" value="{{ old('address') }}" autocomplete="off">
 
                         @error('address')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="city">City <span>*</span></label>
-                        <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ old('city') }}" placeholder="City" required autocomplete="city" >
+
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-map-pin" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                        <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ old('city') }}" placeholder="City *" required autocomplete="city" >
 
                         @error('city')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="state">State <span>*</span></label>
+
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fas fa-globe" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
                         <select  id="state" class="form-control @error('state') eshte jo valide @enderror" name="state" value="{{ old('state') }}">
-                            <option value="" selected disabled hidden>Choose..</option>
+                            <option value="" selected disabled hidden>Select your country</option>
                             <option value="Kosovo">Kosovo</option>
                             <option value="Albania">Albania</option>
                             <option value="North Macedonia">North Macedonia</option>
@@ -106,40 +118,54 @@
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="additional_notes">Additional Notes <span class="text-muted">(Optional)</span></label>
-                        <textarea name="additional_notes" placeholder="Special instructions?" value="{{ old('additional_notes') }}" class="form-control @error('additional_notes') eshte jo valide @enderror" rows = "3" autocomplete="off"></textarea>
+
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-align-justify" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                        <textarea name="additional_notes" placeholder="Additional Notes (Optional)" value="{{ old('additional_notes') }}" class="form-control @error('additional_notes') eshte jo valide @enderror" rows = "3" autocomplete="off"></textarea>
 
                         @error('address')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="cardholder_name">Cardholder Name <span>*</span></label>
+{{--                    <div class="form-group row align-items-center mt-5">--}}
+{{--                        <h5 class="text-muted mr-3">Credit Card Details</h5>--}}
+{{--                    </div>--}}
 
-                        <input id="cardholder_name" type="text" class="form-control @error('cardholder_name') is-invalid @enderror" name="cardholder_name"  placeholder="Cardholder Name" required autocomplete="off">
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-user" aria-hidden="true" style="color: #999;"></i>
+                        <div class="col-md-10">
+                        <input id="cardholder_name" type="text" class="form-control @error('cardholder_name') is-invalid @enderror" name="cardholder_name"  placeholder="Cardholder Name *" required autocomplete="off">
 
                         @error('cardholder_name')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="card-element">
-                            Credit or debit card <span>*</span>
-                        </label>
-                        <div id="card-element" >
+
+                    <div class="form-group row align-items-center justify-content-center">
+                        <i class="fa fa-credit-card" aria-hidden="true" style="color: #999;"></i>
+{{--                        <label for="card-element">--}}
+{{--                            Credit or debit card--}}
+{{--                        </label>--}}
+
+                        <div class="col-md-10">
+                            <div id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
                         </div>
 
                         <!-- Used to display form errors. -->
                         <div id="card-errors" role="alert"></div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <span>*</span> <small>indicates required</small>
