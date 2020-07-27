@@ -79,7 +79,8 @@
 
                                         <div class="col-md-8">
                                             {{-- <input id="price" type="number" value="0" onchange="calculateTotalPrice()" min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror" name="price" value="{{ old('price') }}" autocomplete="off" required> --}}
-                                            <div class="input-group mb-3">
+                                            <div class="input-group">
+                                            {{-- <div class="input-group mb-3"> --}}
 
                                                 <input name="price" id="price" type="number" onchange="calculateTotalPrice()"
                                                        min="0" step="0.01" class="form-control @error('price') eshte jo valide @enderror"
@@ -89,7 +90,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text text-muted">€</span>
                                                 </div>
-                                              </div>
+                                            </div>
                                             @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

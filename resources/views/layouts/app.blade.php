@@ -137,7 +137,7 @@
                                         <a href="/cart">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             {{-- <i class="fa fa-shopping-bag"></i> --}}
-                                            <span class="badge">{{$cartItems}}</span>
+                                            <span class="badge">&nbsp;&nbsp;{{$cartItems}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -153,15 +153,21 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
+                        @if (Auth::check() && $cartItems > 0)
+                            @for ($i = 0; $i < $cartItems; $i++)
+                                <li>
+                                    {{-- <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a> --}}
+                                    <h6><a href="#">{{$products[$i]->name}}</a></h6>
+                                    <p>{{$cart[$i]->amount}} x <span class="price">{{$products[$i]->price}} &euro;</span></p>
+                                </li>
+                            @endfor
+                            <li class="total">
+                                <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                                <span class="float-right"><strong>Total</strong>: {{$totalPrice}} &euro;</span>
+                            </li>
+                        @else
+                            <li><p>No products added to cart</p></li>                                
+                        @endif
                     </ul>
                 </li>
             </div>
@@ -181,7 +187,7 @@
 
 
 
-        <main class="py-2">
+        <main >
             @include('inc.messages')
             @yield('content')
         </main>

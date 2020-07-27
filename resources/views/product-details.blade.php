@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <link rel="stylesheet" href={{ asset('css/card.css') }}>
-<div class="shop-detail-box-main">
+<div class="">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-5 col-md-6">

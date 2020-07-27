@@ -127,6 +127,7 @@ footer .our-link ul li:last-child {
 }
 
 footer .footer-main {
+    margin-top: 25px;
     padding: 70px 0;
     background: #202020;
 }

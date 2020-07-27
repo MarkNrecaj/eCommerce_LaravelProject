@@ -116,7 +116,7 @@ class AdminController extends Controller
         if (count($users) > 0) {
             return view('admin/all_clients')->with('clients', $users);
         } else {
-            return view('admin/all_clients')->with('clients', User::where('role_id', 3));
+            return view('admin/all_clients')->with('clients', User::where('role_id', 3)->paginate(5))->with('error', 'No results found for ' . $request['query'] . '. We\'re showing all users instead.');
         }
     }
 }
