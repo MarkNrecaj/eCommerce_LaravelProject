@@ -264,8 +264,12 @@
                                     <input id="total_price" disabled name="total_price"
                                            type="text" min="0" step="0.01"
                                            class="form-control @error('total_price') eshte jo valide @enderror"
-                                           value="{{ old('total_price') }}"
-                                           placeholder="Total Price">
+                                           value="{{$transfer_fee}}"
+                                           placeholder="Total Price"
+                                           {{-- duhemi me lon 1 indikator kur osht disabled 1 element,
+                                            psh background ngjyra si rreshti me poshte --}}
+                                           {{-- style="background-color: rgb(241, 241, 241)" --}}
+                                           >
                                     @error('total_price')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
