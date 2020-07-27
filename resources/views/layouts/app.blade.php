@@ -37,7 +37,7 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                         </button>
-                        <a class="navbar-brand" href="{{ url('/') }}"><img src="images/logo.png" class="logo" alt=""></a>
+                        <a class="navbar-brand" href="{{ url('/') }}">Fant4st1cs</a>
                     </div>
                     <!-- End Header (brands) Navigation -->
 
