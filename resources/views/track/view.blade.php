@@ -9,7 +9,7 @@
         @csrf
         <br>
         <div class="mb-3">
-            <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number without +" autofocus>
+            <input id="buyerPhone" type="number"  min="0" class="form-control" name="buyerPhone" placeholder="Phone number" autofocus>
         </div>
 
         <div class="mb-3">
