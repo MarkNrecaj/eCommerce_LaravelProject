@@ -28,7 +28,6 @@
 </head>
 <body>
     <div id="app">
-
         <header class="main-header">
             <!-- Start Navigation -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -154,18 +153,18 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
-                        @if ($cartItems > 0)
-                        @for ($i = 0; $i < $cartItems; $i++)
-                        <li>
-                            {{-- <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a> --}}
-                            <h6><a href="#">{{$products[$i]->name}}</a></h6>
-                            <p>1x - <span class="price">{{$products[$i]->price}} &euro;</span></p>
-                        </li>
-                        @endfor
-                        <li class="total">
-                            <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: {{$totalPrice}} &euro;</span>
-                        </li>
+                        @if (Auth::check() && $cartItems > 0)
+                            @for ($i = 0; $i < $cartItems; $i++)
+                                <li>
+                                    {{-- <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a> --}}
+                                    <h6><a href="#">{{$products[$i]->name}}</a></h6>
+                                    <p>{{$cart[$i]->amount}} x <span class="price">{{$products[$i]->price}} &euro;</span></p>
+                                </li>
+                            @endfor
+                            <li class="total">
+                                <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                                <span class="float-right"><strong>Total</strong>: {{$totalPrice}} &euro;</span>
+                            </li>
                         @else
                             <li><p>No products added to cart</p></li>                                
                         @endif
