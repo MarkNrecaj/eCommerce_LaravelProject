@@ -156,7 +156,7 @@
                         @if (Auth::check() && $cartItems > 0)
                             @for ($i = 0; $i < $cartItems; $i++)
                                 <li>
-                                    {{-- <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a> --}}
+                                    <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a>
                                     <h6><a href="#">{{$products[$i]->name}}</a></h6>
                                     <p>{{$cart[$i]->amount}} x <span class="price">{{$products[$i]->price}} &euro;</span></p>
                                 </li>

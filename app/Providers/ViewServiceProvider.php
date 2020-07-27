@@ -6,6 +6,7 @@ use App\Cart;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use App\ProductImage;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -47,12 +48,14 @@ class ViewServiceProvider extends ServiceProvider
                     $totalPrice += $product->price * $item->amount;
                     try {
                         $image = ProductImage::where('product_id', $item->product_id)->get();
-                        //dd($image);
+                        // dd($image);
                         array_push($productsImage, $image);
                     } catch (\Throwable $th) {
                         array_push($productsImage, 'no_image.jpg');
-                    }
-                }    
+                    }                   
+                    
+                }  
+                // dd($productsImage[0][0]->path);
                 $view->with('cartItems', count($cartItems))
                     ->with('cart', $cart)    
                     ->with('products', $products)
