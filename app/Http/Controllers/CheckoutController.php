@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\PostalSetting;
 use App\Product;
 use App\ProductImage;
@@ -12,6 +13,7 @@ use App\Cart;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -115,7 +117,7 @@ class CheckoutController extends Controller
 
         for ($i = 0; $i < count($cart); $i++) {
             // dd($cart[$i]->amount * $products[$i]->price + PostalSetting::find(1)->transfer_fee);
-            Order::create(
+            $order = Order::create(
                 [
                     'receiver_name' => $user->name . ' ' . $user->last_name,
                     'receiver_tel' => $user->tel,
@@ -137,6 +139,9 @@ class CheckoutController extends Controller
                     'seller_id' => $products[$i]->seller_id
                 ]
             );
+
+            $subject = 'Your order has been successfully registered';
+            Mail::send(new OrderConfirmationMail($request->email, $subject, $order));
         }
     }
 
