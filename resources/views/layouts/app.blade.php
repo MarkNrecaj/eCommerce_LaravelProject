@@ -37,7 +37,7 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                         </button>
-                        <a class="navbar-brand" href="{{ url('/') }}"><img src="images/logo.png" class="logo" alt=""></a>
+                        <a class="navbar-brand" href="{{ url('/') }}">Fant4st1cs</a>
                     </div>
                     <!-- End Header (brands) Navigation -->
 
@@ -156,7 +156,7 @@
                         @if (Auth::check() && $cartItems > 0)
                             @for ($i = 0; $i < $cartItems; $i++)
                                 <li>
-                                    {{-- <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a> --}}
+                                    <a href="#" class="photo"><img src=" ../storage/images/{{$productsImage[$i][0]->path}} " class="cart-thumb" alt="" /></a>
                                     <h6><a href="#">{{$products[$i]->name}}</a></h6>
                                     <p>{{$cart[$i]->amount}} x <span class="price">{{$products[$i]->price}} &euro;</span></p>
                                 </li>
