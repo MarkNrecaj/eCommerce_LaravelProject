@@ -95,7 +95,7 @@
                             </li>
                             @if(Route::has('register'))
                             <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</span></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">
                                         {{ __('As seller') }}
@@ -130,7 +130,7 @@
                             @endif
                             @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
                             <li>
-                            <div class="attr-nav">
+                            <div class="attr-nav" style="margin-top: 5px">
                                 <ul>
                                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                                     <li class="side-menu">
@@ -178,7 +178,10 @@
             <div class="container">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Search">
+                    <form style="width: 97%" action="{{route('searchProducts')}}" method="get">
+                        <input type="text" name="query" class="form-control" placeholder="Search">
+                        <input type="submit" hidden>
+                    </form>
                     <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
                 </div>
             </div>

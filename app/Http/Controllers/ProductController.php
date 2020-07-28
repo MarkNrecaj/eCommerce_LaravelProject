@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status',1)->get();
+        $products = Product::where('status', 1)->get();
         //$product_images = ProductImage::get();
         $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
         return view('welcome', compact('products', 'product_images'));
@@ -170,5 +170,14 @@ class ProductController extends Controller
     {
         $id->delete();
         return redirect()->back()->with('success', 'Item with id ' . $id->id . ' removed from cart');
+    }
+
+    public function search(Request $request)
+    {
+        $results = Product::search($request['query'])->paginate(6);
+        $productImgs = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->get();
+
+        return view('search_results')->with('products', $results)
+            ->with('product_images', $productImgs);
     }
 }

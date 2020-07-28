@@ -19,9 +19,9 @@
                             <tr>
                                 <th scope="col">Image</th>
                                 <th scope="col">Product name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">TVSH</th>
                                 <th scope="col">Price No TVSH</th>
+                                <th scope="col">TVSH</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Remove</th>
@@ -31,11 +31,15 @@
                                 @for ($i = 0; $i < count($cart); $i++)
                                     
                                     <tr>
-                                        <td><img style="align-text: center; object-fit: cover" width="100" height="100" src="../storage/images/{{$productsImage[$i][0]->path}}" /></td>
-                                        <td style="min-width: 5px; max-width: 50px; padding:10px; padding-top:18px;">{{$products[$i]->name}}</td>
-                                        <td style="padding: 10px; padding-top:18px;">{{$products[$i]->price}} &euro;</td>
-                                        <td style="padding:10px; padding-top:18px;">{{$products[$i]->tvsh}} %</td>
+                                        <td>
+                                            <a href="product-details/{{$products[$i]->id}}"><img style="align-text: center; object-fit: cover" width="100" height="100" src="../storage/images/{{$productsImage[$i][0]->path}}" /></a>
+                                        </td>
+                                        <td style="min-width: 5px; max-width: 50px; padding:10px; padding-top:18px;">
+                                            <a href="product-details/{{$products[$i]->id}}">{{$products[$i]->name}}</a>
+                                        </td>
                                         <td style="padding: 10px; padding-top:18px;">{{number_format($products[$i]->price * (1 - $products[$i]->tvsh / 100),2,'.','')}} &euro;</td>
+                                        <td style="padding:10px; padding-top:18px;">{{$products[$i]->tvsh}} %</td>
+                                        <td style="padding: 10px; padding-top:18px;">{{$products[$i]->price}} &euro;</td>
                                         <td style="padding: 10px">
                                         {{-- <input type="number" onfocusout="saveNewAmount('{{'amount'.$i}}')" class="form-control" name="amount" id={{'amount'.$i}} value="{{$cart[$i]->amount}}" min="1" max="20"> --}}
                                         <form action="{{route('cart.update', $cart[$i]->id)}}" method="post" id={{'form'.$i}}>
@@ -44,7 +48,9 @@
                                             <input type="submit" hidden value="submit">
                                         </form>
                                         </td>
-                                        <td style="padding: 10px; padding-top:18px;">{{number_format(($products[$i]->price * (1 - $products[$i]->tvsh / 100)) * $cart[$i]->amount,2,'.','')}} &euro;</td>
+                                        {{-- following td contains total with no TVSH. To show total with TVSH, comment existing row, and uncomment commented--}}
+                                        {{-- <td style="padding: 10px; padding-top:18px;">{{number_format(($products[$i]->price * (1 - $products[$i]->tvsh / 100)) * $cart[$i]->amount,2,'.','')}} &euro;</td> --}}
+                                        <td style="padding: 10px; padding-top:18px;">{{number_format(($products[$i]->price * $cart[$i]->amount),2,'.','')}} &euro;</td>
                                         <td style="padding: 10px"> 
                                             <form action="{{route('product.destroy',$cart[$i]->id)}}" method="post">
                                                 @csrf
