@@ -11,7 +11,8 @@
 @section('extra-js')
     <!-- Scripts -->
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{ asset('js/checkout.js') }}"></script>
+    <script src="{{ asset('js/checkout.js') }}" async ></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -26,8 +27,8 @@
                     @foreach($cart as $item)
                     @foreach($products as $product)
                         @if($product->id == $item->product_id)
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed align-items-center">
+                            <div class="product-details">
                                 <h6 class="my-0">{{$product->name}}</h6>
                                 <small class="text-muted">{{$product->description}}</small>
                             </div>
