@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
 use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::where('status',1)->get();
         //$product_images = ProductImage::get();
         $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
         return view('welcome', compact('products', 'product_images'));
@@ -31,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('create_product');
+        $categories = Categories::all();
+        return view('create_product')->with('categories', $categories);
     }
 
     /**
@@ -45,6 +47,7 @@ class ProductController extends Controller
         $this->validate(
             $request,
             [
+                'category' => 'required',
                 'name' => 'required|max:255',
                 'images' => 'nullable|array|max:5',
                 'images.*' => 'image|max:2000',
@@ -59,6 +62,7 @@ class ProductController extends Controller
 
         $product = new Product();
 
+        $product->category = $request->get('category');
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->price = $request->get('price');

@@ -26,6 +26,26 @@
                                     @csrf
 
                                     <div class="form-group row align-items-center justify-content-center">
+
+                                        <i class="fas fa-globe" aria-hidden="true" style="color: #999;"></i>
+                                        <div class="col-md-8">
+                                            <select class="form-control @error('category') eshte jo valide @enderror" name="category"
+                                                    value="{{ old('category') }}" required>
+                                                <option value="" selected disabled hidden>Choose a category:</option>
+                                                @foreach($categories as $category)
+                                                        <option value="{{$category->name}}">{{$category->name}}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('state')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row align-items-center justify-content-center">
                                         <i class="fa fa-list-alt" aria-hidden="true" style="color: #999;"></i>
 
                                         <div class="col-md-8">
