@@ -43,7 +43,15 @@
                             <span class="text-success">+ {{$transfer_fee}} €</span>
                         </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (EUR)</span>
+                        <span>Total (No TVSH)</span>
+                        <strong class="price">{{$total_price_no_tvsh}} €</strong>
+                    </li>
+                    {{-- <li class="list-group-item d-flex justify-content-between">
+                        <span>TVSH</span>
+                        <strong class="price">{{$products[0]->tvsh}} %</strong>
+                    </li> --}}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total + Transfer Fee (EUR)</span>
                         <strong class="price">{{$total_price + $transfer_fee}} €</strong>
                     </li>
                 </ul>

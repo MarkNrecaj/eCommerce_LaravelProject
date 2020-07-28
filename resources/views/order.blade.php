@@ -245,8 +245,30 @@
                                                value="{{ old('price') }}" autocomplete="off"
                                                placeholder="Price *" required>
                                         <div class="input-group-append">
-                                            <span class="input-group-text text-muted">€</span>
+                                            <span class="input-group-text text-muted">&euro;</span>
                                         </div>
+                                    </div>
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center justify-content-center">
+                                <p class="fas" aria-hidden="true" style="color: #999;">TVSH</p>&nbsp;<i class="fas fa-percent" aria-hidden="true" style="color: #999;"></i>
+
+                                <div class="col-md-8" style="margin-right: 50px">
+                                    <div class="input-group">
+                                        <input name="tvsh" type="number"
+                                               min="0" max="100" step="1"
+                                               class="form-control @error('tvsh') eshte jo valide @enderror"
+                                               value="18" autocomplete="off"
+                                               placeholder="TVSH" required>
+                                        {{-- <div class="input-group-append">
+                                            <span class="input-group-text text-muted px-3">&percnt;</span>
+                                        </div> --}}
                                     </div>
                                     @error('price')
                                     <span class="invalid-feedback" role="alert">
@@ -264,7 +286,7 @@
                                     <input id="total_price" disabled name="total_price"
                                            type="text" min="0" step="0.01"
                                            class="form-control @error('total_price') eshte jo valide @enderror"
-                                           value="{{$transfer_fee}}"
+                                           value=""
                                            placeholder="Total Price"
                                            {{-- duhemi me lon 1 indikator kur osht disabled 1 element,
                                             psh background ngjyra si rreshti me poshte --}}

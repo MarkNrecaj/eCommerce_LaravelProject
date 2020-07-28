@@ -27,15 +27,17 @@ class CheckoutController extends Controller
             ->get();
         $products = [];
         $total_price = 0;
+        $total_price_no_tvsh = 0;
         $transfer_fee = PostalSetting::find(1)->transfer_fee;
 
         foreach ($cart as $item) {
             $product = Product::find($item->product_id);
             array_push($products, $product);
-            $total_price += $product->price * $item->amount;
+            $total_price += number_format($product->price * $item->amount, 2, '.', '');
+            $total_price_no_tvsh += number_format($product->price * $item->amount * (1 - ($product->tvsh / 100)), 2, '.', '');
         }
 
-        return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'transfer_fee'));
+        return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'total_price_no_tvsh', 'transfer_fee'));
     }
 
     private function markCartPaid()

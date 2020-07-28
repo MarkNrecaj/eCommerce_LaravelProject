@@ -50,6 +50,7 @@ class ProductController extends Controller
                 'images.*' => 'image|max:2000',
                 'description' => 'nullable|max:255',
                 'price' => 'required|numeric|gte:0',
+                'tvsh' => 'required|numeric|gte:0|lte:100',
                 'quantity' => 'required|numeric|min:1',
                 'weight' => 'nullable|numeric|min:0',
                 'product_type' => 'required|max:255'
@@ -61,6 +62,7 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->price = $request->get('price');
+        $product->tvsh = $request->get('tvsh');
         $product->quantity = $request->get('quantity');
         $product->weight = $request->get('weight');
         $product->product_type = $request->get('product_type');

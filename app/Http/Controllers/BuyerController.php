@@ -33,7 +33,7 @@ class BuyerController extends Controller
             }
         }
 
-        //dd($products);
+        // dd($products);
 
         return view('buyer.cart')->with('cart', $cart)
             ->with('products', $products)
