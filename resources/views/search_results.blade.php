@@ -9,7 +9,7 @@
                     <h2>Sorry. We couldn't find any result.</h2>
                 </div>
                 <div>
-                    <img src="http://static.skaip.org/img/emoticons/180x180/f6fcff/loudlycrying.gif" style="max-width: 150px; margin-top: 70px" alt="Sad emoji">
+                    <img src="http://static.skaip.org/img/emoticons/180x180/f6fcff/loudlycrying.gif" style="max-width: 150px; margin-top: 70px" alt="cying_emoji">
                 </div>
                 <div style="margin-top: 100px">
                     <h3>Please search again or</h3>
