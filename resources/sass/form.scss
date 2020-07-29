@@ -27,6 +27,10 @@
             font-size: 1rem;
             background-color: $primary-color;
         }
+
+        &:hover{
+            color: $secondary-color;
+        }
     }
 
     h3 {
@@ -43,21 +47,28 @@
             padding: 0.75rem 1.25rem;
             background-color: #fff;
             border: 1px solid rgba(0, 0, 0, 0.125);
+
+            .product-details{
+                flex-basis: 65%;
+
+                h6{
+                    font-size: 0.9rem;
+                    line-height: 1.2;
+                    margin-block-start: 2.33em;
+                    margin-block-end: 2.33em;
+                    margin-inline-start: 0px;
+                    margin-inline-end: 0px;
+                }
+                small{
+                    font-size: 90%;
+                    font-weight: 400;
+                }
+
+            }
+
             .price {
                 color: $primary-color-light;
 
-            }
-            h6{
-                font-size: 0.9rem;
-                line-height: 1.2;
-                margin-block-start: 2.33em;
-                margin-block-end: 2.33em;
-                margin-inline-start: 0px;
-                margin-inline-end: 0px;
-            }
-            small{
-                font-size: 90%;
-                font-weight: 400;
             }
         }
     }
@@ -79,7 +90,7 @@
         //    color: red;
         //}
 
-        input, select {
+        input, select, textarea {
             border: none;
             font-size: 1rem;
             border-bottom: 1px solid #999;
@@ -95,20 +106,6 @@
             }
         }
 
-
-        textarea {
-            font-size: 1rem;
-            border: 1px solid #999;
-            background: transparent;
-            outline: none;
-
-            &:focus {
-                border: 1px solid #999;
-                border-bottom: 2px solid $primary-color;
-                box-shadow: none;
-                outline: 0 none;
-            }
-        }
 
         .center {
             display: flex;
@@ -130,8 +127,8 @@
                 border-radius: 50px;
 
                 &:hover {
-                    background-color: $primary-color-light;
-                    color: $secondary-color;
+                    background-color: $secondary-color;
+                    color: $primary-color;
                 }
             }
         }

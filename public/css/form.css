@@ -28,10 +28,15 @@
   background-color: #14213d;
 }
 
+.custom-container h4:hover {
+  color: #fad02c;
+}
+
 .custom-container h3 {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   color: #14213d;
+  margin: 20px;
 }
 
 .custom-container ul {
@@ -45,11 +50,11 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.custom-container ul li .price {
-  color: #315196;
+.custom-container ul li .product-details {
+  flex-basis: 65%;
 }
 
-.custom-container ul li h6 {
+.custom-container ul li .product-details h6 {
   font-size: 0.9rem;
   line-height: 1.2;
   -webkit-margin-before: 2.33em;
@@ -62,9 +67,13 @@
           margin-inline-end: 0px;
 }
 
-.custom-container ul li small {
+.custom-container ul li .product-details small {
   font-size: 90%;
   font-weight: 400;
+}
+
+.custom-container ul li .price {
+  color: #315196;
 }
 
 .custom-container .custom-form {
@@ -82,7 +91,8 @@
 }
 
 .custom-container .custom-form input,
-.custom-container .custom-form select {
+.custom-container .custom-form select,
+.custom-container .custom-form textarea {
   border: none;
   font-size: 1rem;
   border-bottom: 1px solid #999;
@@ -92,25 +102,12 @@
 }
 
 .custom-container .custom-form input:focus,
-.custom-container .custom-form select:focus {
+.custom-container .custom-form select:focus,
+.custom-container .custom-form textarea:focus {
   border-bottom: 2px solid #14213d;
   box-shadow: none;
   outline: 0 none;
   color: #14213d;
-}
-
-.custom-container .custom-form textarea {
-  font-size: 1rem;
-  border: 1px solid #999;
-  background: transparent;
-  outline: none;
-}
-
-.custom-container .custom-form textarea:focus {
-  border: 1px solid #999;
-  border-bottom: 2px solid #14213d;
-  box-shadow: none;
-  outline: 0 none;
 }
 
 .custom-container .custom-form .center {
@@ -135,7 +132,7 @@
 }
 
 .custom-container .custom-form .center button:hover {
-  background-color: #315196;
-  color: #fad02c;
+  background-color: #fad02c;
+  color: #14213d;
 }
 
