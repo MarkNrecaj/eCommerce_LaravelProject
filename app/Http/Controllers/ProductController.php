@@ -28,9 +28,9 @@ class ProductController extends Controller
     public function showCategories($id)
     {
         $category_name = Categories::find($id);
-        $products = Product::where('status', 1)->where('category', $category_name->name)->get();
+        $products = Product::where('status', 1)->where('category', $category_name->name)->orderBy('created_at', 'desc')->paginate(6);
         $categories = Categories::all();
-        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
+        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->orderBy('created_at', 'desc')->get();
         return view('category_products', compact('products', 'product_images', 'categories', 'category_name'));
     }
 

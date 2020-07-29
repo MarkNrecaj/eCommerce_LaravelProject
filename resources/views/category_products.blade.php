@@ -34,7 +34,7 @@
             </div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    {{$product_images->links()}}
+                    {{$products->links()}}
                 </ul>
             </nav>
 @endsection
