@@ -92,22 +92,29 @@
                                 <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
                             </li>
                         @guest
-                        @if(Route::has('register'))
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('register') }}">
-                                    {{ __('As seller') }}
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('registerBuyer') }}">
-                                    {{ __('As buyer') }}
-                                </a></li>
-                            </ul>
-                        </li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if(Route::has('register'))
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">
+                                        {{ __('As seller') }}
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{{ route('registerBuyer') }}">
+                                        {{ __('As buyer') }}
+                                    </a></li>
+                                </ul>
+                            </li>
+                            @endif
+                            <li>
+                                <div class="attr-nav" style="margin-top: 5px">
+                                    <ul>
+                                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         @else
 
                             @if (Auth::user()->isActive)
