@@ -106,6 +106,13 @@
                                 </ul>
                             </li>
                             @endif
+                            <li>
+                                <div class="attr-nav" style="margin-top: 5px">
+                                    <ul>
+                                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         @else
 
                             @if (Auth::user()->isActive)
