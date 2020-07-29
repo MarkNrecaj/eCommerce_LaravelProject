@@ -20,9 +20,18 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('status', 1)->get();
+        $categories = Categories::all();
         //$product_images = ProductImage::get();
         $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
-        return view('welcome', compact('products', 'product_images'));
+        return view('welcome', compact('products', 'product_images','categories'));
+    }
+
+    public function showCategories($id){
+        $category_name = Categories::find($id);
+        $products = Product::where('status', 1)->where('category',$category_name->name)->get();
+        $categories = Categories::all();
+        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
+        return view('category_products', compact('products', 'product_images','categories','category_name'));
     }
 
     /**
