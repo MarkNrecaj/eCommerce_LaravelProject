@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status',1)->get();
+        $products = Product::where('status', 1)->get();
         //$product_images = ProductImage::get();
         $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
         return view('welcome', compact('products', 'product_images'));
@@ -53,6 +53,7 @@ class ProductController extends Controller
                 'images.*' => 'image|max:2000',
                 'description' => 'nullable|max:255',
                 'price' => 'required|numeric|gte:0',
+                'tvsh' => 'required|numeric|gte:0|lte:100',
                 'quantity' => 'required|numeric|min:1',
                 'weight' => 'nullable|numeric|min:0',
                 'product_type' => 'required|max:255'
@@ -65,6 +66,7 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->price = $request->get('price');
+        $product->tvsh = $request->get('tvsh');
         $product->quantity = $request->get('quantity');
         $product->weight = $request->get('weight');
         $product->product_type = $request->get('product_type');
@@ -168,5 +170,14 @@ class ProductController extends Controller
     {
         $id->delete();
         return redirect()->back()->with('success', 'Item with id ' . $id->id . ' removed from cart');
+    }
+
+    public function search(Request $request)
+    {
+        $results = Product::search($request['query'])->paginate(6);
+        $productImgs = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->get();
+
+        return view('search_results')->with('products', $results)
+            ->with('product_images', $productImgs);
     }
 }

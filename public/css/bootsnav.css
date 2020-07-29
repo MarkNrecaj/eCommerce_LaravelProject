@@ -40,7 +40,7 @@ nav.navbar.bootsnav {
     background-color: #fff;
     border: none;
     z-index: 9;
-    height: 60px !important;
+    height: 38px !important;
 }
 
 nav.navbar.bootsnav ul.nav>li>a {
@@ -554,7 +554,7 @@ nav.navbar.bootsnav ul.dropdown-menu.megamenu-content .content ul.menu-col li a:
         background: #fff;
         border: solid 1px #e0e0e0;
         border-top: solid 5px;
-        margin-top: -10px;
+        margin-top: -25px;
     }
     nav.navbar.bootsnav li.dropdown ul.dropdown-menu>li a:hover,
     nav.navbar.bootsnav li.dropdown ul.dropdown-menu>li a:hover {

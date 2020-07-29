@@ -120,6 +120,29 @@
                                     </div>
 
                                     <div class="form-group row align-items-center justify-content-center">
+                                        <p class="fas" aria-hidden="true" style="color: #999;">TVSH</p>&nbsp;<i class="fas fa-percentage" aria-hidden="true" style="color: #999;"></i>
+
+                                        <div class="col-md-8" style="margin-right: 50px">
+                                            <div class="input-group">
+
+                                                <input name="tvsh" type="number"
+                                                       min="0" max="100" step="1" class="form-control @error('price') eshte jo valide @enderror"
+                                                       value="18" autocomplete="off"
+                                                       placeholder="TVSH" required>
+
+                                                {{-- <div class="input-group-prepend">
+                                                    <span class="input-group-text text-muted">€</span>
+                                                </div> --}}
+                                            </div>
+                                            @error('price')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row align-items-center justify-content-center">
                                         <i class="fas fa-boxes" aria-hidden="true" style="color: #999;"></i>
 
                                         <div class="col-md-8">

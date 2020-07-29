@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('price');
+            $table->integer('tvsh');
             $table->integer('quantity');
             $table->integer('weight')->nullable();
             $table->string('product_type');

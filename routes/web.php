@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -23,6 +25,8 @@ Route::get('register/buyer', 'Auth\RegisterController@showBuyerRegistrationForm'
 Route::post('register/buyer', 'Auth\RegisterController@registerBuyer');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/searchproducts', 'ProductController@search')->name('searchProducts');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');

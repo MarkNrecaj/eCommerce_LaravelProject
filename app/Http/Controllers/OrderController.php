@@ -64,6 +64,7 @@ class OrderController extends Controller
                 'order_name' => 'required|max:255',
                 'description' => 'nullable|max:255',
                 'price' => 'required|numeric|gte:0',
+                'tvsh' => 'required|numeric|gte:0|lte:100'
             ]
         );
 
@@ -96,6 +97,7 @@ class OrderController extends Controller
             'order_name' => $request['order_name'],
             'description' => $request['description'],
             'price' => $request['price'],
+            'tvsh' => $request['tvsh'],
             'status' => 'Processing',
             'seller_id' => Auth::user()->id,
             'total_price' => (float) $request['price'] * (int) $request['quantity'] + PostalSetting::find(1)->transfer_fee
