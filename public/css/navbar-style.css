@@ -311,8 +311,8 @@ ul.cart-list>li.total>.btn {
 
 nav.navbar.bootsnav ul.nav>li>a {
     position: relative;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15px;
     color: #010101;
     padding-top: 30px;
     padding-bottom: 30px;

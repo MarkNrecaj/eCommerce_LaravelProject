@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -78,6 +77,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/newProduct">New Product<span class="sr-only"></span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('allProducts')}}">All Products<span class="sr-only"></span></a>
+                                </li>
                             @endif
                         @endguest
                     </ul>
@@ -90,22 +92,22 @@
                                 <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
                             </li>
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if(Route::has('register'))
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">
-                                        {{ __('As seller') }}
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('registerBuyer') }}">
-                                        {{ __('As buyer') }}
-                                    </a></li>
-                                </ul>
-                            </li>
-                            @endif
+                        @if(Route::has('register'))
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('register') }}">
+                                    {{ __('As seller') }}
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('registerBuyer') }}">
+                                    {{ __('As buyer') }}
+                                </a></li>
+                            </ul>
+                        </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
                         @else
 
                             @if (Auth::user()->isActive)
