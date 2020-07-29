@@ -1813,8 +1813,7 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-bottom: 1px solid #dee2e6;
-  font-family: "Roboto", sans-serif;
+  border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
@@ -1824,10 +1823,6 @@ pre code {
 
 .table tbody + tbody {
   border-top: 2px solid #dee2e6;
-}
-
-tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
 }
 
 .table-sm th,
@@ -2063,10 +2058,9 @@ tbody tr:nth-of-type(even) {
 }
 
 .table .thead-light th {
-  color: white;
-  background-color: #14213d;
+  color: #495057;
+  background-color: #e9ecef;
   border-color: #dee2e6;
-  font-weight: bold;
 }
 
 .table-dark {
@@ -3333,7 +3327,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-  color: #14213d;
+  color: #1d68a7;
   text-decoration: underline;
 }
 
@@ -3377,59 +3371,6 @@ input[type=submit].btn-block,
 input[type=reset].btn-block,
 input[type=button].btn-block {
   width: 100%;
-}
-
-.btn-outline-primary {
-  border-color: #14213d;
-  color: #14213d;
-}
-
-.btn-outline-primary:hover {
-  color: white;
-  background-color: #14213d;
-}
-
-.btn-primary {
-  background-color: #14213d;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #fad02c;
-  color: #14213d;
-}
-
-.btn-danger {
-  border-color: #e3342f;
-  background: inherit;
-  color: #e3342f;
-}
-
-.btn-danger:hover {
-  background-color: #e3342f;
-  color: white;
-}
-
-.btn-warning {
-  border-color: #ffed4a;
-  background: inherit;
-  color: #14213d;
-}
-
-.btn-warning:hover {
-  background-color: #ffed4a;
-  color: #14213d;
-}
-
-.btn-secondary {
-  border-color: #6c757d;
-  background: inherit;
-  color: #6c757d;
-}
-
-.btn-secondary:hover {
-  background-color: #6c757d;
-  color: white;
 }
 
 .fade {

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'ProductController@index')->name('dashboard');
+Route::get('/categories/{id}', 'ProductController@showCategories')->name('categories');
+
 Route::get('/product-details/{id}', 'ProductController@productDetails')->name('product-details');
 Route::post('/track', 'ProductController@trackOrder')->name('order.track');
 Route::get('/track', 'ProductController@trackView')->name('order.track.view');

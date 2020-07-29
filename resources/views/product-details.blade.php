@@ -37,8 +37,10 @@
                 <div class="single-product-details">
                     <h2>{{$productDetails->name}}</h2>
                     <h5> <del>$ {{$productDetails->price * 2}}</del> ${{$productDetails->price}}</h5>
-                    <h4>Product Description:</h4>
+                    <span class="text-muted">Category: {{$productDetails->category}}</span>
+{{--                    <h4>Product Description:</h4>--}}
                     <p>{{$productDetails->description}} </p>
+                    <p class="text-muted">Available Stock: <b>{{$productDetails->quantity}}</b> </p>
                     <form action="{{route('cart', $productDetails->id)}}" method="post">
                         @csrf
                         <ul class="ul-style">
@@ -77,7 +79,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
                 <div style="margin-top: 120px; margin-bottom: 30px;">
                     <h2>New Arrivals</h2>
