@@ -122,27 +122,46 @@ class ProductController extends Controller
             ->with('categories', Categories::all());
     }
 
-    public function updateProduct(Product $product)
+    public function updateProduct(Product $product, Request $request)
     {
-        $data = request()->validate([
-            'category' => 'required',
-            'name' => 'required|max:255',
-            // 'images' => 'nullable|array|max:5',
-            // 'images.*' => 'image|max:2000',
-            'description' => 'nullable|max:255',
-            'price' => 'required|numeric|gte:0',
-            'tvsh' => 'required|numeric|gte:0|lte:100',
-            'quantity' => 'required|numeric|min:1',
-            'weight' => 'nullable|numeric|min:0',
-            'product_type' => 'required|max:255'
-        ]);
+        // $data = request()->validate([
+        //     'category' => 'required',
+        //     'name' => 'required|max:255',
+        //     'description' => 'nullable|max:255',
+        //     'price' => 'required|numeric|gte:0',
+        //     'tvsh' => 'required|numeric|gte:0|lte:100',
+        //     'quantity' => 'required|numeric|min:1',
+        //     'weight' => 'nullable|numeric|min:0',
+        //     'product_type' => 'required|max:255'
+        // ]);
 
-        dd($data['category']);
+        $this->validate(
+            $request,
+            [
+                'category' => 'required',
+                'name' => 'required|max:255',
+                'description' => 'nullable|max:255',
+                'price' => 'required|numeric|gte:0',
+                'tvsh' => 'required|numeric|gte:0|lte:100',
+                'quantity' => 'required|numeric|min:1',
+                'weight' => 'nullable|numeric|min:0',
+                'product_type' => 'required|max:255'
+            ]
+        );
+        dd($request);
+        $product->category = $request['category'];
+        $product->name = $request['name'];
+        $product->description = $request['description'];
+        $product->price = $request['price'];
+        $product->tvsh = $request['tvsh'];
+        $product->quantity = $request['quantity'];
+        $product->weight = $request['weight'];
+        $product->product_type = $request['product_type'];
 
-        $product->category = $data['category'];
+        // dd($product->isDirty('category'));
         $product->update();
 
-        return redirect(route('allProducts'))->with('success', 'Product archived successfully');
+        return redirect(route('allProducts'))->with('success', 'Product updated successfully');
     }
 
     public function archiveProduct(Product $product)

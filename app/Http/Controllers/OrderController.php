@@ -87,7 +87,7 @@ class OrderController extends Controller
             'receiver_name' => $request['receiver_name'],
             'receiver_tel' => $request['receiver_tel'],
             'receiver_tel2' => $request['receiver_tel2'],
-            'state' => $request['state'], //if shteti !=xk or al or mk !insert
+            'state' => $request['state'],
             'city' => $request['city'],
             'address' => $request['address'],
             'quantity' => $request['quantity'],

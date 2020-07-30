@@ -86,7 +86,7 @@
 
                     <!-- Right Side Of Navbar -->
 
-                        <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
+                        <ul style="margin-top: 5px" class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
                             <!-- Authentication Links -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
@@ -109,7 +109,7 @@
                             </li>
                             @endif
                             <li>
-                                <div class="attr-nav" style="margin-top: 5px">
+                                <div class="attr-nav" style="margin-top: 3px; margin-left: -15px; margin-right: -15px;">
                                     <ul>
                                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                                     </ul>
