@@ -183,15 +183,15 @@
         </nav>
         </header>
 
-        <div class="top-search">
+        <div class="top-search py-1"  style="background-color: rgb(250, 250, 250); border-top: 1px solid rgb(197, 197, 197);">
             <div class="container">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-search"  style="color: black"></i></span>
                     <form style="width: 97%" action="{{route('searchProducts')}}" method="get">
-                        <input type="text" name="query" class="form-control" placeholder="Search">
+                        <input type="text" name="query" class="form-control" placeholder="Search" style="color: black">
                         <input type="submit" hidden>
                     </form>
-                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                    <span class="input-group-addon close-search"><i class="fa fa-times"  style="color: black"></i></span>
                 </div>
             </div>
         </div>
