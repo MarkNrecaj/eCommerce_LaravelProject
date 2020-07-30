@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-3">
         <div class="row justify-content-center table-responsive">
             <div class="col-md-16">
                 <div class="card">
@@ -43,7 +43,7 @@
                             </div>
                         {{$carts->links()}}
                         @else
-                            <h1 class="text-center">No clients registered yet. Wait for any registration then try again</h1>
+                            <h1 class="text-center">No records to show. You haven't purchased anything... yet!</h1>
                         @endif
                         <br/>
                     </div>

@@ -38,8 +38,8 @@ class CheckoutController extends Controller
             $total_price += number_format($product->price * $item->amount, 2, '.', '');
             $total_price_no_tvsh += number_format($product->price * $item->amount * (1 - ($product->tvsh / 100)), 2, '.', '');
         }
-
-        return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'total_price_no_tvsh', 'transfer_fee'));
+        $user = Auth::user();
+        return view('checkout/checkout')->with(compact('cart', 'products', 'total_price', 'total_price_no_tvsh', 'transfer_fee','user'));
     }
 
     private function markCartPaid()

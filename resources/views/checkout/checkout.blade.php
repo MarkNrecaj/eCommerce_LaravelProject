@@ -64,7 +64,7 @@
                     <div class="form-group row align-items-center justify-content-center">
                         <i class="fa fa-user" aria-hidden="true" style="color: #999;"></i>
                         <div class="col-md-10">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Full Name *" required autocomplete="given-name">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}} {{$user->last_name}}" placeholder="Full Name *" required autocomplete="given-name">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
                     <div class="form-group row align-items-center justify-content-center">
                         <i class="fa fa-envelope" aria-hidden="true" style="color: #999;"></i>
                         <div class="col-md-10">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email *" required autocomplete="email">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" placeholder="Email *" required autocomplete="email">
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                     <div class="form-group row align-items-center justify-content-center">
                         <i class="fa fa-map-pin" aria-hidden="true" style="color: #999;"></i>
                         <div class="col-md-10">
-                        <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ old('city') }}" placeholder="City *" required autocomplete="city" >
+                        <input id="city" type="text" class="form-control @error('city') eshte jo valide @enderror" name="city"  value="{{ $user->city }}" placeholder="City *" required autocomplete="city" >
 
                         @error('city')
                         <span class="invalid-feedback" role="alert">
@@ -133,7 +133,7 @@
                     <div class="form-group row align-items-center justify-content-center">
                         <i class="fa fa-align-justify" aria-hidden="true" style="color: #999;"></i>
                         <div class="col-md-10">
-                        <textarea name="additional_notes" placeholder="Additional Notes (Optional)" value="{{ old('additional_notes') }}" class="form-control @error('additional_notes') eshte jo valide @enderror" rows = "3" autocomplete="off"></textarea>
+                        <textarea name="additional_notes" placeholder="Additional Notes (Optional)" value="{{ old('additional_notes') }}" class="form-control @error('additional_notes') eshte jo valide @enderror" rows = "3" autocomplete="off" style="resize: none"></textarea>
 
                         @error('address')
                         <span class="invalid-feedback" role="alert">

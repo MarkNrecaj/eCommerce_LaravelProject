@@ -65,7 +65,6 @@
                             </tbody>
                         </table>
                         <div>
-                            <hr>
                             <h5 style="text-align: right;"><strong>Total price: {{$totalPrice}} &euro;</strong></h5>
                         </div>
                         <div>

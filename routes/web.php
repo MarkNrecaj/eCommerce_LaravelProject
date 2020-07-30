@@ -29,6 +29,9 @@ Route::post('register/buyer', 'Auth\RegisterController@registerBuyer');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/searchproducts', 'ProductController@search')->name('searchProducts');
+Route::get('/account_disabled', function () {
+    return view('account_disabled');
+})->name('account_disabled');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', 'AdminController@index')->name('admin');
@@ -81,9 +84,8 @@ Route::group(['middleware' => ['buyer']], function () {
     Route::get('/cart', 'BuyerController@loadCart')->name('cart');
     Route::post('/cart/{id}', 'BuyerController@addToCart')->name('cart');
     Route::delete('/product/{id}', 'ProductController@destroy')->name('product.destroy');
-    Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('cart');
     Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
-    //Route::get('/checkoutProduct/{id}', 'CheckoutController@show')->name('checkout.index');
     Route::get('/thankyou', 'CheckoutController@thankyou')->name('thankyou');
     Route::post('/cartUpdate/{cartId}', 'BuyerController@updateCart')->name('cart.update');
     Route::get('/purchaseHistory/buyer/{buyer}/', 'BuyerController@purchaseHistory')->name('purchaseHistory');

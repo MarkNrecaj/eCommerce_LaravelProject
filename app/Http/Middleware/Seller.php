@@ -30,8 +30,8 @@ class Seller
 
         if (Auth::user()->role_id == 3) {
             if (!Auth::user()->isActive) {
-                Auth::logout();
-                return redirect('/login')->with('error', 'Account disabled. Contact support for more info.');
+                // Auth::logout();
+                return redirect(route('account_disabled'));
             }
 
             return $next($request);
