@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -78,6 +77,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/newProduct">New Product<span class="sr-only"></span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('allProducts')}}">All Products<span class="sr-only"></span></a>
+                                </li>
                             @endif
                         @endguest
                     </ul>
@@ -106,6 +108,13 @@
                                 </ul>
                             </li>
                             @endif
+                            <li>
+                                <div class="attr-nav" style="margin-top: 5px">
+                                    <ul>
+                                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         @else
 
                             @if (Auth::user()->isActive)

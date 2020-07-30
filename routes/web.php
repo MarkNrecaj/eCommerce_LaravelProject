@@ -64,8 +64,11 @@ Route::group(['middleware' => ['seller']], function () {
     Route::get('/report/{id}', 'OrderController@downloadReport')->name('report');
     Route::get('/newProduct', 'ProductController@create')->name('newProduct');
     Route::post('/newProduct', 'ProductController@store')->name('addProduct');
+    Route::get('/allProducts', 'ProductController@allProducts')->name('allProducts');
+    Route::get('/editProduct/{product}', 'ProductController@editProduct')->name('editProduct');
+    Route::patch('/editProduct', 'ProductController@updateProduct')->name('updateProduct');
+    Route::patch('/archiveProduct/{product}', 'ProductController@archiveProduct')->name('archiveProduct');
 });
-
 
 Route::group(['middleware' => ['postal_worker']], function () {
     Route::get('/postalworker', 'PostalWorkerController@index')->name('postalworker');

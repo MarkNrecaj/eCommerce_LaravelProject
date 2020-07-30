@@ -532,7 +532,7 @@ nav.navbar.bootsnav ul.dropdown-menu.megamenu-content .content ul.menu-col li a:
     }
     nav.navbar.bootsnav ul.nav>li>a {
         padding: 30px 15px;
-        font-weight: 600;
+        font-weight: 100;
     }
     nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after {
         font-family: 'FontAwesome';

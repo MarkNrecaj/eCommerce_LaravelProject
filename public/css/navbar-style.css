@@ -311,8 +311,8 @@ ul.cart-list>li.total>.btn {
 
 nav.navbar.bootsnav ul.nav>li>a {
     position: relative;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15px;
     color: #010101;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -371,20 +371,27 @@ ul.cart-list p .price {
 .hvr-hover {
     display: inline-block;
     vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
+    /* -webkit-transform: perspective(1px) translateZ(0); */
+    /* transform: perspective(1px) translateZ(0); */
     box-shadow: 0 0 1px transparent;
     position: relative;
-    background: #d33b33;
-    -webkit-transition-property: color;
+    background: #14213d;
+    /* -webkit-transition-property: color;
     transition-property: color;
     -webkit-transition-duration: .3s;
-    transition-duration: .3s;
+    transition-duration: .3s; */
     border-radius: 0;
-    box-shadow: none
+    box-shadow: none;
+    border-radius: 2px;
 }
 
-.hvr-hover::after {
+.hvr-hover:hover {
+    background-color: #fad02c;
+    color: #14213d !important;
+}
+
+
+/* .hvr-hover::after {
     content: "";
     position: absolute;
     z-index: -1;
@@ -409,7 +416,7 @@ ul.cart-list p .price {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
     color: #fff
-}
+} */
 
 ul.cart-list>li.total>.btn:hover {
     color: #fff

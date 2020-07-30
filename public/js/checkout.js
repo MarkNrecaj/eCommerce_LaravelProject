@@ -25,13 +25,13 @@
     };
 
     // Create an instance of the card Element.
-    var card = elements.create('card', {style: style});
+    var card = elements.create('card', { style: style });
 
     // Add an instance of the card Element into the `card-element` <div>.
     card.mount('#card-element');
 
     // Handle real-time validation errors from the card Element.
-    card.on('change', function(event) {
+    card.on('change', function (event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
             displayError.textContent = event.error.message;
@@ -42,7 +42,7 @@
 
     // Handle form submission.
     var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault();
 
         var options = {
@@ -56,7 +56,7 @@
         document.getElementById('complete-order').disabled = true;
 
 
-        stripe.createToken(card, options).then(function(result) {
+        stripe.createToken(card, options).then(function (result) {
             if (result.error) {
                 // Inform the user if there was an error.
                 var errorElement = document.getElementById('card-errors');

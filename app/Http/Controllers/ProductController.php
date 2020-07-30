@@ -19,19 +19,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status', 1)->get();
+        $products = Product::where('status', 1)->orderBy('created_at', 'desc')->paginate(6);
         $categories = Categories::all();
-        //$product_images = ProductImage::get();
-        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
-        return view('welcome', compact('products', 'product_images','categories'));
+        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->orderBy('created_at', 'desc')->get();
+        return view('welcome', compact('products', 'product_images', 'categories'));
     }
 
-    public function showCategories($id){
+    public function showCategories($id)
+    {
         $category_name = Categories::find($id);
-        $products = Product::where('status', 1)->where('category',$category_name->name)->get();
+        $products = Product::where('status', 1)->where('category', $category_name->name)->orderBy('created_at', 'desc')->paginate(6);
         $categories = Categories::all();
-        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->paginate(6);
-        return view('category_products', compact('products', 'product_images','categories','category_name'));
+        $product_images = ProductImage::select('id', 'path', 'product_id')->groupBy('product_id')->orderBy('created_at', 'desc')->get();
+        return view('category_products', compact('products', 'product_images', 'categories', 'category_name'));
     }
 
     /**
@@ -109,6 +109,48 @@ class ProductController extends Controller
         }
 
         return redirect()->route('newProduct')->with('success', 'Product added successfully');
+    }
+
+    public function allProducts()
+    {
+        return view('all_products')->with('products', Product::where('seller_id', Auth::user()->id)->orderBy('status', 'desc')->paginate(6));
+    }
+
+    public function editProduct(Product $product)
+    {
+        return view('update_product')->with('product', $product)
+            ->with('categories', Categories::all());
+    }
+
+    public function updateProduct(Product $product)
+    {
+        $data = request()->validate([
+            'category' => 'required',
+            'name' => 'required|max:255',
+            // 'images' => 'nullable|array|max:5',
+            // 'images.*' => 'image|max:2000',
+            'description' => 'nullable|max:255',
+            'price' => 'required|numeric|gte:0',
+            'tvsh' => 'required|numeric|gte:0|lte:100',
+            'quantity' => 'required|numeric|min:1',
+            'weight' => 'nullable|numeric|min:0',
+            'product_type' => 'required|max:255'
+        ]);
+
+        dd($data['category']);
+
+        $product->category = $data['category'];
+        $product->update();
+
+        return redirect(route('allProducts'))->with('success', 'Product archived successfully');
+    }
+
+    public function archiveProduct(Product $product)
+    {
+        $product->status = !$product->status;
+        $product->update();
+
+        return redirect(route('allProducts'))->with('success', 'Product archived successfully');
     }
 
     public function productDetails($id)
