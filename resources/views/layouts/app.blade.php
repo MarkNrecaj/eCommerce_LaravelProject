@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('css/all.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/footer.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/navbar-style.css')}}" type="text/css">
@@ -97,7 +97,7 @@
                             </li>
                             @if(Route::has('register'))
                             <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">
                                         {{ __('As seller') }}
@@ -111,7 +111,7 @@
                             <li>
                                 <div class="attr-nav" style="margin-top: 3px; margin-left: -15px; margin-right: -15px;">
                                     <ul>
-                                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                                        <li class="search"><a><i class="fa fa-search"></i></a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -119,7 +119,7 @@
 
                             @if (Auth::user()->isActive)
                             <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                                 <ul class="dropdown-menu">
                                     @if (Auth::user()->role_id == 4)
                                     <li>
@@ -141,7 +141,7 @@
                             <li>
                             <div class="attr-nav" style="margin-top: 5px">
                                 <ul>
-                                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                                    <li class="search"><a><i class="fa fa-search"></i></a></li>
                                     <li class="side-menu">
                                         <a href="/cart">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -159,7 +159,7 @@
             </div>
 
             <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <a class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
                         @if (Auth::check() && $cartItems > 0)
@@ -195,10 +195,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <main >
             @include('inc.messages')
             @yield('content')
