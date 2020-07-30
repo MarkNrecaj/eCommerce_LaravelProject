@@ -126,7 +126,7 @@
                                         <a href={{route('purchaseHistory', Auth::user()->id)}}>My Purchases</a>
                                     </li>
                                         @endif
-                                        <li><a href="#">Reset Password</a></li>
+                                        <li><a href="{{ route('password.request') }}">Reset Password</a></li>
                                         <li><a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -175,7 +175,7 @@
                                 <span class="float-right"><strong>Total</strong>: {{$totalPrice}} &euro;</span>
                             </li>
                         @else
-                            <li><p>No products added to cart</p></li>                                
+                            <li><p>No products added to cart</p></li>
                         @endif
                     </ul>
                 </li>
