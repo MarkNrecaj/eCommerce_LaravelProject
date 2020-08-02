@@ -33,9 +33,11 @@
                 <div class="container">
                     <!-- Start Header Navigation -->
                     <div class="navbar-header">
+                        <div class="toggler-button">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                         </button>
+                        </div>
                         <a class="navbar-brand" href="{{ url('/') }}">Fant4st1cs</a>
                     </div>
                     <!-- End Header (brands) Navigation -->
@@ -137,8 +139,10 @@
                                         </form>
                                 </ul>
                             @endif
+                            </ul>
+                        </div>
                             @if(Auth::user()->role_id == 4 && Auth::user()->isActive) {{-- if buyer --}}
-                            <li>
+                            
                             <div class="attr-nav" style="margin-top: 5px">
                                 <ul>
                                     <li class="search"><a><i class="fa fa-search"></i></a></li>
@@ -151,11 +155,11 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        
                             @endif
                         @endguest
-                    </ul>
-                </div>
+                    
+                
             </div>
 
             <div class="side">
