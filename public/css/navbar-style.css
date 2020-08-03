@@ -235,7 +235,8 @@ p {
 }
 
 .search a {
-    color: #d33b33
+    color: #d33b33;
+    cursor: pointer;
 }
 
 .attr-nav>ul>li>a:hover {
