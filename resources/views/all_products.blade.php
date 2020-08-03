@@ -4,8 +4,9 @@
     <div class="container mt-3">
         <div class="row justify-content-center table-responsive">
             <div class="col-md-16">
-                <div class="card">
+                <div class="card text">
                     <div class="card-header">All products posted by {{Auth::user()->name}}</div>
+                    <div class="card-body">    
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -53,10 +54,9 @@
                                 {{$products->links()}}
                             </div>
                         @else
-                        <h1 class="text-center">No clients registered yet. Wait for any registration then try again</h1>
+                        <h3 class="text-center">No products registered yet. Register one to get started.</h3>
                         @endif
-                        <br/>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>

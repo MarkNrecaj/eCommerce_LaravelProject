@@ -18,7 +18,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="POST" class="custom-form" action="{{route('order')}} cen">
+                        <form method="POST" class="custom-form" action="{{route('order')}}">
                             @csrf
 
                             <div class="form-group row align-items-center justify-content-center">
@@ -282,7 +282,7 @@
                                 <i class="fas fa-tags" aria-hidden="true" style="color: #999;"></i>
 
                                 <div class="col-md-8">
-{{--                                     value="{{$transfer_fee}}.00 €"--}}
+                                    {{--value="{{$transfer_fee}}.00 €"--}}
                                     <input id="total_price" disabled name="total_price"
                                            type="text" min="0" step="0.01"
                                            class="form-control @error('total_price') eshte jo valide @enderror"
@@ -307,14 +307,14 @@
                             </div>
                                 <span class="text-muted">*</span> <small> required fields</small>
 
-                            <script>
-                                function calculateTotalPrice() {
-                                    document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + {{$transfer_fee}}).toFixed(2) + " €";
-                                }
-                            </script>
 
                         </form>
 
+                        <script>
+                            function calculateTotalPrice() {
+                                document.getElementById('total_price').value = ((parseFloat(document.getElementById('price').value * document.getElementById('quantity').value)) + {{$transfer_fee}}).toFixed(2) + " €";
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

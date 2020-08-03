@@ -33,6 +33,7 @@ body {
 
 .my_card .photo img {
   margin-bottom: 20px;
+  height: 200px;
   max-height: 200px;
   max-width: 270px;
 }

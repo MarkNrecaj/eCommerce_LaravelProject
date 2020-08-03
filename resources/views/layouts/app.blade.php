@@ -48,10 +48,10 @@
 
                             @if (Auth::user()->role_id == 1) {{-- if admin --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('workers')}}">Manage workers</a>
+                                    <a class="nav-link" href="{{route('workers')}}">Manage Employees</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('clients')}}">Manage clients</a>
+                                    <a class="nav-link" href="{{route('clients')}}">Manage Clients</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('admin.newOrders')}}">Orders</a>
@@ -89,7 +89,7 @@
                         <ul style="margin-top: 5px" class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
                             <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track order') }}</a>
+                                <a class="nav-link" href="{{ route('order.track.view') }}">{{ __('Track Order') }}</a>
                             </li>
                         @guest
                             <li class="nav-item">

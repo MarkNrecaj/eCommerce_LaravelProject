@@ -148,7 +148,7 @@ class ProductController extends Controller
                 'product_type' => 'required|max:255'
             ]
         );
-        dd($request);
+        // dd($request);
         $product->category = $request['category'];
         $product->name = $request['name'];
         $product->description = $request['description'];

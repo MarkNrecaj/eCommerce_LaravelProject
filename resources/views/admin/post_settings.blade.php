@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card custom-container">
-                <div class="card-header text-center">{{ __('Postal settings') }}</div>
+                <div class="card-header text-center">{{ __('Post settings') }}</div>
 
                 <div class="card-body">
                     <form class="custom-form" method="POST" action="/admin/postalsettings/{{$setting->id}}">

@@ -21,11 +21,11 @@ class Seller
         }
 
         if (Auth::user()->role_id == 1) {
-            return redirect()->route('admin')->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
+            return redirect()->back()->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
         }
 
         if (Auth::user()->role_id == 2) {
-            return redirect()->route('postalworker')->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
+            return redirect()->back()->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
         }
 
         if (Auth::user()->role_id == 3) {
@@ -38,7 +38,7 @@ class Seller
         }
 
         if (Auth::user()->role_id == 4) {
-            return redirect()->route('buyer')->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
+            return redirect()->back()->with('error', 'You can\'t go to that link, because you aren\'t logged in as seller.');
         }
     }
 }
